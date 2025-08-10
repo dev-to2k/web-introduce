@@ -79,7 +79,7 @@ export default function AppSection() {
           <div className="mt-16 min-h-[320px] md:min-h-[380px] grid grid-rows-[auto_1fr_auto]">
             {/* Logos + content top */}
             <div>
-              <div className="flex items-center gap-6 opacity-80">
+              <div className="flex items-center gap-6 opacity-80 space-x-6">
                 <Image
                   src="/images/8xx.png"
                   alt="8XX"
@@ -88,11 +88,11 @@ export default function AppSection() {
                   className="h-8 w-auto object-contain"
                 />
                 <Image
-                  src="/images/logo-atq.png"
-                  alt="ATQ"
+                  src="/images/58win.png"
+                  alt="58WIN"
                   width={72}
                   height={32}
-                  className="h-8 w-auto object-contain"
+                  className="h-10 w-auto object-contain scale-225 translate-y-[-4px]"
                 />
                 <Image
                   src="/images/ax88.png"

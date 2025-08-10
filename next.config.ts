@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: "www.hlads.club",
         pathname: "/wp-content/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
     ],
   },
 };

@@ -1,12 +1,14 @@
-import Hero from "./components/hero";
-import Categories from "./components/categories";
 import AppSection from "./components/app-section";
-import Security from "./components/security";
-import Partners from "./components/partners";
+import Categories from "./components/categories";
 import CustomerSupport from "./components/customer-support";
-import MembersIntroSlider from "./components/members-intro-slider";
+import Events from "./components/events";
+import Hero from "./components/hero";
 import MembersIntroContent from "./components/members-intro-content";
+import MembersIntroSlider from "./components/members-intro-slider";
 import News from "./components/news";
+import Partners from "./components/partners";
+import Security from "./components/security";
+import SiteStats from "./components/site-stats";
 import Videos from "./components/videos";
 
 export default function Home() {
@@ -18,11 +20,14 @@ export default function Home() {
       {/* Giới thiệu thành viên (slide video) */}
       <MembersIntroSlider />
 
-      {/* Danh mục trò chơi */}
-      <Categories />
+      {/* Số liệu hệ thống */}
+      <SiteStats />
 
       {/* Giới thiệu thành viên (content) */}
       <MembersIntroContent />
+
+      {/* Danh mục trò chơi */}
+      <Categories />
 
       {/* Tin tức */}
       <News />
@@ -38,7 +43,10 @@ export default function Home() {
 
       {/* Đối tác */}
       <Partners />
-      
+
+      {/* Sự kiện – ATQ */}
+      <Events />
+
       {/* Chăm sóc khách hàng */}
       <CustomerSupport />
     </div>
