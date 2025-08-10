@@ -1,11 +1,28 @@
-"use client";
-
 import Image from "next/image";
-import "swiper/css";
-import "swiper/css/free-mode";
-import { Autoplay, FreeMode } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import SectionTitle from "./section-title";
+import { cn } from "@/lib/utils";
+import { Marquee } from "@/components/magicui/marquee";
+
+function LogoCard({ src, alt }: { src: string; alt: string }) {
+  return (
+    <figure
+      className={cn(
+        "relative h-[60px] w-44 shrink-0 cursor-pointer overflow-hidden rounded-xl border bg-white p-2",
+        "border-slate-200 hover:shadow-md transition duration-300",
+      )}
+    >
+      <div className="relative h-full w-full">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 640px) 40vw, (max-width: 1024px) 25vw, 16vw"
+          className="object-contain transition duration-300 ease-out hover:scale-105 hover:brightness-110"
+        />
+      </div>
+    </figure>
+  );
+}
 
 export default function Partners() {
   const logos: { src: string; alt: string }[] = [
@@ -50,54 +67,27 @@ export default function Partners() {
       alt: "SABA",
     },
   ];
+  const midpoint = Math.ceil(logos.length / 2);
+  const firstRow = logos.slice(0, midpoint);
+  const secondRow = logos.slice(midpoint);
   return (
     <section className="py-10">
       <SectionTitle align="center" variant="badge">
         Đối tác chiến lược
       </SectionTitle>
-      <div className="mt-6">
-        <Swiper
-          className="partners-swiper"
-          modules={[Autoplay, FreeMode]}
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          speed={1500}
-          freeMode={{ enabled: true, momentum: false }}
-          loop
-          loopAdditionalSlides={logos.length}
-          spaceBetween={12}
-          slidesPerView={2}
-          breakpoints={{
-            640: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            1024: { slidesPerView: 6 },
-          }}
-        >
-          {logos.map((logo, idx) => (
-            <SwiperSlide key={`${logo.src}-${idx}`}>
-              <div className="group h-[60px] bg-white rounded-xl grid place-items-center transition-transform duration-300 ease-out hover:scale-105">
-                <div className="relative w-full h-full px-4">
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                    className="object-contain transition duration-300 ease-out group-hover:scale-110 group-hover:brightness-110"
-                    priority={false}
-                  />
-                </div>
-              </div>
-            </SwiperSlide>
+      <div className="relative mt-6 flex w-full flex-col items-center justify-center overflow-hidden">
+        <Marquee pauseOnHover className="[--duration:20s] gap-3">
+          {firstRow.map((l) => (
+            <LogoCard key={l.src} src={l.src} alt={l.alt} />
           ))}
-        </Swiper>
-        <style jsx>{`
-          :global(.partners-swiper .swiper-wrapper) {
-            transition-timing-function: ease-in-out !important;
-          }
-        `}</style>
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:22s] -mt-2 gap-3">
+          {secondRow.map((l) => (
+            <LogoCard key={l.src} src={l.src} alt={l.alt} />
+          ))}
+        </Marquee>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r from-background" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l from-background" />
       </div>
     </section>
   );

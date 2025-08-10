@@ -154,7 +154,7 @@ export default function MembersIntroContent() {
                 className="grid md:grid-cols-12 gap-8 items-center"
               >
                 <div className="md:col-span-5">
-                  <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-white p-2 md:p-4">
+                  <div className="relative aspect-[16/9] p-2 md:p-4">
                     <Image
                       src={it.contentImg}
                       alt={it.title}

@@ -1,4 +1,4 @@
-import CountUp from "./count-up";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 
 type Stat = {
   value: number;
@@ -13,13 +13,19 @@ export default function SiteStats() {
   ];
 
   return (
-    <section aria-label="Số liệu hệ thống" className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <section
+      aria-label="Số liệu hệ thống"
+      className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+    >
       {stats.map((s) => (
         <div
           key={s.label}
           className="bg-white rounded-xl p-6 border border-slate-200 shadow-card text-center"
         >
-          <CountUp end={s.value} className="text-3xl font-semibold text-brand" locale="en-US" />
+          <NumberTicker
+            value={s.value}
+            className="text-3xl font-bold text-brand"
+          />
           <div className="mt-1 text-slate-500">{s.label}</div>
         </div>
       ))}
