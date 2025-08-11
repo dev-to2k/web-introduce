@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 import { getSectionTitleClasses } from "./section-title.styles";
 
 export type SectionTitleProps = {
@@ -16,7 +16,7 @@ export default function SectionTitle({
   className = "",
   variant = "default",
 }: SectionTitleProps) {
-  const Tag = as as any;
+  const Tag = as as ElementType;
   const classes = getSectionTitleClasses({ align, variant, className });
   return <Tag className={classes}>{children}</Tag>;
 }

@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import type { ReactNode, ElementType } from "react";
 import { getSectionTitleClasses } from "./section-title.styles";
 
 export type SectionTitleClientProps = {
@@ -17,7 +17,7 @@ export default function SectionTitleClient({
   className = "",
   variant = "default",
 }: SectionTitleClientProps) {
-  const Tag = as as any;
+  const Tag = as as ElementType;
   return (
     <Tag className={getSectionTitleClasses({ align, variant, className })}>
       {children}
