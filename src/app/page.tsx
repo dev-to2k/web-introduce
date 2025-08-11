@@ -9,8 +9,8 @@ import News from "./components/news/news";
 import Partners from "./components/partners";
 import Security from "./components/security/security";
 import SiteStats from "./components/site-stats";
-import Videos from "./components/video/videos";
 import TruyCap from "./components/truy-cap/truy-cap";
+import Videos from "./components/video/videos";
 
 export default function Home() {
   return (
@@ -42,14 +42,14 @@ export default function Home() {
       {/* Ứng dụng QR */}
       <AppSection />
 
+      {/* Sự kiện – ATQ */}
+      <Events />
+
       {/* Bảo mật */}
       <Security />
 
       {/* Đối tác */}
       <Partners />
-
-      {/* Sự kiện – ATQ */}
-      <Events />
 
       {/* Chăm sóc khách hàng */}
       <CustomerSupport />
