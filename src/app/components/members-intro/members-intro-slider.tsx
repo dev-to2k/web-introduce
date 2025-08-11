@@ -4,8 +4,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SectionTitleClient from "./section-title-client";
-import VideoPlayer from "./video-player";
+import SectionTitleClient from "../../../components/shared/section-title-client";
+import VideoPlayer from "../video/video-player";
 
 export default function MembersIntroSlider() {
   const videos = [
@@ -13,6 +13,8 @@ export default function MembersIntroSlider() {
     { src: "/videos/banner-video.mp4", title: "Thành viên B" },
     { src: "/videos/banner-video.mp4", title: "Thành viên C" },
   ];
+  // Bật loop chỉ khi số video > max slidesPerView để tránh cảnh báo Swiper
+  const shouldLoop = videos.length > 3;
   return (
     <section id="members-slider" className="py-6">
       <SectionTitleClient align="center" variant="badge">
@@ -26,12 +28,12 @@ export default function MembersIntroSlider() {
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
-        loop
+        loop={shouldLoop}
         className="mt-4 px-1"
       >
         {videos.map((v) => (
           <SwiperSlide key={v.title}>
-            <div className="rounded-xl shadow-card border border-slate-200 overflow-hidden">
+            <div className="rounded-xl border border-slate-200 overflow-hidden">
               <VideoPlayer
                 className="h-56 w-full"
                 src={v.src}

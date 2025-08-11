@@ -1,5 +1,5 @@
+import SectionTitle from "../../../components/shared/section-title";
 import EventsClient, { type VideoItem } from "./events-client";
-import SectionTitle from "./section-title";
 
 export default function Events() {
   // Demo data - có thể thay bằng dữ liệu thật sau

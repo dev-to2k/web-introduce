@@ -1,5 +1,6 @@
 "use client";
-import VideoPlayer from "./video-player";
+import { TextAnimate } from "@/components/magicui/text-animate";
+import VideoPlayer from "./video/video-player";
 
 export default function Hero() {
   return (
@@ -14,16 +15,23 @@ export default function Hero() {
             Liên minh ATQ · Nền tảng game quốc tế
           </span>
 
-          <h1 className="hero-fade-delay mt-4 text-4xl md:text-6xl font-black tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-brand to-indigo-600">
-            Cuộc chơi mới – Tầm nhìn mới
-          </h1>
+          <TextAnimate
+            as="h1"
+            animation="blurInUp"
+            by="character"
+            once
+            className="mt-4 text-4xl md:text-6xl font-black tracking-tight leading-tight"
+            segmentClassName="text-brand drop-shadow-[0_2px_6px_rgba(2,6,23,0.15)]"
+          >
+            {"Cuộc chơi mới – Tầm nhìn mới"}
+          </TextAnimate>
 
           <p className="hero-fade-delay-2 mt-4 text-slate-600 md:text-lg max-w-xl">
             Hệ sinh thái game đa nền tảng, nạp/rút nhanh, bảo mật chuẩn quốc tế.
             Tập trung vào trải nghiệm mượt, khuyến mãi minh bạch, CSKH 24/7.
           </p>
 
-          <div className="hero-fade-delay-2 mt-6 flex flex-wrap gap-3">
+          <div className="hero-fade-delay-2 mt-6 flex flex-wrap gap-3 hidden">
             <button className="px-5 py-3 rounded-lg bg-gradient-to-r from-brand via-indigo-500 to-violet-500 text-white font-semibold shadow-card hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-brand/40">
               <span className="relative inline-flex items-center gap-2 z-10">
                 Đăng ký miễn phí

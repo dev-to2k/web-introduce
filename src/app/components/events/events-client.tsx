@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { motion } from "motion/react";
 
 export type VideoItem = {
   id: string; // YouTube video ID
@@ -12,6 +13,23 @@ export type VideoItem = {
 type Props = {
   items: VideoItem[];
 };
+
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
+
+const listContainerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.02 } },
+};
+
+const listItemVariants = itemVariants;
 
 export default function EventsClient({ items }: Props) {
   const [query, setQuery] = useState("");
@@ -25,9 +43,15 @@ export default function EventsClient({ items }: Props) {
   const active = filtered[activeIdx] ?? filtered[0] ?? items[0];
 
   return (
-    <div className="grid md:grid-cols-12 gap-6 items-start md:items-stretch">
+    <motion.div
+      className="grid md:grid-cols-12 gap-6 items-start md:items-stretch"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       {/* Left: Main video */}
-      <div className="md:col-span-8">
+      <motion.div variants={itemVariants} className="md:col-span-8">
         <div className="w-full aspect-video rounded-xl overflow-hidden shadow-card border border-slate-200 bg-black">
           <iframe
             className="h-full w-full"
@@ -38,10 +62,10 @@ export default function EventsClient({ items }: Props) {
             allowFullScreen
           />
         </div>
-      </div>
+      </motion.div>
 
       {/* Right: Sidebar list */}
-      <div className="md:col-span-4 h-full min-h-0">
+      <motion.div variants={itemVariants} className="md:col-span-4 h-full min-h-0">
         <div className="bg-white rounded-xl border border-slate-200 shadow-card p-4 h-full flex flex-col min-h-0">
           <div className="flex items-center gap-6">
             <b className="text-slate-800">THIỆN NGUYỆN</b>
@@ -61,9 +85,12 @@ export default function EventsClient({ items }: Props) {
             className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40"
           />
 
-          <div className="mt-4 space-y-3 pr-1 md:flex-1 md:min-h-0 md:overflow-y-auto">
+          <motion.div
+            className="mt-4 space-y-3 pr-1 md:flex-1 md:min-h-0 md:overflow-y-auto"
+            variants={listContainerVariants}
+          >
             {filtered.map((v, idx) => (
-              <button
+              <motion.button
                 key={v.id}
                 onClick={() => setActiveIdx(idx)}
                 className={`w-full flex items-center gap-3 rounded-lg border p-2 text-left transition shadow-sm ${
@@ -71,6 +98,7 @@ export default function EventsClient({ items }: Props) {
                     ? "border-brand/60 ring-1 ring-brand/30 bg-brand/5"
                     : "border-slate-200 hover:bg-slate-50"
                 }`}
+                variants={listItemVariants}
               >
                 <div className="h-14 w-24 relative shrink-0 rounded">
                   <Image
@@ -91,15 +119,15 @@ export default function EventsClient({ items }: Props) {
                     </div>
                   )}
                 </div>
-              </button>
+              </motion.button>
             ))}
 
             {filtered.length === 0 && (
               <div className="text-sm text-slate-500">Không tìm thấy video phù hợp.</div>
             )}
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

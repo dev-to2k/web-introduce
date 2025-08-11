@@ -1,15 +1,15 @@
-import AppSection from "./components/app-section";
-import Categories from "./components/categories";
+import AppSection from "./components/app-section/app-section";
+import Categories from "./components/categories/categories";
 import CustomerSupport from "./components/customer-support";
-import Events from "./components/events";
+import Events from "./components/events/events";
 import Hero from "./components/hero";
-import MembersIntroContent from "./components/members-intro-content";
-import MembersIntroSlider from "./components/members-intro-slider";
-import News from "./components/news";
+import MembersIntroContent from "./components/members-intro/members-intro-content";
+import MembersIntroSlider from "./components/members-intro/members-intro-slider";
+import News from "./components/news/news";
 import Partners from "./components/partners";
-import Security from "./components/security";
+import Security from "./components/security/security";
 import SiteStats from "./components/site-stats";
-import Videos from "./components/videos";
+import Videos from "./components/video/videos";
 
 export default function Home() {
   return (

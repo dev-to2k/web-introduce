@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import SectionTitleClient from "./section-title-client";
+import SectionTitleClient from "../../../components/shared/section-title-client";
 
 export default function MembersIntroContent() {
   const items = [
@@ -132,7 +132,7 @@ export default function MembersIntroContent() {
                   alt={it.title}
                   width={24}
                   height={24}
-                  className="object-contain"
+                  className="h-auto w-auto object-contain"
                 />
               </span>
               <span className="whitespace-nowrap text-sm font-medium">

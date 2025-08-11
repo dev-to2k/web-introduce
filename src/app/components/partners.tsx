@@ -1,14 +1,14 @@
-import Image from "next/image";
-import SectionTitle from "./section-title";
-import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/magicui/marquee";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import SectionTitle from "../../components/shared/section-title";
 
 function LogoCard({ src, alt }: { src: string; alt: string }) {
   return (
     <figure
       className={cn(
         "relative h-[60px] w-44 shrink-0 cursor-pointer overflow-hidden rounded-xl border bg-white p-2",
-        "border-slate-200 hover:shadow-md transition duration-300",
+        "border-slate-200 hover:shadow-md transition duration-300"
       )}
     >
       <div className="relative h-full w-full">
