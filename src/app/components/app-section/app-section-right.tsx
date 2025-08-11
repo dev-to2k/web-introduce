@@ -20,17 +20,17 @@ export default function AppSectionRight() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
-      className="block"
+      className="block max-w-full overflow-hidden"
     >
       {/* Logos row */}
-      <motion.div variants={itemVariants} className="flex items-center gap-6 opacity-80 space-x-6">
-        <Image src="/images/8xx.png" alt="8XX" width={64} height={32} className="h-8 w-auto object-contain" />
-        <Image src="/images/58win.png" alt="58WIN" width={72} height={32} className="h-10 w-auto object-contain scale-225 translate-y-[-4px]" />
-        <Image src="/images/ax88.png" alt="AX88" width={64} height={32} className="h-8 w-auto object-contain" />
+      <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-4 md:gap-6 opacity-80">
+        <Image src="/images/8xx.png" alt="8XX" width={64} height={32} className="h-8 w-auto object-contain shrink-0" />
+        <Image src="/images/58win.png" alt="58WIN" width={72} height={32} className="h-8 md:h-10 w-auto object-contain shrink-0 md:scale-125 translate-y-[-2px] md:translate-y-[-4px]" />
+        <Image src="/images/ax88.png" alt="AX88" width={64} height={32} className="h-8 w-auto object-contain shrink-0" />
       </motion.div>
 
       {/* Text paragraphs */}
-      <motion.div variants={containerVariants} className="mt-3 space-y-3 text-slate-600 leading-relaxed">
+      <motion.div variants={containerVariants} className="mt-3 space-y-3 text-slate-600 leading-relaxed text-pretty break-words max-w-full">
         <motion.p variants={itemVariants}>
           ATQ là một trong những nhà cái trực tuyến uy tín và chuyên nghiệp nhất hiện nay, cung cấp đa dạng sản phẩm cá cược chất lượng cao như: Thể Thao, Casino Trực Tuyến, Game Bài, Bắn Cá, Xổ Số và nhiều trò chơi hấp dẫn khác.
         </motion.p>

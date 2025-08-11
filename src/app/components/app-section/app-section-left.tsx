@@ -43,9 +43,9 @@ export default function AppSectionLeft() {
       </motion.div>
 
       {/* QR + Buttons */}
-      <motion.div variants={containerVariants} className="flex items-end gap-5 flex-wrap">
+      <motion.div variants={containerVariants} className="grid grid-cols-2 gap-4 md:flex md:items-end md:gap-5 md:flex-wrap">
         {qrs.map((q) => (
-          <motion.div key={q.alt} variants={itemVariants} className="flex items-center gap-3">
+          <motion.div key={q.alt} variants={itemVariants} className="flex flex-col items-center text-center gap-2 md:flex-row md:text-left md:gap-3">
             <div className="w-24 aspect-square bg-white p-2 rounded-xl border border-slate-200 shadow-card grid place-items-center">
               <Image
                 src={q.src}
@@ -55,7 +55,7 @@ export default function AppSectionLeft() {
                 className="h-auto w-auto object-contain"
               />
             </div>
-            <div className="text-sm text-slate-600">
+            <div className="text-xs md:text-sm text-slate-600 mt-1 md:mt-0">
               <div className="font-semibold text-slate-900">{q.title}</div>
               <div>Quét để tải</div>
             </div>

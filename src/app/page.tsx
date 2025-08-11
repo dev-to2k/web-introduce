@@ -10,6 +10,7 @@ import Partners from "./components/partners";
 import Security from "./components/security/security";
 import SiteStats from "./components/site-stats";
 import Videos from "./components/video/videos";
+import TruyCap from "./components/truy-cap/truy-cap";
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
 
       {/* Số liệu hệ thống */}
       <SiteStats />
+
+      {/* Truy cập */}
+      <TruyCap />
 
       {/* Giới thiệu thành viên (content) */}
       <MembersIntroContent />

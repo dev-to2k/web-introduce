@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Header() {
@@ -18,36 +19,36 @@ export default function Header() {
           />
         </div>
         <nav className="hidden md:flex items-center gap-6 font-semibold text-slate-700">
-          <a
+          <Link
             href="#san-pham"
             className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
           >
-            Sản phẩm
-          </a>
-          <a
+            Trang Chủ
+          </Link>
+          <Link
             href="#uu-dai"
             className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
           >
-            Khuyến mãi
-          </a>
-          <a
+            Sự Kiện
+          </Link>
+          <Link
             href="#huong-dan"
             className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
           >
-            Hướng dẫn
-          </a>
-          <a
+            Đại Lý
+          </Link>
+          <Link
             href="#app"
             className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
           >
-            App
-          </a>
-          <a
+            Tuyển dụng
+          </Link>
+          <Link
             href="#ho-tro"
             className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
           >
-            Hỗ trợ
-          </a>
+            Khuyến Mãi
+          </Link>
         </nav>
         <div className="hidden md:flex items-center gap-2">
           <button className="px-3 py-2 font-semibold text-brand hover:text-indigo-600 transition-colors">
@@ -79,11 +80,11 @@ export default function Header() {
         } px-4 pb-3 border-t border-slate-200 bg-white`}
       >
         <div className="flex flex-col gap-3 font-semibold text-slate-700 py-3">
-          <a href="#san-pham">Sản phẩm</a>
-          <a href="#uu-dai">Khuyến mãi</a>
-          <a href="#huong-dan">Hướng dẫn</a>
-          <a href="#app">App</a>
-          <a href="#ho-tro">Hỗ trợ</a>
+          <Link href="#san-pham">Trang Chủ</Link>
+          <Link href="#uu-dai">Sự kiện</Link>
+          <Link href="#huong-dan">Đại lý</Link>
+          <Link href="#app">Tuyển dụng</Link>
+          <Link href="#ho-tro">Khuyến mãi</Link>
         </div>
       </div>
     </header>

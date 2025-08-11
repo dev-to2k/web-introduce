@@ -1,8 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { motion } from "motion/react";
 
 export type VideoItem = {
   id: string; // YouTube video ID
@@ -44,17 +44,21 @@ export default function EventsClient({ items }: Props) {
 
   return (
     <motion.div
-      className="grid md:grid-cols-12 gap-6 items-start md:items-stretch"
+      className="grid w-full max-w-full gap-5 sm:gap-6 items-start lg:grid-cols-12 lg:items-stretch overflow-x-hidden rounded-xl bg-transparent"
       variants={containerVariants}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
     >
       {/* Left: Main video */}
-      <motion.div variants={itemVariants} className="md:col-span-8">
-        <div className="w-full aspect-video rounded-xl overflow-hidden shadow-card border border-slate-200 bg-black">
+      <motion.div
+        variants={itemVariants}
+        className="min-w-0 lg:col-span-7 xl:col-span-8"
+      >
+        <div className="w-full max-w-full aspect-video rounded-xl overflow-hidden shadow-card border border-slate-200 bg-black">
           <iframe
-            className="h-full w-full"
+            className="block h-full w-full max-w-full"
+            loading="lazy"
             src={`https://www.youtube.com/embed/${active.id}`}
             title={active.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -65,9 +69,12 @@ export default function EventsClient({ items }: Props) {
       </motion.div>
 
       {/* Right: Sidebar list */}
-      <motion.div variants={itemVariants} className="md:col-span-4 h-full min-h-0">
-        <div className="bg-white rounded-xl border border-slate-200 shadow-card p-4 h-full flex flex-col min-h-0">
-          <div className="flex items-center gap-6">
+      <motion.div
+        variants={itemVariants}
+        className="min-w-0 lg:col-span-5 xl:col-span-4 h-full min-h-0"
+      >
+        <div className="bg-white rounded-xl border border-slate-200 shadow-card p-4 h-full flex flex-col min-h-0 lg:sticky lg:top-4 w-full max-w-full">
+          <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto whitespace-nowrap">
             <b className="text-slate-800">THIỆN NGUYỆN</b>
             <span className="text-slate-400">TIN TỨC</span>
             <span className="text-slate-400">SỰ KIỆN</span>
@@ -86,7 +93,7 @@ export default function EventsClient({ items }: Props) {
           />
 
           <motion.div
-            className="mt-4 space-y-3 pr-1 md:flex-1 md:min-h-0 md:overflow-y-auto"
+            className="mt-4 space-y-3 pr-1 lg:flex-1 lg:min-h-0 lg:overflow-y-auto lg:max-h-[calc(100vh-200px)]"
             variants={listContainerVariants}
           >
             {filtered.map((v, idx) => (
@@ -105,12 +112,12 @@ export default function EventsClient({ items }: Props) {
                     src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`}
                     alt={v.title}
                     fill
-                    sizes="(min-width: 768px) 33vw, 100vw"
+                    sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 28vw, 100vw"
                     className="object-cover rounded"
                   />
                 </div>
                 <div className="min-w-0">
-                  <div className="truncate font-medium text-slate-800">
+                  <div className="truncate break-words font-medium text-slate-800">
                     {v.title}
                   </div>
                   {v.channel && (
@@ -123,7 +130,9 @@ export default function EventsClient({ items }: Props) {
             ))}
 
             {filtered.length === 0 && (
-              <div className="text-sm text-slate-500">Không tìm thấy video phù hợp.</div>
+              <div className="text-sm text-slate-500">
+                Không tìm thấy video phù hợp.
+              </div>
             )}
           </motion.div>
         </div>
