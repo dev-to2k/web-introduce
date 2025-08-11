@@ -9,9 +9,9 @@ import VideoPlayer from "../video/video-player";
 
 export default function MembersIntroSlider() {
   const videos = [
-    { src: "/videos/banner-video.mp4", title: "Thành viên A" },
-    { src: "/videos/banner-video.mp4", title: "Thành viên B" },
-    { src: "/videos/banner-video.mp4", title: "Thành viên C" },
+    { src: "/videos/banner-video.mp4", title: "58WIN" },
+    { src: "/videos/banner-video.mp4", title: "8XX" },
+    { src: "/videos/banner-video.mp4", title: "AX88" },
   ];
   // Bật loop chỉ khi số video > max slidesPerView để tránh cảnh báo Swiper
   const shouldLoop = videos.length > 3;

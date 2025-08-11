@@ -1,8 +1,8 @@
+import fs from "fs";
+import path from "path";
 import SectionTitle from "../../../components/shared/section-title";
 import type { TruyCapItem } from "./truy-cap-grid";
 import TruyCapSwiper from "./truy-cap-swiper";
-import fs from "fs";
-import path from "path";
 
 function getImages(): TruyCapItem[] {
   const dir = path.join(process.cwd(), "public", "images", "truy-cap");
@@ -17,7 +17,7 @@ function getImages(): TruyCapItem[] {
         src: `/images/truy-cap/${name}`,
         alt: `Truy cập ${idx + 1}`,
       }));
-  } catch (err) {
+  } catch {
     return [];
   }
 }

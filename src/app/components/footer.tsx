@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FooterAccordion from "./footer-accordion";
 
 export default function Footer() {
   return (
@@ -76,7 +77,19 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8 mt-8 md:mt-12">
+        {/* Mobile: Accordion */}
+        <div className="md:col-span-7 sm:hidden mt-8 md:mt-12">
+          <FooterAccordion
+            sections={[
+              { title: "Menu", items: ["Trang chủ", "Hướng dẫn", "Khuyến mãi", "Sự kiện"] },
+              { title: "Sự kiện", items: ["Việt Nam", "Philippines", "Thái Lan", "Hàn Quốc", "Brazil"] },
+              { title: "Đối tác", items: ["Sảnh Game", "Ngân hàng", "Bên thứ 3"] },
+            ]}
+          />
+        </div>
+
+        {/* Desktop & tablet: Columns */}
+        <div className="md:col-span-7 hidden sm:grid sm:grid-cols-3 gap-8 mt-8 md:mt-12">
           <div>
             <div className="text-white font-semibold tracking-wide uppercase text-base sm:text-lg">Menu</div>
             <ul className="text-sm space-y-2 mt-3 text-slate-300/90">
