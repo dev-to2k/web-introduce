@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import TocCollapse from "../_components/toc-collapse";
 
-type Props = {
-  params: { slug: string };
-};
-
-export default async function ArticleDetail({ params }: Props) {
-  const { slug } = params;
+export default async function ArticleDetail({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
   // Demo content; integrate real CMS/data later
   const title = slug

@@ -2,6 +2,7 @@
 
 // Lightweight video player that supports both HTML5 sources and YouTube URLs
 import { useState } from "react";
+import Image from "next/image";
 
 type Props = {
   src: string;
@@ -64,12 +65,16 @@ export default function VideoPlayer({
             title="YouTube video player"
           />
         ) : hideOverlayPlayButton ? (
-          <img
-            src={thumbnail}
-            alt="Video thumbnail"
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
+          <div className="relative h-full w-full">
+            <Image
+              src={thumbnail}
+              alt="Video thumbnail"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority={false}
+            />
+          </div>
         ) : (
           <button
             type="button"
@@ -77,11 +82,13 @@ export default function VideoPlayer({
             onClick={() => setIsPlaying(true)}
             className="relative h-full w-full group overflow-hidden"
           >
-            <img
+            <Image
               src={thumbnail}
               alt="Video thumbnail"
-              className="h-full w-full object-cover"
-              loading="lazy"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority={false}
             />
             <span className="absolute inset-0 grid place-items-center bg-black/20 group-hover:bg-black/30 transition-colors">
               <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/90 text-black shadow-md">
