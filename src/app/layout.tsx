@@ -36,7 +36,7 @@ export default function RootLayout({
         <Background />
         <Topbar />
         <Header />
-        <main className="max-w-screen-xl mx-auto px-4">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

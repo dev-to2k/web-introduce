@@ -71,7 +71,7 @@ export default function Partners() {
   const firstRow = logos.slice(0, midpoint);
   const secondRow = logos.slice(midpoint);
   return (
-    <section className="py-10">
+    <section className="max-w-screen-2xl mx-auto px-4">
       <SectionTitle align="center" variant="badge">
         Đối tác chiến lược
       </SectionTitle>

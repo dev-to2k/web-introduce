@@ -1,62 +1,79 @@
 "use client";
+import Button from "@/components/shared/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const setVar = () => {
+      const h = el.getBoundingClientRect().height;
+      // Đặt biến CSS toàn cục để các section (Hero) có thể dùng
+      document.documentElement.style.setProperty("--header-h", `${h}px`);
+    };
+
+    setVar();
+
+    const ro = new ResizeObserver(() => setVar());
+    ro.observe(el);
+    const onResize = () => setVar();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [isOpen]);
+
+  const navLinks: { href: string; label: string; isActive?: boolean }[] = [
+    { href: "#san-pham", label: "Trang Chủ", isActive: true },
+    { href: "#uu-dai", label: "Sự Kiện", isActive: false },
+    { href: "#ho-tro", label: "Liên Minh", isActive: false },
+    { href: "#huong-dan", label: "Đại Lý", isActive: false },
+    { href: "#app", label: "Tuyển dụng", isActive: false },
+  ];
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
-      <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200"
+    >
+      <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Image
             src="/images/logo-atq.png"
             alt="ATQ Alliance Logo"
-            width={128}
-            height={36}
+            width={160}
+            height={60}
             priority
-            className="h-9 w-auto scale-200"
+            className="h-16 w-auto scale-200"
           />
         </div>
-        <nav className="hidden md:flex items-center gap-6 font-semibold text-slate-700">
-          <Link
-            href="#san-pham"
-            className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
-          >
-            Trang Chủ
-          </Link>
-          <Link
-            href="#uu-dai"
-            className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
-          >
-            Sự Kiện
-          </Link>
-          <Link
-            href="#huong-dan"
-            className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
-          >
-            Đại Lý
-          </Link>
-          <Link
-            href="#app"
-            className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
-          >
-            Tuyển dụng
-          </Link>
-          <Link
-            href="#ho-tro"
-            className="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors"
-          >
-            Khuyến Mãi
-          </Link>
+        <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 text-lg">
+          {navLinks.map(({ href, label, isActive }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors font-bold uppercase
+                ${isActive ? "text-brand" : "text-slate-700"}
+              `}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
         <div className="hidden md:flex items-center gap-2">
-          <button className="px-3 py-2 font-semibold text-brand hover:text-indigo-600 transition-colors">
+          <Button variant="link" size="sm" className="px-3 py-2 text-lg">
             Đăng nhập
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-brand to-indigo-500 text-white font-semibold shadow-card hover:shadow-lg hover:-translate-y-0.5 transition">
+          </Button>
+          <Button variant="gradient" size="sm" className="text-lg">
             Đăng ký
-          </button>
+          </Button>
         </div>
         <button
           className="md:hidden p-2 rounded-lg hover:bg-slate-100"
@@ -80,11 +97,11 @@ export default function Header() {
         } px-4 pb-3 border-t border-slate-200 bg-white`}
       >
         <div className="flex flex-col gap-3 font-semibold text-slate-700 py-3">
-          <Link href="#san-pham">Trang Chủ</Link>
-          <Link href="#uu-dai">Sự kiện</Link>
-          <Link href="#huong-dan">Đại lý</Link>
-          <Link href="#app">Tuyển dụng</Link>
-          <Link href="#ho-tro">Khuyến mãi</Link>
+          {navLinks.map(({ href, label }) => (
+            <Link key={href} href={href}>
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
     </header>

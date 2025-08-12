@@ -1,7 +1,5 @@
 import AppSection from "./components/app-section/app-section";
-import Categories from "./components/categories/categories";
 import CustomerSupport from "./components/customer-support";
-import Events from "./components/events/events";
 import Hero from "./components/hero";
 import MembersIntroContent from "./components/members-intro/members-intro-content";
 import MembersIntroSlider from "./components/members-intro/members-intro-slider";
@@ -18,20 +16,14 @@ export default function Home() {
       {/* ATQ (banner) */}
       <Hero />
 
-      {/* Giới thiệu thành viên (slide video) */}
-      <MembersIntroSlider />
+      {/* Giới thiệu thành viên (content) */}
+      <MembersIntroContent />
 
       {/* Số liệu hệ thống */}
       <SiteStats />
 
       {/* Truy cập */}
       <TruyCap />
-
-      {/* Giới thiệu thành viên (content) */}
-      <MembersIntroContent />
-
-      {/* Danh mục trò chơi */}
-      <Categories />
 
       {/* Tin tức */}
       <News />
@@ -42,8 +34,8 @@ export default function Home() {
       {/* Ứng dụng QR */}
       <AppSection />
 
-      {/* Sự kiện – ATQ */}
-      <Events />
+      {/* Giới thiệu thành viên (slide video) */}
+      <MembersIntroSlider />
 
       {/* Bảo mật */}
       <Security />

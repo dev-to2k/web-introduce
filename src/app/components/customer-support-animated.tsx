@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import Image from 'next/image';
-import React from 'react';
+import { motion } from "motion/react";
+import Image from "next/image";
+import React from "react";
 
 const containerVariants = {
   hidden: {},
@@ -16,7 +16,7 @@ const itemVariants = {
 
 // Icons (kept local to client to avoid passing non-serializable components)
 const IconHeadset = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden {...props}>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
     <path d="M4 12a8 8 0 1 1 16 0v5a3 3 0 0 1-3 3h-2.5a1.5 1.5 0 1 1 0-3H17a1 1 0 0 0 1-1v-4a6 6 0 1 0-12 0v4a1 1 0 0 0 1 1h2.5a1.5 1.5 0 1 1 0 3H8a3 3 0 0 1-3-3v-5Z" />
   </svg>
 );
@@ -41,7 +41,12 @@ const IconYoutube = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function SupportImage() {
   return (
-    <motion.div variants={itemVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+    <motion.div
+      variants={itemVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="relative h-[320px] md:h-[380px]">
         <div className="relative h-full w-full p-2 md:p-4">
           <Image
@@ -58,7 +63,13 @@ export function SupportImage() {
   );
 }
 
-export function SupportBullets({ items, className = '' }: { items: string[]; className?: string }) {
+export function SupportBullets({
+  items,
+  className = "",
+}: {
+  items: string[];
+  className?: string;
+}) {
   return (
     <motion.ul
       className={`space-y-2 text-slate-600 list-disc list-inside ${className}`}
@@ -82,10 +93,13 @@ export type ChannelItem = {
   href: string;
   color: string;
   ring: string;
-  icon: 'headset' | 'telegram' | 'facebook' | 'youtube';
+  icon: "headset" | "telegram" | "facebook" | "youtube";
 };
 
-const iconMap: Record<ChannelItem['icon'], (props: React.SVGProps<SVGSVGElement>) => React.ReactElement> = {
+const iconMap: Record<
+  ChannelItem["icon"],
+  (props: React.SVGProps<SVGSVGElement>) => React.ReactElement
+> = {
   headset: IconHeadset,
   telegram: IconTelegram,
   facebook: IconFacebook,
@@ -113,10 +127,14 @@ export function SupportChannels({ channels }: { channels: ChannelItem[] }) {
             aria-label={label}
             variants={itemVariants}
           >
-            <div className={`mx-auto h-12 w-12 rounded-full grid place-items-center ring-1 ${ring}`}>
-              <Icon className={`h-6 w-6 ${color}`} />
+            <div
+              className={`mx-auto h-12 w-12 rounded-full grid place-items-center ring-1 ${ring}`}
+            >
+              <Icon className={`h-6 w-6 ${color} drop-shadow-sm`} />
             </div>
-            <div className="mt-2 font-semibold text-slate-900 group-hover:text-brand transition">{label}</div>
+            <div className="mt-2 font-semibold text-slate-900 group-hover:text-brand transition">
+              {label}
+            </div>
           </motion.a>
         );
       })}

@@ -75,7 +75,10 @@ export default function MembersIntroContent() {
     );
   };
   return (
-    <section id="members-content" className="py-10 md:py-12 space-y-6">
+    <section
+      id="members-content"
+      className=" md:py-12 space-y-6 max-w-screen-xl mx-auto px-4"
+    >
       <SectionTitleClient align="center" variant="badge">
         Giới thiệu thành viên ATQ
       </SectionTitleClient>
@@ -83,7 +86,7 @@ export default function MembersIntroContent() {
       <div
         role="tablist"
         aria-label="Thành viên"
-        className="flex items-center gap-3 md:gap-4"
+        className="flex items-center gap-4 md:gap-5"
         onKeyDown={(e) => {
           if (
             e.key !== "ArrowRight" &&
@@ -119,23 +122,23 @@ export default function MembersIntroContent() {
               ref={(el) => {
                 if (el) tabRefs.current[idx] = el;
               }}
-              className={`group cursor-pointer inline-flex items-center gap-2 rounded-full px-4 py-2 transition select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40
+              className={`group cursor-pointer inline-flex items-center gap-3 rounded-full px-5 py-3 transition select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40
               ${
                 isActive
                   ? "bg-brand/10 text-brand shadow-card ring-1 ring-brand/30"
                   : "bg-slate-50 text-slate-700"
               }`}
             >
-              <span className="w-8 h-8 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
+              <span className="w-12 h-12 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
                 <Image
                   src={it.img}
                   alt={it.title}
-                  width={24}
-                  height={24}
+                  width={32}
+                  height={32}
                   className="h-auto w-auto object-contain"
                 />
               </span>
-              <span className="whitespace-nowrap text-sm font-medium">
+              <span className="whitespace-nowrap text-base font-medium">
                 {it.title}
               </span>
             </button>
@@ -154,34 +157,54 @@ export default function MembersIntroContent() {
                 className="grid md:grid-cols-12 gap-8 items-center"
               >
                 <div className="md:col-span-5">
-                  <div className="relative aspect-[16/9] p-2 md:p-4">
-                    <Image
-                      src={it.contentImg}
-                      alt={it.title}
-                      fill
-                      sizes="(min-width: 768px) 560px, 100vw"
-                      className="object-contain drop-shadow-md"
-                      priority={idx === 0}
-                    />
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-tr from-brand/30 via-fuchsia-400/20 to-sky-400/20 blur-2xl"></div>
+                    <div className="relative aspect-[16/9] p-2 md:p-4 rounded-2xl bg-white/60 backdrop-blur shadow-xl ring-1 ring-slate-200">
+                      <Image
+                        src={it.contentImg}
+                        alt={it.title}
+                        fill
+                        sizes="(min-width: 768px) 560px, 100vw"
+                        className="object-contain drop-shadow-md"
+                        priority={idx === 0}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="md:col-span-7">
-                  <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 md:p-8 shadow-lg border border-slate-100">
-                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 leading-tight">
-                      {it.subTitle}
-                    </h3>
-                    <div className="space-y-4">
-                      {it.paragraphs.map((p, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <div className="w-2 h-2 bg-brand rounded-full mt-2 flex-shrink-0"></div>
-                          <p className="text-slate-700 leading-relaxed text-sm md:text-base">
-                            <span className="font-semibold text-brand">
-                              {it.title}
-                            </span>
-                            <span className="ml-1">{p}</span>
-                          </p>
+                  <div className="p-[1px] rounded-2xl bg-gradient-to-br from-brand/40 via-violet-300/40 to-cyan-300/40">
+                    <div className="relative rounded-2xl clip-animated-border">
+                      <div className="rounded-2xl p-6 md:p-8 bg-white shadow-xl">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-semibold mb-4">
+                          {it.title}
+                        </span>
+                        <h3 className="text-2xl md:text-3xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-slate-900 via-slate-800 to-brand/70 bg-clip-text text-transparent">
+                          {it.subTitle}
+                        </h3>
+                        <div className="space-y-4">
+                          {it.paragraphs.map((p, i) => (
+                            <div key={i} className="flex items-start gap-3">
+                              <span className="mt-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-brand/10 text-brand ring-1 ring-brand/20">
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M9 16.2l-3.5-3.5a1 1 0 10-1.4 1.4l4.2 4.2a1 1 0 001.4 0l9-9a1 1 0 10-1.4-1.4L9 16.2z" />
+                                </svg>
+                              </span>
+                              <p className="text-slate-700 leading-relaxed text-sm md:text-base">
+                                <span className="font-semibold text-brand">
+                                  {it.title}
+                                </span>
+                                <span className="ml-1">{p}</span>
+                              </p>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
                     </div>
                   </div>
                 </div>

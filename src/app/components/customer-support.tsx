@@ -1,6 +1,10 @@
 import SectionTitle from "../../components/shared/section-title";
-import { SupportImage, SupportBullets, SupportChannels, type ChannelItem } from "./customer-support-animated";
-
+import {
+  SupportBullets,
+  SupportChannels,
+  SupportImage,
+  type ChannelItem,
+} from "./customer-support-animated";
 
 const bulletItems = [
   "Live Chat: Giải đáp trực tiếp trên website/app.",
@@ -48,28 +52,53 @@ export default function CustomerSupport() {
   return (
     <section
       id="support"
-      className="py-10 md:py-14 grid md:grid-cols-12 gap-8 items-start"
+      className="py-12 max-w-screen-xl mx-auto px-4 md:py-16 "
     >
-      {/* Left: Illustration */}
-      <div className="md:col-span-5">
-        <SupportImage />
-      </div>
+      <SectionTitle as="div" align="center" variant="badge" className="mb-4">
+        Dịch Vụ Hỗ Trợ Khách Hàng
+      </SectionTitle>
+      <div className="grid md:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Left: Illustration */}
+        <div className="md:col-span-5">
+          <SupportImage />
+        </div>
 
-      {/* Right: Content */}
-      <div className="md:col-span-7">
-        <SectionTitle align="left" variant="default">
-          Dịch Vụ Hỗ Trợ Khách Hàng
-        </SectionTitle>
-        <p className="mt-2 text-slate-600">
-          ATQ cam kết hỗ trợ 24/7 với đội ngũ chuyên nghiệp qua nhiều kênh:
-        </p>
-        <SupportBullets items={bulletItems} className="mt-3" />
-        <p className="mt-3 text-slate-600">
-          Liên hệ ngay: Website ATQ.com | Hotline: 1900 6868
-        </p>
+        {/* Right: Content */}
+        <div className="md:col-span-7">
+          <div className="relative rounded-2xl clip-animated-border">
+            <div className="rounded-2xl bg-white shadow-xl p-6 md:p-8">
+              <div className="space-y-3">
+                <SectionTitle
+                  as="div"
+                  align="left"
+                  variant="default"
+                  className="mb-4 text-brand"
+                >
+                  Hỗ Trợ Khách Hàng 24/7
+                </SectionTitle>
+                <p className="text-slate-600">
+                  ATQ cam kết hỗ trợ 24/7 với đội ngũ chuyên nghiệp qua nhiều
+                  kênh:
+                </p>
+                <SupportBullets items={bulletItems} />
+                <p className="text-slate-600">
+                  Liên hệ nhanh:{" "}
+                  <a href="#" className="text-brand hover:underline">
+                    Website ATQ.com
+                  </a>{" "}
+                  |
+                  <a href="tel:19006868" className="text-brand hover:underline">
+                    {" "}
+                    Hotline: 1900 6868
+                  </a>
+                </p>
 
-        {/* Channels */}
-        <SupportChannels channels={channels} />
+                {/* Channels */}
+                <SupportChannels channels={channels} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

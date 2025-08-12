@@ -17,7 +17,7 @@ export default function Security() {
     },
   ];
   return (
-    <section id="security" className="py-10">
+    <section id="security" className="max-w-screen-xl mx-auto px-4">
       <SectionTitle as="div" align="center" variant="badge">
         BẢO MẬT VÀ GIẤY PHÉP
       </SectionTitle>

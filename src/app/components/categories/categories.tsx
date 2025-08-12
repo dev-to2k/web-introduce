@@ -24,7 +24,7 @@ const DISPLAY_CATS = CATS.filter((c) => !!CAT_IMAGE_MAP[c.label]).slice(0, 5);
 
 export default function Categories() {
   return (
-    <section className="py-10">
+    <section className="">
       <SectionTitle align="center" variant="badge">
         Danh mục game
       </SectionTitle>

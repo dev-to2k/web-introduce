@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/shared/button";
 import { motion } from "motion/react";
 type Props = {
   className?: string;
@@ -24,22 +25,24 @@ export default function AppCtaButtons({ className }: Props) {
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <motion.button
+      <motion.div
         variants={itemVariants}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="inline-flex items-center justify-center h-11 md:h-12 min-w-[168px] px-5 rounded-lg border-2 border-brand bg-brand text-white font-semibold shadow-card transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40"
       >
-        Tải cho iOS
-      </motion.button>
-      <motion.button
+        <Button variant="brand" size="lg" className="border-2 border-brand">
+          Tải cho iOS
+        </Button>
+      </motion.div>
+      <motion.div
         variants={itemVariants}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="inline-flex items-center justify-center h-11 md:h-12 min-w-[168px] px-5 rounded-lg border-2 border-brand bg-white text-brand font-semibold shadow-card transition hover:bg-brand/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40"
       >
-        Tải cho Android
-      </motion.button>
+        <Button variant="outline" size="lg" className="bg-white">
+          Tải cho Android
+        </Button>
+      </motion.div>
     </motion.div>
   );
 }

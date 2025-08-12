@@ -10,8 +10,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   /* custom tokens migrated from index.html inline Tailwind config */
-  --color-brand: #155EEF;
-  --color-ink: #0B1F3A;
+  --color-brand: #155eef;
+  --color-ink: #0b1f3a;
   --shadow-card: 0 8px 30px rgba(12, 37, 93, 0.12);
   --radius-xl: 1.25rem;
   --color-sidebar-ring: var(--sidebar-ring);
@@ -49,19 +49,19 @@
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   @keyframes marquee {
-  from {
-    transform: translateX(0);
+    from {
+      transform: translateX(0);
     }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
   @keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
+    from {
+      transform: translateY(0);
     }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
     }
   }
 }
@@ -147,4 +147,61 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Animated gradient border helper */
+@keyframes border-gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-border {
+  /* Use brand color with subtle light/dark variations */
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--color-brand) 85%, white),
+    var(--color-brand),
+    color-mix(in oklch, var(--color-brand) 85%, white)
+  );
+  background-size: 200% 200%;
+  animation: border-gradient-move 3s linear infinite;
+}
+
+/* Clip-path border animation (Cách 1) */
+@keyframes clippath-border-scan {
+  0%,
+  100% {
+    clip-path: inset(0 0 95% 0 round 1rem);
+  }
+  25% {
+    clip-path: inset(0 95% 0 0 round 1rem);
+  }
+  50% {
+    clip-path: inset(95% 0 0 0 round 1rem);
+  }
+  75% {
+    clip-path: inset(0 0 0 95% round 1rem);
+  }
+}
+
+.clip-animated-border {
+  position: relative;
+  border-radius: 1rem; /* match rounded-2xl */
+}
+
+.clip-animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-brand);
+  border-radius: inherit;
+  pointer-events: none;
+  animation: clippath-border-scan 3s linear infinite;
 }

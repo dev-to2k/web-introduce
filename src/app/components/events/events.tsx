@@ -27,7 +27,10 @@ export default function Events() {
   ];
 
   return (
-    <section id="events" className="py-10 overflow-x-hidden">
+    <section
+      id="events"
+      className=" overflow-x-hidden max-w-screen-xl mx-auto px-4 pt-6"
+    >
       <SectionTitle align="center" variant="badge">
         Sự kiện – ATQ
       </SectionTitle>

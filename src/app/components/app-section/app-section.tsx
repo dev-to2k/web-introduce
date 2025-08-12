@@ -5,7 +5,7 @@ import AppSectionRight from "./app-section-right";
 
 export default function AppSection() {
   return (
-    <section id="app" className="py-10">
+    <section id="app" className="max-w-screen-xl mx-auto px-4">
       <SectionTitle as="div" align="center" variant="badge">
         ATQ – NỀN TẢNG GIẢI TRÍ HÀNG ĐẦU
       </SectionTitle>
