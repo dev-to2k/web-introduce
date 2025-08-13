@@ -1,6 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import { FreeMode } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import SectionTitleClient from "../../../components/shared/section-title-client";
 
 export default function MembersIntroContent() {
@@ -83,10 +87,68 @@ export default function MembersIntroContent() {
         Giới thiệu thành viên ATQ
       </SectionTitleClient>
 
+      {/* Mobile: Swiper slider */}
+      <div className="md:hidden -mx-4 px-4">
+        <Swiper
+          modules={[FreeMode]}
+          freeMode
+          slidesPerView="auto"
+          spaceBetween={16}
+          slidesOffsetBefore={16}
+          slidesOffsetAfter={16}
+          allowTouchMove
+          threshold={4}
+          grabCursor
+          watchOverflow={false}
+          resistanceRatio={0.85}
+          className="!overflow-visible"
+        >
+          {items.map((it, idx) => {
+            const isActive = active === idx;
+            return (
+              <SwiperSlide key={it.title} className="!w-auto">
+                <button
+                  id={`tab-${idx}`}
+                  role="tab"
+                  aria-controls={`panel-${idx}`}
+                  aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
+                  type="button"
+                  onClick={() => setActive(idx)}
+                  ref={(el) => {
+                    if (el) tabRefs.current[idx] = el;
+                  }}
+                  className={`group cursor-pointer inline-flex items-center gap-3 rounded-full px-5 py-3 transition select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 shrink-0 min-w-[140px]
+                  ${
+                    isActive
+                      ? "bg-brand/10 text-brand shadow-xl shadow-brand/10 ring-1 ring-brand/30"
+                      : "bg-slate-50 text-slate-700"
+                  }`}
+                >
+                  <span className="w-12 h-12 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
+                    <Image
+                      src={it.img}
+                      alt={it.title}
+                      width={32}
+                      height={32}
+                      className="h-auto w-auto object-contain"
+                    />
+                  </span>
+                  <span className="whitespace-nowrap text-base font-medium">
+                    {it.title}
+                  </span>
+                </button>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+
+      {/* Desktop: traditional tablist */}
       <div
         role="tablist"
         aria-label="Thành viên"
-        className="flex items-center gap-4 md:gap-5"
+        className="hidden md:flex items-center gap-4 md:gap-5"
         onKeyDown={(e) => {
           if (
             e.key !== "ArrowRight" &&
@@ -125,7 +187,7 @@ export default function MembersIntroContent() {
               className={`group cursor-pointer inline-flex items-center gap-3 rounded-full px-5 py-3 transition select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40
               ${
                 isActive
-                  ? "bg-brand/10 text-brand shadow-card ring-1 ring-brand/30"
+                  ? "bg-brand/10 text-brand shadow-xl shadow-brand/10 ring-1 ring-brand/30"
                   : "bg-slate-50 text-slate-700"
               }`}
             >
@@ -184,7 +246,7 @@ export default function MembersIntroContent() {
                         <div className="space-y-4">
                           {it.paragraphs.map((p, i) => (
                             <div key={i} className="flex items-start gap-3">
-                              <span className="mt-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-brand/10 text-brand ring-1 ring-brand/20">
+                              <span className="mt-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-brand/10 text-brand ring-1 ring-brand/20 min-w-4">
                                 <svg
                                   width="14"
                                   height="14"

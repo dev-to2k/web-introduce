@@ -1,5 +1,5 @@
 import AppSection from "./components/app-section/app-section";
-import CustomerSupport from "./components/customer-support";
+import CustomerSupport from "./components/customer-support/customer-support";
 import Hero from "./components/hero";
 import MembersIntroContent from "./components/members-intro/members-intro-content";
 import MembersIntroSlider from "./components/members-intro/members-intro-slider";

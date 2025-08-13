@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Topbar from "./components/topbar";
-import Header from "./components/header";
 import Background from "./components/background";
-import Footer from "./components/footer";
+import Footer from "./components/footer/footer";
+import Header from "./components/header";
+import Topbar from "./components/topbar";
+import "./globals.css";
 
 const vietSans = Be_Vietnam_Pro({
   variable: "--font-geist-sans",
@@ -23,6 +23,13 @@ export const metadata: Metadata = {
   description: "Trang landing chuyển từ index.html sang Next.js App Router",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,7 +43,7 @@ export default function RootLayout({
         <Background />
         <Topbar />
         <Header />
-        <main>{children}</main>
+        <main className="w-full max-w-full overflow-x-hidden">{children}</main>
         <Footer />
       </body>
     </html>

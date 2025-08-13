@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "swiper/css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -69,6 +70,39 @@
 
 body {
   font-family: var(--font-sans);
+}
+
+/* Prevent horizontal whitespace on small screens */
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make embed/media elements not overflow the viewport */
+img,
+video,
+svg,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+/* Hide scrollbar utility for horizontal carousels */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Swiper minimal fallback styles (avoid overriding effect-specific dimensions) */
+.swiper {
+  overflow: visible;
+}
+.swiper-wrapper {
+  display: flex !important;
 }
 
 :root {
@@ -145,7 +179,10 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+  :where(main, header, nav, section, footer) {
+    max-width: 100%;
   }
 }
 
@@ -204,4 +241,18 @@ body {
   border-radius: inherit;
   pointer-events: none;
   animation: clippath-border-scan 3s linear infinite;
+}
+
+/* Ensure the animated border never overlaps content (fix mobile bullet icon overlay) */
+.clip-animated-border {
+  isolation: isolate;
+}
+
+.clip-animated-border::before {
+  z-index: 0;
+}
+
+.clip-animated-border > * {
+  position: relative;
+  z-index: 1;
 }

@@ -51,7 +51,7 @@ export default function Header() {
             width={160}
             height={60}
             priority
-            className="h-16 w-auto scale-200"
+            className="h-10 md:h-16 w-auto max-w-full"
           />
         </div>
         <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 text-lg">

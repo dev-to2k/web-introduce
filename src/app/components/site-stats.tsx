@@ -37,13 +37,13 @@ export default function SiteStats() {
       className="max-w-screen-xl mx-auto px-4"
     >
       {/* Mobile: Swiper slider */}
-      <div className="block sm:hidden">
+      <div className="block sm:hidden rounded-xl">
         <Swiper
           modules={[Pagination]}
           spaceBetween={12}
           slidesPerView={1.1}
           pagination={{ clickable: true }}
-          className="px-1"
+          className="px-1 rounded-xl"
         >
           {stats.map((s) => (
             <SwiperSlide key={s.label}>{renderCard(s)}</SwiperSlide>

@@ -1,4 +1,4 @@
-import SectionTitle from "../../components/shared/section-title";
+import SectionTitle from "@/components/shared/section-title";
 import {
   SupportBullets,
   SupportChannels,
