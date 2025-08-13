@@ -49,7 +49,7 @@ export default function EventsClient({ items }: Props) {
         variants={itemVariants}
         className="min-w-0 lg:col-span-7 xl:col-span-8"
       >
-        <div className="w-full max-w-full aspect-video rounded-xl overflow-hidden shadow-card border border-slate-200 bg-black">
+        <div className="w-full max-w-full aspect-video rounded-xl overflow-hidden shadow-card border border-slate-200 bg-black dark:border-white/10">
           <iframe
             className="block h-full w-full max-w-full"
             loading="lazy"
@@ -67,9 +67,9 @@ export default function EventsClient({ items }: Props) {
         variants={itemVariants}
         className="min-w-0 lg:col-span-5 xl:col-span-4 h-full min-h-0"
       >
-        <div className="bg-white rounded-xl border border-slate-200 shadow-card p-4 h-full flex flex-col min-h-0 lg:sticky lg:top-4 w-full max-w-full">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-card p-4 h-full flex flex-col min-h-0 lg:sticky lg:top-4 w-full max-w-full dark:bg-neutral-900 dark:border-white/10">
           <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto whitespace-nowrap">
-            <b className="text-slate-800">THIỆN NGUYỆN</b>
+            <b className="text-slate-800 dark:text-white">THIỆN NGUYỆN</b>
             <span className="text-slate-400">TIN TỨC</span>
             <span className="text-slate-400">SỰ KIỆN</span>
           </div>
@@ -83,7 +83,7 @@ export default function EventsClient({ items }: Props) {
               setQuery(e.target.value);
               setActiveIdx(0);
             }}
-            className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40"
+            className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-800 dark:text-white"
           />
 
           <div className="mt-4 pr-1 lg:flex-1 lg:min-h-0 lg:overflow-y-auto lg:max-h-[calc(100vh-200px)]">
@@ -95,7 +95,7 @@ export default function EventsClient({ items }: Props) {
                   className={`w-full flex items-center gap-3 rounded-lg border p-2 text-left transition shadow-sm ${
                     idx === activeIdx
                       ? "border-brand/60 ring-1 ring-brand/30 bg-brand/5"
-                      : "border-slate-200 hover:bg-slate-50"
+                      : "border-slate-200 hover:bg-slate-50 dark:border-white/10 dark:hover:bg-white/5"
                   }`}
                 >
                   <div className="h-14 w-24 relative shrink-0 rounded">
@@ -108,7 +108,7 @@ export default function EventsClient({ items }: Props) {
                     />
                   </div>
                   <div className="min-w-0">
-                    <div className="truncate break-words font-medium text-slate-800">
+                    <div className="truncate break-words font-medium text-slate-800 dark:text-white">
                       {v.title}
                     </div>
                     {v.channel && (

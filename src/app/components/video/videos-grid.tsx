@@ -34,11 +34,14 @@ export default function VideosGrid() {
       </motion.div>
       <motion.div
         variants={itemVariants}
-        className="bg-white rounded-xl p-4 border border-slate-200 shadow-card"
+        className="bg-white rounded-xl p-4 border border-slate-200 shadow-card dark:bg-neutral-900 dark:border-white/10"
       >
-        <b>Giới thiệu hệ sinh thái ATQ</b>
-        <p className="text-slate-600 mt-2">
-          Khám phá các danh mục trò chơi, cộng đồng thành viên, ưu đãi và chính sách an toàn.
+        <b className="text-slate-900 dark:text-white">
+          Giới thiệu hệ sinh thái ATQ
+        </b>
+        <p className="text-slate-600 dark:text-slate-400 mt-2">
+          Khám phá các danh mục trò chơi, cộng đồng thành viên, ưu đãi và chính
+          sách an toàn.
         </p>
       </motion.div>
     </motion.div>

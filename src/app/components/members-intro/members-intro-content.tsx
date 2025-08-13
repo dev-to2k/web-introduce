@@ -122,7 +122,7 @@ export default function MembersIntroContent() {
                   ${
                     isActive
                       ? "bg-brand/10 text-brand shadow-xl shadow-brand/10 ring-1 ring-brand/30"
-                      : "bg-slate-50 text-slate-700"
+                      : "bg-slate-50 text-slate-700 dark:bg-neutral-800 dark:text-slate-200"
                   }`}
                 >
                   <span className="w-12 h-12 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
@@ -188,7 +188,7 @@ export default function MembersIntroContent() {
               ${
                 isActive
                   ? "bg-brand/10 text-brand shadow-xl shadow-brand/10 ring-1 ring-brand/30"
-                  : "bg-slate-50 text-slate-700"
+                  : "bg-slate-50 text-slate-700 dark:bg-neutral-800 dark:text-slate-200"
               }`}
             >
               <span className="w-12 h-12 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
@@ -236,7 +236,7 @@ export default function MembersIntroContent() {
                 <div className="md:col-span-7">
                   <div className="p-[1px] rounded-2xl bg-gradient-to-br from-brand/40 via-violet-300/40 to-cyan-300/40">
                     <div className="relative rounded-2xl clip-animated-border">
-                      <div className="rounded-2xl p-6 md:p-8 bg-white shadow-xl">
+                      <div className="rounded-2xl p-6 md:p-8 bg-white shadow-xl dark:bg-neutral-900">
                         <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-semibold mb-4">
                           {it.title}
                         </span>
@@ -257,7 +257,7 @@ export default function MembersIntroContent() {
                                   <path d="M9 16.2l-3.5-3.5a1 1 0 10-1.4 1.4l4.2 4.2a1 1 0 001.4 0l9-9a1 1 0 10-1.4-1.4L9 16.2z" />
                                 </svg>
                               </span>
-                              <p className="text-slate-700 leading-relaxed text-sm md:text-base">
+                              <p className="text-slate-700 leading-relaxed text-sm md:text-base dark:text-slate-300">
                                 <span className="font-semibold text-brand">
                                   {it.title}
                                 </span>

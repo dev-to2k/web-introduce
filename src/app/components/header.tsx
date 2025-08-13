@@ -3,9 +3,11 @@ import Button from "@/components/shared/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import ThemeToggle from "../components/theme/theme-toggle";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -31,6 +33,13 @@ export default function Header() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const navLinks: { href: string; label: string; isActive?: boolean }[] = [
     { href: "#san-pham", label: "Trang Chủ", isActive: true },
     { href: "#uu-dai", label: "Sự Kiện", isActive: false },
@@ -41,7 +50,13 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200"
+      className={`fixed inset-x-0 z-50 border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10
+        ${
+          isScrolled
+            ? "shadow-sm dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]"
+            : ""
+        }`}
+      style={{ top: "calc(var(--topbar-h, 0px))" }}
     >
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -54,13 +69,15 @@ export default function Header() {
             className="h-10 md:h-16 w-auto max-w-full"
           />
         </div>
-        <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 text-lg">
+        <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 dark:text-slate-200 text-lg">
           {navLinks.map(({ href, label, isActive }) => (
             <Link
               key={href}
               href={href}
-              className={`px-3 py-2 rounded-md hover:bg-slate-100 hover:text-brand transition-colors font-bold uppercase
-                ${isActive ? "text-brand" : "text-slate-700"}
+              className={`px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-white/10 hover:text-brand transition-colors font-bold uppercase
+                ${
+                  isActive ? "text-brand" : "text-slate-700 dark:text-slate-200"
+                }
               `}
             >
               {label}
@@ -68,6 +85,7 @@ export default function Header() {
           ))}
         </nav>
         <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
           <Button variant="link" size="sm" className="px-3 py-2 text-lg">
             Đăng nhập
           </Button>
@@ -76,7 +94,7 @@ export default function Header() {
           </Button>
         </div>
         <button
-          className="md:hidden p-2 rounded-lg hover:bg-slate-100"
+          className="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10"
           aria-label="Mở menu"
           onClick={() => setIsOpen((v) => !v)}
         >
@@ -94,9 +112,9 @@ export default function Header() {
       <div
         className={`md:hidden ${
           isOpen ? "" : "hidden"
-        } px-4 pb-3 border-t border-slate-200 bg-white`}
+        } px-4 pb-3 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-900`}
       >
-        <div className="flex flex-col gap-3 font-semibold text-slate-700 py-3">
+        <div className="flex flex-col gap-3 font-semibold text-slate-700 dark:text-slate-200 py-3">
           {navLinks.map(({ href, label }) => (
             <Link key={href} href={href}>
               {label}

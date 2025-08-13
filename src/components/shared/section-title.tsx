@@ -18,5 +18,9 @@ export default function SectionTitle({
 }: SectionTitleProps) {
   const Tag = as as ElementType;
   const classes = getSectionTitleClasses({ align, variant, className });
-  return <Tag className={classes}>{children}</Tag>;
+  return (
+    <Tag className={classes}>
+      <span className="dark:text-white">{children}</span>
+    </Tag>
+  );
 }

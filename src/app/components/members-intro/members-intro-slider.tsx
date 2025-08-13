@@ -101,7 +101,6 @@ export default function MembersIntroSlider() {
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            navigation
             pagination={{ clickable: true }}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={shouldLoop}

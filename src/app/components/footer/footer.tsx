@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer
       id="ho-tro"
-      className="bg-ink text-slate-200 mt-10 border-t border-white/10 overflow-hidden"
+      className="mt-10 overflow-hidden border-t bg-ink text-slate-200 border-white/10 dark:bg-neutral-950 dark:text-slate-200 dark:border-white/10"
     >
       {/* Top: brand + links */}
       <div className="max-w-screen-xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-12 gap-8 lg:gap-12">
@@ -21,8 +21,10 @@ export default function Footer() {
               priority
             />
           </div>
-          <div className="text-sm text-slate-300/90">
-            <div className="font-medium text-white">ATQ Alliance</div>
+          <div className="text-sm text-slate-300/90 dark:text-slate-300/90">
+            <div className="font-medium text-white dark:text-white">
+              ATQ Alliance
+            </div>
             <div className="mt-1">12 Huỳnh Thúc Kháng, TP. Hồ Chí Minh</div>
             <div className="mt-1">Chơi có trách nhiệm. 18+.</div>
           </div>
@@ -81,9 +83,24 @@ export default function Footer() {
         <div className="md:col-span-7 sm:hidden mt-8 md:mt-12">
           <FooterAccordion
             sections={[
-              { title: "Menu", items: ["Trang chủ", "Hướng dẫn", "Khuyến mãi", "Sự kiện"] },
-              { title: "Sự kiện", items: ["Việt Nam", "Philippines", "Thái Lan", "Hàn Quốc", "Brazil"] },
-              { title: "Đối tác", items: ["Sảnh Game", "Ngân hàng", "Bên thứ 3"] },
+              {
+                title: "Menu",
+                items: ["Trang chủ", "Hướng dẫn", "Khuyến mãi", "Sự kiện"],
+              },
+              {
+                title: "Sự kiện",
+                items: [
+                  "Việt Nam",
+                  "Philippines",
+                  "Thái Lan",
+                  "Hàn Quốc",
+                  "Brazil",
+                ],
+              },
+              {
+                title: "Đối tác",
+                items: ["Sảnh Game", "Ngân hàng", "Bên thứ 3"],
+              },
             ]}
           />
         </div>
@@ -91,8 +108,10 @@ export default function Footer() {
         {/* Desktop & tablet: Columns */}
         <div className="md:col-span-7 hidden sm:grid sm:grid-cols-3 gap-8 mt-8 md:mt-12">
           <div>
-            <div className="text-white font-semibold tracking-wide uppercase text-base sm:text-lg">Menu</div>
-            <ul className="text-sm space-y-2 mt-3 text-slate-300/90">
+            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
+              Menu
+            </div>
+            <ul className="text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
               <li>Trang chủ</li>
               <li>Hướng dẫn</li>
               <li>Khuyến mãi</li>
@@ -100,10 +119,10 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <div className="text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
+            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
               Sự kiện
             </div>
-            <ul className="text-sm space-y-2 mt-3 text-slate-300/90">
+            <ul className="text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
               <li>Việt Nam</li>
               <li>Philippines</li>
               <li>Thái Lan</li>
@@ -112,10 +131,10 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <div className="text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
+            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
               Đối tác
             </div>
-            <ul className="text-sm space-y-2 mt-3 text-slate-300/90">
+            <ul className="text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
               <li>Sảnh Game</li>
               <li>Ngân hàng</li>
               <li>Bên thứ 3</li>

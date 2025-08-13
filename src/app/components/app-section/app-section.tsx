@@ -18,7 +18,7 @@ export default function AppSection() {
         {/* Right: Content */}
         <div className="md:col-span-6">
           {/* Wrapper khớp chiều cao khung ảnh bên trái và đẩy CTA xuống đáy */}
-          <div className="mt-16 min-h-[320px] md:min-h-[380px] grid grid-rows-[auto_1fr_auto]">
+          <div className="mt-6 md:mt-16 min-h-[320px] md:min-h-[380px] grid grid-rows-[auto_1fr_auto]">
             {/* Logos + content top */}
             <AppSectionRight />
             {/* CTA bottom aligned */}

@@ -29,8 +29,13 @@ export default function AppCtaButtons({ className }: Props) {
         variants={itemVariants}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        className="w-full sm:w-auto flex-1 sm:flex-none"
       >
-        <Button variant="brand" size="lg" className="border-2 border-brand">
+        <Button
+          variant="brand"
+          size="lg"
+          className="border-2 border-brand min-w-0 w-full sm:w-auto sm:min-w-[168px]"
+        >
           Tải cho iOS
         </Button>
       </motion.div>
@@ -38,8 +43,13 @@ export default function AppCtaButtons({ className }: Props) {
         variants={itemVariants}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        className="w-full sm:w-auto flex-1 sm:flex-none"
       >
-        <Button variant="outline" size="lg" className="bg-white">
+        <Button
+          variant="outline"
+          size="lg"
+          className="bg-white min-w-0 w-full sm:w-auto sm:min-w-[168px]"
+        >
           Tải cho Android
         </Button>
       </motion.div>

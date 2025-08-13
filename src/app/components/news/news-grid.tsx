@@ -52,7 +52,7 @@ export default function NewsGrid({ items }: Props) {
           <motion.article
             key={n.image ?? n.title}
             variants={itemVariants}
-            className="group bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden transition duration-300 ease-out hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5"
+            className="group bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden transition duration-300 ease-out hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 dark:bg-neutral-900 dark:border-white/10 dark:hover:border-white/20"
           >
             <div className="h-36 relative">
               <Image
@@ -66,12 +66,12 @@ export default function NewsGrid({ items }: Props) {
             </div>
             <div className="p-4">
               {n.date && (
-                <div className="text-slate-500 text-sm inline-flex items-center gap-1">
+                <div className="text-slate-500 dark:text-slate-400 text-sm inline-flex items-center gap-1">
                   <CalendarDays className="w-4 h-4" />
                   {n.date}
                 </div>
               )}
-              <b className="block">{n.title}</b>
+              <b className="block text-slate-900 dark:text-white">{n.title}</b>
               <Link href={`/bai-viet/${n.slug ?? slugify(n.title)}`}>
                 <Button className="mt-2 gap-2" size="sm" variant="brand">
                   Xem chi tiết
@@ -87,7 +87,10 @@ export default function NewsGrid({ items }: Props) {
           href="/bai-viet"
           className="text-brand font-semibold hover:underline"
         >
-          xem tất cả
+          <span className="inline-flex items-center gap-2 hover:gap-3 transition-all duration-300">
+            Xem tất cả
+            <ArrowRight className="w-4 h-4" />
+          </span>
         </Link>
       </div>
     </div>

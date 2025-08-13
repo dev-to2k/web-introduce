@@ -7,8 +7,8 @@ function LogoCard({ src, alt }: { src: string; alt: string }) {
   return (
     <figure
       className={cn(
-        "relative h-[60px] w-44 shrink-0 cursor-pointer overflow-hidden rounded-xl border bg-white p-2",
-        "border-slate-200 hover:shadow-md transition duration-300"
+        "relative h-[60px] w-44 shrink-0 cursor-pointer overflow-hidden rounded-xl border bg-white p-2 dark:bg-neutral-900",
+        "border-slate-200 hover:shadow-md transition duration-300 dark:border-white/10"
       )}
     >
       <div className="relative h-full w-full">

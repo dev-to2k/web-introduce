@@ -17,7 +17,10 @@ export default function FooterAccordion({ sections }: { sections: Section[] }) {
   return (
     <div className="sm:hidden space-y-2">
       {sections.map((section, idx) => (
-        <div key={section.title} className="border-b border-white/10 py-2">
+        <div
+          key={section.title}
+          className="border-b border-slate-200 dark:border-white/10 py-2"
+        >
           <button
             type="button"
             aria-expanded={openIndex === idx}
@@ -45,10 +48,12 @@ export default function FooterAccordion({ sections }: { sections: Section[] }) {
           <div
             id={`footer-accordion-panel-${idx}`}
             className={`overflow-hidden transition-all duration-300 ease-out ${
-              openIndex === idx ? "max-h-60 opacity-100 mt-2" : "max-h-0 opacity-0"
+              openIndex === idx
+                ? "max-h-60 opacity-100 mt-2"
+                : "max-h-0 opacity-0"
             }`}
           >
-            <ul className="text-sm space-y-2 text-slate-300/90">
+            <ul className="text-sm space-y-2 text-white dark:text-slate-300/90">
               {section.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
