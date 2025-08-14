@@ -132,17 +132,15 @@ export default function EventsPage() {
 
         {/* Right list */}
         <aside className="md:col-span-3 self-start">
-          <div className="lg:sticky lg:top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
-            <div className="space-y-4 overflow-y-auto pr-1 max-h-[calc(100vh-(var(--topbar-h,0px)+var(--header-h,64px)+32px))]">
-              {stickyCompact && (
-                <div className="sticky top-0 z-10">
-                  <CompactCard key={stickyCompact.id} item={stickyCompact} />
-                </div>
-              )}
-              {restTail.map((e) => (
-                <CompactCard key={e.id} item={e} />
-              ))}
-            </div>
+          <div className="space-y-4">
+            {stickyCompact && (
+              <div className="sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] z-10">
+                <CompactCard key={stickyCompact.id} item={stickyCompact} />
+              </div>
+            )}
+            {restTail.map((e) => (
+              <CompactCard key={e.id} item={e} />
+            ))}
           </div>
         </aside>
       </div>

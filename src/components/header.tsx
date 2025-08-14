@@ -2,12 +2,32 @@
 import Button from "@/components/shared/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "../components/theme/theme-toggle";
 import { RenderMobile } from "./responsive/RenderAt";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const setVar = () => {
+      const h = el.getBoundingClientRect().height;
+      if (h > 0) {
+        document.documentElement.style.setProperty("--header-h", `${h}px`);
+      }
+    };
+    setVar();
+    const ro = new ResizeObserver(setVar);
+    ro.observe(el);
+    window.addEventListener("resize", setVar);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", setVar);
+    };
+  }, []);
 
   const navLinks: { href: string; label: string; isActive?: boolean }[] = [
     { href: "/", label: "Trang Chủ", isActive: true },
@@ -19,7 +39,8 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky z-40 w-full border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10 top-8`}
+      ref={headerRef}
+      className={`sticky z-40 w-full border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10 top-[var(--topbar-h,0px)]`}
     >
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">

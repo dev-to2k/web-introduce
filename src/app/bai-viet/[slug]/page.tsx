@@ -68,7 +68,7 @@ export default async function ArticleDetail({
         </section>
 
         {/* Main layout: content card + right TOC */}
-        <div className="max-w-screen-xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_320px] gap-6">
+        <div className="max-w-screen-xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_320px] gap-6 items-start">
           <article className="prose prose-slate prose-lg max-w-none bg-white rounded-xl border border-slate-200 shadow-card p-5 md:p-7 prose-headings:text-ink prose-h2:font-extrabold prose-h2:mt-8 prose-h2:mb-3 prose-h3:font-bold prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-2 prose-p:leading-[1.9] prose-p:my-4 prose-li:leading-[1.9] prose-a:text-brand hover:prose-a:underline prose-strong:text-ink prose-li:marker:text-brand">
             <div className="flex items-center justify-between mb-4">
               <h1 className="mt-2 text-2xl md:text-3xl font-extrabold text-ink">
@@ -260,7 +260,7 @@ export default async function ArticleDetail({
             </div>
           </article>
 
-          <div className="lg:sticky lg:top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] h-fit">
+          <div className="sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] h-fit">
             <TocCollapse
               className="p-0"
               items={[

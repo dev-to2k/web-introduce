@@ -47,9 +47,9 @@ export default function RootLayout({
         <ThemeScript />
         <Background />
         <Topbar />
+        <RenderDesktop>
           <Header />
-        {/* <RenderDesktop>
-        </RenderDesktop> */}
+        </RenderDesktop>
         <RenderMobile>
           <MobileHeader />
         </RenderMobile>
