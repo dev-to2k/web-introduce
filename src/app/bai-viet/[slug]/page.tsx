@@ -1,4 +1,4 @@
-import NewsGrid, { type NewsItem } from "@/app/components/news/news-grid";
+import NewsGrid, { type NewsItem } from "@/components/news/news-grid";
 import Button from "@/components/shared/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -260,7 +260,7 @@ export default async function ArticleDetail({
             </div>
           </article>
 
-          <div className="lg:sticky lg:top-[calc(var(--header-h,64px)+16px)] h-fit">
+          <div className="lg:sticky lg:top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] h-fit">
             <TocCollapse
               className="p-0"
               items={[

@@ -1,5 +1,5 @@
-import AppCtaButtons from "../../../components/shared/app-cta-buttons";
-import SectionTitle from "../../../components/shared/section-title";
+import AppCtaButtons from "../shared/app-cta-buttons";
+import SectionTitle from "../shared/section-title";
 import AppSectionLeft from "./app-section-left";
 import AppSectionRight from "./app-section-right";
 

@@ -22,7 +22,7 @@ export default function Topbar() {
   return (
     <div
       ref={ref}
-      className="text-slate-200 text-xs bg-ink dark:bg-neutral-950 fixed top-0 inset-x-0 z-50"
+      className="text-slate-200 text-xs bg-ink dark:bg-neutral-950 sticky top-0 inset-x-0 z-50"
     >
       <div className="max-w-screen-xl mx-auto px-4 py-2 flex items-center justify-between min-w-0">
         <span className="truncate max-w-[70%] text-slate-200/90 dark:text-slate-300/90">

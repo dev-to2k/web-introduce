@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Geist_Mono } from "next/font/google";
-import Background from "./components/background";
-import Footer from "./components/footer/footer";
-import Header from "./components/header";
-import MobileBottomTabbar from "./components/mobile/bottom-tabbar";
-import MobileHeader from "./components/mobile/header-mobile";
-import ThemeScript from "./components/theme/theme-script";
-import Topbar from "./components/topbar";
+import Background from "../components/background";
+import Footer from "../components/footer/footer";
+import Header from "../components/header";
+import MobileBottomTabbar from "../components/mobile/bottom-tabbar";
+import MobileHeader from "../components/mobile/header-mobile";
+import ThemeScript from "../components/theme/theme-script";
+import Topbar from "../components/topbar";
+import { RenderDesktop, RenderMobile } from "../components/responsive/RenderAt"; 
 import "./globals.css";
 
 const vietSans = Be_Vietnam_Pro({
@@ -46,23 +47,16 @@ export default function RootLayout({
         <ThemeScript />
         <Background />
         <Topbar />
-        <div className="hidden md:block">
+        <RenderDesktop>
           <Header />
-        </div>
-        <div className="md:hidden">
+        </RenderDesktop>
+        <RenderMobile>
           <MobileHeader />
-        </div>
-        <main
-          className="w-full max-w-full overflow-x-hidden"
-          style={{
-            paddingTop: "calc(var(--topbar-h, 0px) + var(--header-h, 0px))",
-          }}
-        >
-          {children}
-        </main>
-        <div className="md:hidden">
+        </RenderMobile>
+        <main className="w-full max-w-full overflow-x-hidden">{children}</main>
+        <RenderMobile>
           <MobileBottomTabbar />
-        </div>
+        </RenderMobile>
         <Footer />
       </body>
     </html>

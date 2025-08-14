@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import SectionTitle from "../../../components/shared/section-title";
+import SectionTitle from "../shared/section-title";
 import type { TruyCapItem } from "./truy-cap-grid";
 import TruyCapSwiper from "./truy-cap-swiper";
 

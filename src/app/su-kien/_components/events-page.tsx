@@ -84,6 +84,8 @@ export default function EventsPage() {
 
   const feature = filtered[0] ?? ALL_EVENTS.find((e) => e.category === active)!;
   const rest = filtered.slice(1);
+  const stickyCompact = rest[0];
+  const restTail = rest.slice(1);
 
   return (
     <section className="max-w-screen-xl mx-auto px-4 py-6 md:py-10">
@@ -97,7 +99,7 @@ export default function EventsPage() {
       <div className="hidden md:grid md:grid-cols-12 gap-5 lg:gap-6 items-start">
         {/* Left nav */}
         <aside className="md:col-span-2 self-start">
-          <nav className="space-y-2 sticky top-[calc(var(--header-h,64px)+16px)]">
+          <nav className="space-y-2 sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
             {CATEGORIES.map((c) => (
               <button
                 key={c.key}
@@ -129,9 +131,14 @@ export default function EventsPage() {
 
         {/* Right list */}
         <aside className="md:col-span-3 self-start">
-          <div className="lg:sticky lg:top-[calc(var(--header-h,64px)+16px)]">
-            <div className="space-y-4 overflow-y-auto pr-1 max-h-[calc(100vh-(var(--header-h,64px)+32px))]">
-              {rest.map((e) => (
+          <div className="lg:sticky lg:top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
+            <div className="space-y-4 overflow-y-auto pr-1 max-h-[calc(100vh-(var(--topbar-h,0px)+var(--header-h,64px)+32px))]">
+              {stickyCompact && (
+                <div className="sticky top-0 z-10">
+                  <CompactCard key={stickyCompact.id} item={stickyCompact} />
+                </div>
+              )}
+              {restTail.map((e) => (
                 <CompactCard key={e.id} item={e} />
               ))}
             </div>

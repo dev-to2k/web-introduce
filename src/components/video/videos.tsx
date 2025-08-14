@@ -1,4 +1,4 @@
-import SectionTitle from "../../../components/shared/section-title";
+import SectionTitle from "../shared/section-title";
 import VideosGrid from "./videos-grid";
 
 export default function Videos() {

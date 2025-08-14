@@ -1,4 +1,4 @@
-import SectionTitle from "../../../components/shared/section-title";
+import SectionTitle from "../shared/section-title";
 import EventsClient, { type VideoItem } from "./events-client";
 
 export default function Events() {

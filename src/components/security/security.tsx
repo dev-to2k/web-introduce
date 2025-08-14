@@ -1,4 +1,4 @@
-import SectionTitle from "../../../components/shared/section-title";
+import SectionTitle from "../shared/section-title";
 import SecurityGrid from "./security-grid";
 
 export default function Security() {

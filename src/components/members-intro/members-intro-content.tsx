@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SectionTitleClient from "../../../components/shared/section-title-client";
+import SectionTitleClient from "../shared/section-title-client";
 
 export default function MembersIntroContent() {
   const items = [

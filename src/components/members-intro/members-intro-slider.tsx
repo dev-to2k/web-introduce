@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SectionTitleClient from "../../../components/shared/section-title-client";
+import SectionTitleClient from "../shared/section-title-client";
 import VideoPlayer from "../video/video-player";
 
 export default function MembersIntroSlider() {

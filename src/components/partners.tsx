@@ -1,7 +1,7 @@
 import { Marquee } from "@/components/magicui/marquee";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import SectionTitle from "../../components/shared/section-title";
+import SectionTitle from "./shared/section-title";
 
 function LogoCard({ src, alt }: { src: string; alt: string }) {
   return (

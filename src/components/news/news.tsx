@@ -14,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SectionTitle from "../../../components/shared/section-title-client";
+import SectionTitle from "../shared/section-title-client";
 import NewsGrid from "./news-grid";
 
 export default function News() {

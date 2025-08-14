@@ -17,7 +17,9 @@ export default function Header() {
     const setVar = () => {
       const h = el.getBoundingClientRect().height;
       // Đặt biến CSS toàn cục để các section (Hero) có thể dùng
-      document.documentElement.style.setProperty("--header-h", `${h}px`);
+      if (h > 0) {
+        document.documentElement.style.setProperty("--header-h", `${h}px`);
+      }
     };
 
     setVar();
@@ -50,13 +52,12 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed inset-x-0 z-50 border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10
+      className={`sticky z-40 w-full border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10 top-[var(--topbar-h,0px)]
         ${
           isScrolled
             ? "shadow-sm dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]"
             : ""
         }`}
-      style={{ top: "calc(var(--topbar-h, 0px))" }}
     >
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">

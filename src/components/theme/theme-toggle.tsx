@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useTheme } from "./use-theme";
+import { useTheme } from "../../hooks/use-theme";
 
 type Props = {
   className?: string;
