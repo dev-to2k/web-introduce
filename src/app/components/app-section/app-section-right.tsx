@@ -32,28 +32,28 @@ export default function AppSectionRight() {
           alt="8XX"
           width={64}
           height={32}
-          className="h-8 w-auto object-contain shrink-0"
+          className="h-8 w-auto object-contain shrink-0 scale-100 md:scale-100 translate-y-[2px] md:translate-y-[-4px]"
         />
         <Image
           src="/images/58win.png"
           alt="58WIN"
           width={72}
           height={32}
-          className="h-8 md:h-10 w-auto object-contain shrink-0 md:scale-125 translate-y-[-2px] md:translate-y-[-4px]"
+          className="h-8 md:h-10 w-auto object-contain shrink-0 scale-225 ml-6 md:scale-125 translate-y-[-2px] md:translate-y-[-4px]"
         />
         <Image
           src="/images/ax88.png"
           alt="AX88"
           width={64}
           height={32}
-          className="h-8 w-auto object-contain shrink-0"
+          className="h-8 w-auto object-contain shrink-0 scale-50 md:scale-100"
         />
       </motion.div>
 
       {/* Text paragraphs */}
       <motion.div
         variants={containerVariants}
-        className="mt-3 space-y-3 text-slate-600 leading-relaxed text-pretty break-words max-w-full"
+        className="mt-3 space-y-3 text-slate-600 text-sm sm:text-base md:text-[17px] lg:text-lg leading-6 md:leading-7 lg:leading-8 text-pretty break-words max-w-full"
       >
         <motion.p variants={itemVariants}>
           ATQ là một trong những nhà cái trực tuyến uy tín và chuyên nghiệp nhất

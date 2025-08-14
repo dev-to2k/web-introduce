@@ -38,7 +38,7 @@ export default function EventsClient({ items }: Props) {
 
   return (
     <motion.div
-      className="grid w-full max-w-full gap-5 sm:gap-6 items-start lg:grid-cols-12 lg:items-stretch overflow-x-hidden rounded-xl bg-transparent"
+      className="grid w-full max-w-full gap-4 sm:gap-5 md:gap-6 items-start lg:grid-cols-12 lg:items-stretch overflow-x-hidden rounded-xl bg-transparent"
       variants={containerVariants}
       initial="hidden"
       whileInView="show"
@@ -67,8 +67,8 @@ export default function EventsClient({ items }: Props) {
         variants={itemVariants}
         className="min-w-0 lg:col-span-5 xl:col-span-4 h-full min-h-0"
       >
-        <div className="bg-white rounded-xl border border-slate-200 shadow-card p-4 h-full flex flex-col min-h-0 lg:sticky lg:top-4 w-full max-w-full dark:bg-neutral-900 dark:border-white/10">
-          <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto whitespace-nowrap">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-card p-3 sm:p-4 h-full flex flex-col min-h-0 lg:sticky lg:top-4 w-full max-w-full dark:bg-neutral-900 dark:border-white/10">
+          <div className="flex items-center gap-3 sm:gap-5 overflow-x-auto whitespace-nowrap text-xs sm:text-sm">
             <b className="text-slate-800 dark:text-white">THIỆN NGUYỆN</b>
             <span className="text-slate-400">TIN TỨC</span>
             <span className="text-slate-400">SỰ KIỆN</span>
@@ -83,16 +83,16 @@ export default function EventsClient({ items }: Props) {
               setQuery(e.target.value);
               setActiveIdx(0);
             }}
-            className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-800 dark:text-white"
+            className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm sm:text-base outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-800 dark:text-white"
           />
 
-          <div className="mt-4 pr-1 lg:flex-1 lg:min-h-0 lg:overflow-y-auto lg:max-h-[calc(100vh-200px)]">
+          <div className="mt-4 pr-1 lg:flex-1 lg:min-h-0 lg:overflow-y-auto lg:max-h:[calc(100vh-200px)]">
             <AnimatedList delay={300} className="gap-3 items-stretch">
               {filtered.map((v, idx) => (
                 <button
                   key={v.id}
                   onClick={() => setActiveIdx(idx)}
-                  className={`w-full flex items-center gap-3 rounded-lg border p-2 text-left transition shadow-sm ${
+                  className={`w-full flex items-center gap-3 rounded-lg border p-2 text-left transition shadow-sm text-sm sm:text-base ${
                     idx === activeIdx
                       ? "border-brand/60 ring-1 ring-brand/30 bg-brand/5"
                       : "border-slate-200 hover:bg-slate-50 dark:border-white/10 dark:hover:bg-white/5"
@@ -108,11 +108,11 @@ export default function EventsClient({ items }: Props) {
                     />
                   </div>
                   <div className="min-w-0">
-                    <div className="truncate break-words font-medium text-slate-800 dark:text-white">
+                    <div className="truncate break-words font-medium text-slate-800 dark:text-white text-sm sm:text-base">
                       {v.title}
                     </div>
                     {v.channel && (
-                      <div className="text-xs text-slate-500 truncate">
+                      <div className="text-[11px] sm:text-xs text-slate-500 truncate">
                         {v.channel}
                       </div>
                     )}

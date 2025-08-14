@@ -72,7 +72,7 @@ export default function Partners() {
   const secondRow = logos.slice(midpoint);
   return (
     <section className="max-w-screen-2xl mx-auto px-4">
-      <SectionTitle align="center" variant="badge">
+      <SectionTitle align="center" variant="badge" className="text-xs">
         Đối tác chiến lược
       </SectionTitle>
       <div className="relative mt-6 flex w-full flex-col items-center justify-center overflow-hidden">

@@ -83,7 +83,11 @@ export default function MembersIntroContent() {
       id="members-content"
       className=" md:py-12 space-y-6 max-w-screen-xl mx-auto px-4"
     >
-      <SectionTitleClient align="center" variant="badge">
+      <SectionTitleClient
+        align="center"
+        variant="badge"
+        className="text-xs sm:text-sm md:text-base"
+      >
         Giới thiệu thành viên ATQ
       </SectionTitleClient>
 
@@ -134,7 +138,7 @@ export default function MembersIntroContent() {
                       className="h-auto w-auto object-contain"
                     />
                   </span>
-                  <span className="whitespace-nowrap text-base font-medium">
+                  <span className="whitespace-nowrap text-sm sm:text-base font-medium">
                     {it.title}
                   </span>
                 </button>
@@ -200,7 +204,7 @@ export default function MembersIntroContent() {
                   className="h-auto w-auto object-contain"
                 />
               </span>
-              <span className="whitespace-nowrap text-base font-medium">
+              <span className="whitespace-nowrap text-base md:text-lg font-medium">
                 {it.title}
               </span>
             </button>
@@ -240,7 +244,7 @@ export default function MembersIntroContent() {
                         <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-semibold mb-4">
                           {it.title}
                         </span>
-                        <h3 className="text-2xl md:text-3xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-slate-900 via-slate-800 to-brand/70 bg-clip-text text-transparent">
+                        <h3 className="text-xl md:text-3xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-slate-900 via-slate-800 to-brand/70 bg-clip-text text-transparent">
                           {it.subTitle}
                         </h3>
                         <div className="space-y-4">

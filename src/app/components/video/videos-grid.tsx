@@ -36,10 +36,10 @@ export default function VideosGrid() {
         variants={itemVariants}
         className="bg-white rounded-xl p-4 border border-slate-200 shadow-card dark:bg-neutral-900 dark:border-white/10"
       >
-        <b className="text-slate-900 dark:text-white">
+        <b className="text-slate-900 dark:text-white text-base sm:text-lg md:text-xl leading-6 md:leading-7">
           Giới thiệu hệ sinh thái ATQ
         </b>
-        <p className="text-slate-600 dark:text-slate-400 mt-2">
+        <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm sm:text-base leading-6">
           Khám phá các danh mục trò chơi, cộng đồng thành viên, ưu đãi và chính
           sách an toàn.
         </p>

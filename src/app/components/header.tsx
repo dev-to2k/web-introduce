@@ -41,11 +41,11 @@ export default function Header() {
   }, []);
 
   const navLinks: { href: string; label: string; isActive?: boolean }[] = [
-    { href: "#san-pham", label: "Trang Chủ", isActive: true },
-    { href: "#uu-dai", label: "Sự Kiện", isActive: false },
-    { href: "#ho-tro", label: "Liên Minh", isActive: false },
-    { href: "#huong-dan", label: "Đại Lý", isActive: false },
-    { href: "#app", label: "Tuyển dụng", isActive: false },
+    { href: "/", label: "Trang Chủ", isActive: true },
+    { href: "/su-kien", label: "Sự Kiện", isActive: false },
+    { href: "/ho-tro", label: "Liên Minh", isActive: false },
+    { href: "/huong-dan", label: "Đại Lý", isActive: false },
+    { href: "/app", label: "Tuyển dụng", isActive: false },
   ];
   return (
     <header
@@ -59,7 +59,7 @@ export default function Header() {
       style={{ top: "calc(var(--topbar-h, 0px))" }}
     >
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src="/images/logo-atq.png"
             alt="ATQ Alliance Logo"
@@ -68,7 +68,7 @@ export default function Header() {
             priority
             className="h-10 md:h-16 w-auto max-w-full"
           />
-        </div>
+        </Link>
         <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 dark:text-slate-200 text-lg">
           {navLinks.map(({ href, label, isActive }) => (
             <Link

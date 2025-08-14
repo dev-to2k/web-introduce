@@ -4,7 +4,11 @@ import VideosGrid from "./videos-grid";
 export default function Videos() {
   return (
     <section id="videos" className="max-w-screen-xl mx-auto px-4">
-      <SectionTitle align="center" variant="badge">
+      <SectionTitle
+        align="center"
+        variant="badge"
+        className="text-xs sm:text-sm"
+      >
         Video nổi bật
       </SectionTitle>
       <VideosGrid />

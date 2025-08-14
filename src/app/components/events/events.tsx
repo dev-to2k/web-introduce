@@ -31,7 +31,11 @@ export default function Events() {
       id="events"
       className=" overflow-x-hidden max-w-screen-xl mx-auto px-4 pt-6"
     >
-      <SectionTitle align="center" variant="badge">
+      <SectionTitle
+        align="center"
+        variant="badge"
+        className="text-xs sm:text-sm md:text-base"
+      >
         Sự kiện – ATQ
       </SectionTitle>
       <div className="mt-6">

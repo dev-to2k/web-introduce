@@ -21,7 +21,7 @@ export default function Footer() {
               priority
             />
           </div>
-          <div className="text-sm text-slate-300/90 dark:text-slate-300/90">
+          <div className="text-xs sm:text-sm text-slate-300/90 dark:text-slate-300/90">
             <div className="font-medium text-white dark:text-white">
               ATQ Alliance
             </div>
@@ -108,10 +108,10 @@ export default function Footer() {
         {/* Desktop & tablet: Columns */}
         <div className="md:col-span-7 hidden sm:grid sm:grid-cols-3 gap-8 mt-8 md:mt-12">
           <div>
-            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
+            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-sm sm:text-base">
               Menu
             </div>
-            <ul className="text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
+            <ul className="text-xs sm:text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
               <li>Trang chủ</li>
               <li>Hướng dẫn</li>
               <li>Khuyến mãi</li>
@@ -119,10 +119,10 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
+            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-sm sm:text-base">
               Sự kiện
             </div>
-            <ul className="text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
+            <ul className="text-xs sm:text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
               <li>Việt Nam</li>
               <li>Philippines</li>
               <li>Thái Lan</li>
@@ -131,10 +131,10 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-base sm:text-lg">
+            <div className="text-white dark:text-white font-semibold tracking-wide uppercase text-sm sm:text-base">
               Đối tác
             </div>
-            <ul className="text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
+            <ul className="text-xs sm:text-sm space-y-2 mt-3 text-slate-300/90 dark:text-slate-300/90">
               <li>Sảnh Game</li>
               <li>Ngân hàng</li>
               <li>Bên thứ 3</li>
@@ -145,7 +145,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="bg-black/20">
-        <div className="max-w-screen-xl mx-auto px-4 py-4 text-xs text-slate-400 flex items-center justify-between gap-4">
+        <div className="max-w-screen-xl mx-auto px-4 py-4 text-[11px] sm:text-xs text-slate-400 flex items-center justify-between gap-4">
           <div>Copyright © {new Date().getFullYear()} ATQ Alliance</div>
           <div className="hidden sm:block">
             Bảo lưu mọi quyền | Điều khoản & Chính sách

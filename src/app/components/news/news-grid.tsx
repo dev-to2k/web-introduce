@@ -66,12 +66,14 @@ export default function NewsGrid({ items }: Props) {
             </div>
             <div className="p-4">
               {n.date && (
-                <div className="text-slate-500 dark:text-slate-400 text-sm inline-flex items-center gap-1">
+                <div className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm inline-flex items-center gap-1">
                   <CalendarDays className="w-4 h-4" />
                   {n.date}
                 </div>
               )}
-              <b className="block text-slate-900 dark:text-white">{n.title}</b>
+              <b className="block text-slate-900 dark:text-white text-base sm:text-lg md:text-xl leading-6 md:leading-7">
+                {n.title}
+              </b>
               <Link href={`/bai-viet/${n.slug ?? slugify(n.title)}`}>
                 <Button className="mt-2 gap-2" size="sm" variant="brand">
                   Xem chi tiết

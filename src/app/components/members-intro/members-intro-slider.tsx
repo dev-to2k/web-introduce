@@ -86,8 +86,12 @@ export default function MembersIntroSlider() {
   return (
     <section id="members-slider" className="py-6 max-w-screen-2xl mx-auto px-4">
       <BlurFade inView>
-        <SectionTitleClient align="center" variant="badge">
-          Sự kiện video
+        <SectionTitleClient
+          align="center"
+          variant="badge"
+          className="text-xs sm:text-sm"
+        >
+          Thiện Nguyện
         </SectionTitleClient>
       </BlurFade>
       {/* Mobile: giữ SwiperJS */}

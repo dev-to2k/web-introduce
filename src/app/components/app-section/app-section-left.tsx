@@ -71,7 +71,9 @@ export default function AppSectionLeft() {
               />
             </a>
             <div className="text-xs md:text-sm text-slate-600 mt-1 md:mt-0">
-              <div className="font-semibold text-slate-900">{q.title}</div>
+              <div className="font-semibold text-slate-900 dark:text-white">
+                {q.title}
+              </div>
               <div>Quét để tải</div>
             </div>
           </motion.div>

@@ -26,7 +26,7 @@ export default function FooterAccordion({ sections }: { sections: Section[] }) {
             aria-expanded={openIndex === idx}
             aria-controls={`footer-accordion-panel-${idx}`}
             onClick={() => toggle(idx)}
-            className="w-full flex items-center justify-between text-white font-semibold tracking-wide uppercase text-base"
+            className="w-full flex items-center justify-between text-white font-semibold tracking-wide uppercase text-sm"
           >
             <span>{section.title}</span>
             <svg
@@ -53,7 +53,7 @@ export default function FooterAccordion({ sections }: { sections: Section[] }) {
                 : "max-h-0 opacity-0"
             }`}
           >
-            <ul className="text-sm space-y-2 text-white dark:text-slate-300/90">
+            <ul className="text-xs space-y-2 text-white dark:text-slate-300/90">
               {section.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}

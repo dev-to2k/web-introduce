@@ -55,7 +55,7 @@ export default function HotEvents() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <SectionTitle variant="badge" className="mb-4">
+          <SectionTitle variant="badge" className="mb-4 text-sm">
             SỰ KIỆN NỔI BẬT
           </SectionTitle>
           <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
@@ -87,7 +87,7 @@ export default function HotEvents() {
           <SectionTitleClient
             variant="badge"
             align="left"
-            className="!text-base"
+            className="text-xs sm:text-sm"
           >
             SỰ KIỆN NỔI BẬT
           </SectionTitleClient>
@@ -164,10 +164,10 @@ function EventCard({
         {/* Content */}
         <div className="p-4 md:p-6">
           <div className="space-y-3">
-            <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand dark:group-hover:text-brand transition-colors">
+            <h3 className="text-base md:text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand dark:group-hover:text-brand transition-colors">
               {event.title}
             </h3>
-            <div className="bg-brand text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 group-hover:bg-brand/90 transition-colors">
+            <div className="bg-brand text-white px-4 py-2 rounded-lg text-xs md:text-sm font-semibold flex items-center justify-center gap-2 group-hover:bg-brand/90 transition-colors">
               Xem thêm
               <ArrowRight className="h-4 w-4" />
             </div>

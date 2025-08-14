@@ -72,7 +72,7 @@ export function SupportBullets({
 }) {
   return (
     <motion.ul
-      className={`space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside ${className}`}
+      className={`space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside text-sm md:text-base ${className}`}
       variants={containerVariants}
       initial="hidden"
       whileInView="show"
@@ -109,7 +109,7 @@ const iconMap: Record<
 export function SupportChannels({ channels }: { channels: ChannelItem[] }) {
   return (
     <motion.div
-      className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4"
+      className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4"
       variants={containerVariants}
       initial="hidden"
       whileInView="show"
@@ -123,16 +123,18 @@ export function SupportChannels({ channels }: { channels: ChannelItem[] }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group rounded-xl p-4 bg-white ring-1 ring-slate-200 hover:shadow-card transition border border-slate-100 text-center dark:bg-neutral-900 dark:ring-white/10 dark:border-white/10"
+            className="group rounded-xl p-3 sm:p-4 bg-white ring-1 ring-slate-200 hover:shadow-card transition border border-slate-100 text-center dark:bg-neutral-900 dark:ring-white/10 dark:border-white/10"
             aria-label={label}
             variants={itemVariants}
           >
             <div
-              className={`mx-auto h-12 w-12 rounded-full grid place-items-center ring-1 ${ring}`}
+              className={`mx-auto h-10 w-10 sm:h-12 sm:w-12 rounded-full grid place-items-center ring-1 ${ring}`}
             >
-              <Icon className={`h-6 w-6 ${color} drop-shadow-sm`} />
+              <Icon
+                className={`h-5 w-5 sm:h-6 sm:w-6 ${color} drop-shadow-sm`}
+              />
             </div>
-            <div className="mt-2 font-semibold text-slate-900 dark:text-white group-hover:text-brand transition">
+            <div className="mt-2 font-semibold text-slate-900 dark:text-white group-hover:text-brand transition text-sm sm:text-base">
               {label}
             </div>
           </motion.a>

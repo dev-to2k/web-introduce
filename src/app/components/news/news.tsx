@@ -72,8 +72,12 @@ export default function News() {
       .replace(/(^-|-$)+/g, "");
   return (
     <section id="news" className="py-6 max-w-screen-xl mx-auto px-4">
-      <SectionTitle align="center" variant="badge">
-        Tin tức
+      <SectionTitle
+        align="center"
+        variant="badge"
+        className="text-xs sm:text-sm"
+      >
+        Tin tức - HOT
       </SectionTitle>
       {/* Mobile slider: 1 item per slide */}
       <div className="md:hidden mt-4 -mx-1 px-1">
@@ -99,12 +103,12 @@ export default function News() {
                 </div>
                 <div className="p-4">
                   {n.date && (
-                    <div className="text-slate-500 dark:text-slate-400 text-sm inline-flex items-center gap-1">
+                    <div className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm inline-flex items-center gap-1">
                       <CalendarDays className="w-4 h-4" />
                       {n.date}
                     </div>
                   )}
-                  <b className="block text-slate-900 dark:text-white">
+                  <b className="block text-slate-900 dark:text-white text-base sm:text-lg leading-6">
                     {n.title}
                   </b>
                   <Link href={`/bai-viet/${n.slug ?? slugify(n.title)}`}>

@@ -24,8 +24,8 @@ export default function Home() {
       {/* Quick alliance grid (OKwin style) */}
       <AllianceGridMobile />
 
-      {/* Giới thiệu thành viên (content) */}
-      <MembersIntroContent />
+      {/* Ứng dụng QR */}
+      <AppSection />
 
       {/* Tin tức */}
       <News />
@@ -35,9 +35,6 @@ export default function Home() {
 
       {/* Video */}
       <Videos />
-
-      {/* Ứng dụng QR */}
-      <AppSection />
 
       {/* Giới thiệu thành viên (slide video) */}
       <MembersIntroSlider />
