@@ -6,6 +6,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { RenderMobile } from "../responsive/RenderAt";
 
 type EventItem = {
   id: string;
@@ -82,7 +83,7 @@ export default function HotEvents() {
       </div>
 
       {/* Mobile Layout */}
-      <div className="md:hidden">
+      <RenderMobile>
         <div className="flex items-center justify-between mb-4">
           <SectionTitleClient
             variant="badge"
@@ -115,7 +116,7 @@ export default function HotEvents() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </RenderMobile>
     </section>
   );
 }

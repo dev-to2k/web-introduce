@@ -2,45 +2,12 @@
 import Button from "@/components/shared/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ThemeToggle from "../components/theme/theme-toggle";
+import { RenderMobile } from "./responsive/RenderAt";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = headerRef.current;
-    if (!el) return;
-
-    const setVar = () => {
-      const h = el.getBoundingClientRect().height;
-      // Đặt biến CSS toàn cục để các section (Hero) có thể dùng
-      if (h > 0) {
-        document.documentElement.style.setProperty("--header-h", `${h}px`);
-      }
-    };
-
-    setVar();
-
-    const ro = new ResizeObserver(() => setVar());
-    ro.observe(el);
-    const onResize = () => setVar();
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 0);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const navLinks: { href: string; label: string; isActive?: boolean }[] = [
     { href: "/", label: "Trang Chủ", isActive: true },
@@ -49,15 +16,10 @@ export default function Header() {
     { href: "/huong-dan", label: "Đại Lý", isActive: false },
     { href: "/app", label: "Tuyển dụng", isActive: false },
   ];
+
   return (
     <header
-      ref={headerRef}
-      className={`sticky z-40 w-full border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10 top-[var(--topbar-h,0px)]
-        ${
-          isScrolled
-            ? "shadow-sm dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]"
-            : ""
-        }`}
+      className={`sticky z-40 w-full border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10 top-8`}
     >
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
@@ -94,35 +56,39 @@ export default function Header() {
             Đăng ký
           </Button>
         </div>
-        <button
-          className="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10"
-          aria-label="Mở menu"
-          onClick={() => setIsOpen((v) => !v)}
-        >
-          <svg
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
+        <RenderMobile>
+          <button
+            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10"
+            aria-label="Mở menu"
+            onClick={() => setIsOpen((v) => !v)}
           >
-            <path d="M3 6h18M3 12h18M3 18h18" />
-          </svg>
-        </button>
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          </button>
+        </RenderMobile>
       </div>
-      <div
-        className={`md:hidden ${
-          isOpen ? "" : "hidden"
-        } px-4 pb-3 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-900`}
-      >
-        <div className="flex flex-col gap-3 font-semibold text-slate-700 dark:text-slate-200 py-3">
-          {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href}>
-              {label}
-            </Link>
-          ))}
+      <RenderMobile>
+        <div
+          className={`${
+            isOpen ? "" : "hidden"
+          } px-4 pb-3 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-900`}
+        >
+          <div className="flex flex-col gap-3 font-semibold text-slate-700 dark:text-slate-200 py-3">
+            {navLinks.map(({ href, label }) => (
+              <Link key={href} href={href}>
+                {label}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </RenderMobile>
     </header>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useTheme } from "../../hooks/use-theme";
 
 type Props = {
@@ -9,9 +9,7 @@ type Props = {
 export default function ThemeToggle({ className }: Props) {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
-  // Hydration-safe: only show real icon after mount
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const label = useMemo(() => (isDark ? "Dark" : "Light"), [isDark]);
   return (
     <button
       type="button"
@@ -25,19 +23,14 @@ export default function ThemeToggle({ className }: Props) {
       suppressHydrationWarning
     >
       <span aria-hidden className="inline-flex items-center justify-center">
-        {mounted ? (
-          isDark ? (
-            <MoonIcon className="h-4 w-4" />
-          ) : (
-            <SunIcon className="h-4 w-4" />
-          )
+        {isDark ? (
+          <MoonIcon className="h-4 w-4" />
         ) : (
-          // neutral placeholder to keep SSR/CSR markup equivalent
-          <span className="inline-block h-4 w-4 rounded-full bg-slate-300" />
+          <SunIcon className="h-4 w-4" />
         )}
       </span>
       <span className="hidden sm:inline" suppressHydrationWarning>
-        {mounted ? (isDark ? "Dark" : "Light") : ""}
+        {label}
       </span>
     </button>
   );

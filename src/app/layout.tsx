@@ -5,9 +5,9 @@ import Footer from "../components/footer/footer";
 import Header from "../components/header";
 import MobileBottomTabbar from "../components/mobile/bottom-tabbar";
 import MobileHeader from "../components/mobile/header-mobile";
+import { RenderDesktop, RenderMobile } from "../components/responsive/RenderAt";
 import ThemeScript from "../components/theme/theme-script";
 import Topbar from "../components/topbar";
-import { RenderDesktop, RenderMobile } from "../components/responsive/RenderAt"; 
 import "./globals.css";
 
 const vietSans = Be_Vietnam_Pro({
@@ -47,9 +47,9 @@ export default function RootLayout({
         <ThemeScript />
         <Background />
         <Topbar />
-        <RenderDesktop>
           <Header />
-        </RenderDesktop>
+        {/* <RenderDesktop>
+        </RenderDesktop> */}
         <RenderMobile>
           <MobileHeader />
         </RenderMobile>

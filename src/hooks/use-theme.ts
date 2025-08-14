@@ -5,9 +5,14 @@ export type Theme = "light" | "dark";
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
+    // Prefer SSR-safe, synchronous read from DOM set by ThemeScript
+    if (typeof document !== "undefined") {
+      const attr = document.documentElement.getAttribute("data-theme");
+      if (attr === "dark" || attr === "light") return attr;
+    }
     if (typeof window === "undefined") return "light";
     const saved = window.localStorage.getItem("theme");
-    if (saved === "dark" || saved === "light") return saved;
+    if (saved === "dark" || saved === "light") return saved as Theme;
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";

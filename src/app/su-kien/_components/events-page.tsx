@@ -1,5 +1,6 @@
 "use client";
 
+import { RenderMobile } from "@/components/responsive/RenderAt";
 import SectionTitle from "@/components/shared/section-title";
 import { cn } from "@/lib/utils";
 import { Calendar, Play } from "lucide-react";
@@ -147,40 +148,42 @@ export default function EventsPage() {
       </div>
 
       {/* Mobile: stacked */}
-      <div className="md:hidden space-y-4">
-        <div className="flex gap-2 overflow-x-auto no-scrollbar">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c.key}
-              onClick={() => setActive(c.key)}
-              className={cn(
-                "shrink-0 px-4 py-2 rounded-full text-sm font-semibold border",
-                active === c.key
-                  ? "bg-brand text-white border-brand"
-                  : "bg-white text-slate-800 border-slate-200 dark:bg-neutral-900 dark:text-white dark:border-white/10"
-              )}
-            >
-              {c.label}
-            </button>
-          ))}
+      <RenderMobile>
+        <div className="space-y-4">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c.key}
+                onClick={() => setActive(c.key)}
+                className={cn(
+                  "shrink-0 px-4 py-2 rounded-full text-sm font-semibold border",
+                  active === c.key
+                    ? "bg-brand text-white border-brand"
+                    : "bg-white text-slate-800 border-slate-200 dark:bg-neutral-900 dark:text-white dark:border-white/10"
+                )}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+
+          <input
+            type="text"
+            placeholder="Tìm kiếm sự kiện..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
+          />
+
+          <FeatureCard item={feature} />
+
+          <div className="space-y-3">
+            {rest.map((e) => (
+              <CompactCard key={e.id} item={e} />
+            ))}
+          </div>
         </div>
-
-        <input
-          type="text"
-          placeholder="Tìm kiếm sự kiện..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
-        />
-
-        <FeatureCard item={feature} />
-
-        <div className="space-y-3">
-          {rest.map((e) => (
-            <CompactCard key={e.id} item={e} />
-          ))}
-        </div>
-      </div>
+      </RenderMobile>
     </section>
   );
 }

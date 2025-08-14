@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { RenderMobile } from "../responsive/RenderAt";
 import SectionTitleClient from "../shared/section-title-client";
 import VideoPlayer from "../video/video-player";
 
@@ -95,8 +96,8 @@ export default function MembersIntroSlider() {
         </SectionTitleClient>
       </BlurFade>
       {/* Mobile: giữ SwiperJS */}
-      <BlurFade inView delay={0.05}>
-        <div className="md:hidden">
+      <RenderMobile>
+        <BlurFade inView delay={0.05}>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={16}
@@ -116,8 +117,8 @@ export default function MembersIntroSlider() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-      </BlurFade>
+        </BlurFade>
+      </RenderMobile>
 
       {/* Desktop: Marquee dọc 5 cột */}
       <div className="relative overflow-hidden hidden md:grid grid-cols-5 gap-4 mt-4">

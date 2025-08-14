@@ -23,7 +23,7 @@ const allianceItems: AllianceItem[] = [
 
 export default function AllianceGridMobile() {
   return (
-    <section className="md:hidden mt-3 px-3" id="alliance">
+    <section className="mt-3 px-3" id="alliance">
       <MobileSectionHeader title="Alliance Member" />
       <div className="mt-3 -mx-1 px-1">
         <Swiper

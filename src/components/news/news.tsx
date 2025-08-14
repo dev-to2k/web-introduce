@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { RenderDesktop, RenderMobile } from "../responsive/RenderAt";
 import SectionTitle from "../shared/section-title-client";
 import NewsGrid from "./news-grid";
 
@@ -80,54 +81,56 @@ export default function News() {
         Tin tức - HOT
       </SectionTitle>
       {/* Mobile slider: 1 item per slide */}
-      <div className="md:hidden mt-4 -mx-1 px-1">
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          spaceBetween={12}
-          slidesPerView={1}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 4500, disableOnInteraction: false }}
-          className="!overflow-visible"
-        >
-          {items.map((n) => (
-            <SwiperSlide key={n.slug ?? n.title}>
-              <article className="group bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden transition duration-300 ease-out hover:shadow-lg hover:border-slate-300 dark:bg-neutral-900 dark:border-white/10">
-                <div className="h-44 relative">
-                  <Image
-                    src={n.image}
-                    alt={n.title}
-                    fill
-                    className="object-cover transition duration-300 ease-out group-hover:scale-105 group-hover:brightness-110"
-                    sizes="100vw"
-                  />
-                </div>
-                <div className="p-4">
-                  {n.date && (
-                    <div className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm inline-flex items-center gap-1">
-                      <CalendarDays className="w-4 h-4" />
-                      {n.date}
-                    </div>
-                  )}
-                  <b className="block text-slate-900 dark:text-white text-base sm:text-lg leading-6">
-                    {n.title}
-                  </b>
-                  <Link href={`/bai-viet/${n.slug ?? slugify(n.title)}`}>
-                    <Button className="mt-2 gap-2" size="sm" variant="brand">
-                      Xem chi tiết
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
-                </div>
-              </article>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <RenderMobile>
+        <div className="mt-4 -mx-1 px-1">
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            spaceBetween={12}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            className="!overflow-visible"
+          >
+            {items.map((n) => (
+              <SwiperSlide key={n.slug ?? n.title}>
+                <article className="group bg-white rounded-xl border border-slate-200 shadow-card overflow-hidden transition duration-300 ease-out hover:shadow-lg hover:border-slate-300 dark:bg-neutral-900 dark:border-white/10">
+                  <div className="h-44 relative">
+                    <Image
+                      src={n.image}
+                      alt={n.title}
+                      fill
+                      className="object-cover transition duration-300 ease-out group-hover:scale-105 group-hover:brightness-110"
+                      sizes="100vw"
+                    />
+                  </div>
+                  <div className="p-4">
+                    {n.date && (
+                      <div className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm inline-flex items-center gap-1">
+                        <CalendarDays className="w-4 h-4" />
+                        {n.date}
+                      </div>
+                    )}
+                    <b className="block text-slate-900 dark:text-white text-base sm:text-lg leading-6">
+                      {n.title}
+                    </b>
+                    <Link href={`/bai-viet/${n.slug ?? slugify(n.title)}`}>
+                      <Button className="mt-2 gap-2" size="sm" variant="brand">
+                        Xem chi tiết
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </RenderMobile>
 
       {/* Desktop/tablet grid */}
-      <div className="hidden md:block">
+      <RenderDesktop>
         <NewsGrid items={items} />
-      </div>
+      </RenderDesktop>
     </section>
   );
 }

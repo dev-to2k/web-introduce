@@ -2,10 +2,11 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { RenderDesktop, RenderMobile } from "../responsive/RenderAt";
 
 export type SecurityCard = {
   title: string;
@@ -30,52 +31,60 @@ export default function SecurityGrid({ items }: Props) {
   return (
     <>
       {/* Mobile: Swiper slider */}
-      <div className="md:hidden mt-6">
-        <Swiper
-          modules={[Pagination]}
-          slidesPerView={1}
-          spaceBetween={16}
-          pagination={{ clickable: true }}
-          style={{ paddingBottom: 24 }}
-        >
-          {items.map((card) => (
-            <SwiperSlide key={card.title}>
-              <div className="relative aspect-square">
-                <Image
-                  src={card.src}
-                  alt={card.title}
-                  fill
-                  sizes="100vw"
-                  className="object-cover rounded-xl shadow-card"
-                  priority={false}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <RenderMobile>
+        <div className="mt-6">
+          <Swiper
+            modules={[Pagination]}
+            slidesPerView={1}
+            spaceBetween={16}
+            pagination={{ clickable: true }}
+            style={{ paddingBottom: 24 }}
+          >
+            {items.map((card) => (
+              <SwiperSlide key={card.title}>
+                <div className="relative aspect-square">
+                  <Image
+                    src={card.src}
+                    alt={card.title}
+                    fill
+                    sizes="100vw"
+                    className="object-cover rounded-xl shadow-card"
+                    priority={false}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </RenderMobile>
 
       {/* Desktop: animated grid */}
-      <motion.div
-        className="hidden md:grid grid-cols-3 gap-6 mt-6"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {items.map((card) => (
-          <motion.div key={card.title} variants={itemVariants} className="relative aspect-square group">
-            <Image
-              src={card.src}
-              alt={card.title}
-              fill
-              sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
-              className="object-cover rounded-xl shadow-card transition duration-300 ease-out group-hover:scale-[1.015]"
-              priority={false}
-            />
-          </motion.div>
-        ))}
-      </motion.div>
+      <RenderDesktop>
+        <motion.div
+          className="grid grid-cols-3 gap-6 mt-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {items.map((card) => (
+            <motion.div
+              key={card.title}
+              variants={itemVariants}
+              className="relative aspect-square group"
+            >
+              <Image
+                src={card.src}
+                alt={card.title}
+                fill
+                sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
+                className="object-cover rounded-xl shadow-card transition duration-300 ease-out group-hover:scale-[1.015]"
+                priority={false}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </RenderDesktop>
     </>
   );
 }

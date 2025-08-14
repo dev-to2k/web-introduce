@@ -1,3 +1,4 @@
+import { RenderMobile } from "@/components/responsive/RenderAt";
 import AppSection from "../components/app-section/app-section";
 import CustomerSupport from "../components/customer-support/customer-support";
 import HotEvents from "../components/events/hot-events";
@@ -16,12 +17,14 @@ export default function Home() {
       <Hero />
 
       {/* Mobile quick actions giống OKwin */}
-      <div className="md:hidden">
+      <RenderMobile>
         <QuickActionsMobile />
-      </div>
+      </RenderMobile>
 
       {/* Quick alliance grid (OKwin style) */}
-      <AllianceGridMobile />
+      <RenderMobile>
+        <AllianceGridMobile />
+      </RenderMobile>
 
       {/* Ứng dụng QR */}
       <AppSection />

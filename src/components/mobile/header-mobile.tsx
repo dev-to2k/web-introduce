@@ -39,7 +39,7 @@ export default function MobileHeader() {
   return (
     <header
       ref={headerRef}
-      className={`md:hidden sticky z-40 inset-x-0 border-b bg-white text-slate-900 border-slate-200 dark:bg-neutral-900 dark:text-white dark:border-white/10 top-[var(--topbar-h,0px)] ${
+      className={`sticky z-40 inset-x-0 border-b bg-white text-slate-900 border-slate-200 dark:bg-neutral-900 dark:text-white dark:border-white/10 top-[var(--topbar-h,0px)] ${
         isScrolled
           ? "shadow-sm dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]"
           : ""

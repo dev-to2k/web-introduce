@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { RenderMobile } from "../responsive/RenderAt";
 import SectionTitleClient from "../shared/section-title-client";
 
 export default function MembersIntroContent() {
@@ -92,61 +93,63 @@ export default function MembersIntroContent() {
       </SectionTitleClient>
 
       {/* Mobile: Swiper slider */}
-      <div className="md:hidden -mx-4 px-4">
-        <Swiper
-          modules={[FreeMode]}
-          freeMode
-          slidesPerView="auto"
-          spaceBetween={16}
-          slidesOffsetBefore={16}
-          slidesOffsetAfter={16}
-          allowTouchMove
-          threshold={4}
-          grabCursor
-          watchOverflow={false}
-          resistanceRatio={0.85}
-          className="!overflow-visible"
-        >
-          {items.map((it, idx) => {
-            const isActive = active === idx;
-            return (
-              <SwiperSlide key={it.title} className="!w-auto">
-                <button
-                  id={`tab-${idx}`}
-                  role="tab"
-                  aria-controls={`panel-${idx}`}
-                  aria-selected={isActive}
-                  tabIndex={isActive ? 0 : -1}
-                  type="button"
-                  onClick={() => setActive(idx)}
-                  ref={(el) => {
-                    if (el) tabRefs.current[idx] = el;
-                  }}
-                  className={`group cursor-pointer inline-flex items-center gap-3 rounded-full px-5 py-3 transition select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 shrink-0 min-w-[140px]
+      <RenderMobile>
+        <div className="-mx-4 px-4">
+          <Swiper
+            modules={[FreeMode]}
+            freeMode
+            slidesPerView="auto"
+            spaceBetween={16}
+            slidesOffsetBefore={16}
+            slidesOffsetAfter={16}
+            allowTouchMove
+            threshold={4}
+            grabCursor
+            watchOverflow={false}
+            resistanceRatio={0.85}
+            className="!overflow-visible"
+          >
+            {items.map((it, idx) => {
+              const isActive = active === idx;
+              return (
+                <SwiperSlide key={it.title} className="!w-auto">
+                  <button
+                    id={`tab-${idx}`}
+                    role="tab"
+                    aria-controls={`panel-${idx}`}
+                    aria-selected={isActive}
+                    tabIndex={isActive ? 0 : -1}
+                    type="button"
+                    onClick={() => setActive(idx)}
+                    ref={(el) => {
+                      if (el) tabRefs.current[idx] = el;
+                    }}
+                    className={`group cursor-pointer inline-flex items-center gap-3 rounded-full px-5 py-3 transition select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 shrink-0 min-w-[140px]
                   ${
                     isActive
                       ? "bg-brand/10 text-brand shadow-xl shadow-brand/10 ring-1 ring-brand/30"
                       : "bg-slate-50 text-slate-700 dark:bg-neutral-800 dark:text-slate-200"
                   }`}
-                >
-                  <span className="w-12 h-12 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
-                    <Image
-                      src={it.img}
-                      alt={it.title}
-                      width={32}
-                      height={32}
-                      className="h-auto w-auto object-contain"
-                    />
-                  </span>
-                  <span className="whitespace-nowrap text-sm sm:text-base font-medium">
-                    {it.title}
-                  </span>
-                </button>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
+                  >
+                    <span className="w-12 h-12 rounded-full bg-white overflow-hidden grid place-items-center shadow-sm">
+                      <Image
+                        src={it.img}
+                        alt={it.title}
+                        width={32}
+                        height={32}
+                        className="h-auto w-auto object-contain"
+                      />
+                    </span>
+                    <span className="whitespace-nowrap text-sm sm:text-base font-medium">
+                      {it.title}
+                    </span>
+                  </button>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </RenderMobile>
 
       {/* Desktop: traditional tablist */}
       <div

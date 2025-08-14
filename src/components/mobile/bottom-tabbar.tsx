@@ -15,7 +15,7 @@ const items: {
 
 export default function MobileBottomTabbar() {
   return (
-    <nav className="md:hidden fixed bottom-0 inset-x-0 z-50">
+    <nav className="fixed bottom-0 inset-x-0 z-50">
       <div className="mx-2 mb-2 rounded-2xl bg-white text-slate-900 border border-slate-200 shadow-2xl dark:bg-neutral-900 dark:text-white dark:border-white/10">
         <ul className="grid grid-cols-5 text-[11px]">
           {items.map(({ href, label, icon: Icon }) => (
