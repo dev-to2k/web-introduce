@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Calendar, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Category = "news" | "video" | "charity";
 
@@ -91,9 +91,11 @@ export default function EventsPage() {
   return (
     <section className="max-w-screen-xl mx-auto px-4 py-6 md:py-10">
       <div className="mb-6 md:mb-8">
-        <SectionTitle align="center" variant="badge">
-          Sự kiện – ATQ
-        </SectionTitle>
+        <Reveal>
+          <SectionTitle align="center" variant="badge">
+            Sự kiện – ATQ
+          </SectionTitle>
+        </Reveal>
       </div>
 
       {/* Desktop: 3 columns */}
@@ -101,45 +103,54 @@ export default function EventsPage() {
         {/* Left nav */}
         <aside className="md:col-span-2 self-start">
           <nav className="space-y-2 sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c.key}
-                onClick={() => setActive(c.key)}
-                className={cn(
-                  "w-full text-left px-4 py-3 rounded-xl font-semibold transition border",
-                  active === c.key
-                    ? "bg-brand text-white border-brand"
-                    : "bg-white text-slate-800 border-slate-200 hover:bg-slate-50 dark:bg-neutral-900 dark:text-white dark:border-white/10 dark:hover:bg-white/5"
-                )}
-              >
-                {c.label}
-              </button>
+            {CATEGORIES.map((c, i) => (
+              <Reveal key={c.key} delay={i * 40}>
+                <button
+                  onClick={() => setActive(c.key)}
+                  className={cn(
+                    "w-full text-left px-4 py-3 rounded-xl font-semibold transition border",
+                    active === c.key
+                      ? "bg-brand text-white border-brand"
+                      : "bg-white text-slate-800 border-slate-200 hover:bg-slate-50 dark:bg-neutral-900 dark:text-white dark:border-white/10 dark:hover:bg-white/5"
+                  )}
+                >
+                  {c.label}
+                </button>
+              </Reveal>
             ))}
-            <input
-              type="text"
-              placeholder="Tìm kiếm..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="mt-3 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
-            />
+            <Reveal>
+              <input
+                type="text"
+                placeholder="Tìm kiếm..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="mt-3 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
+              />
+            </Reveal>
           </nav>
         </aside>
 
         {/* Main feature */}
         <main className="md:col-span-7">
-          <FeatureCard item={feature} />
+          <Reveal>
+            <FeatureCard item={feature} />
+          </Reveal>
         </main>
 
         {/* Right list */}
         <aside className="md:col-span-3 self-start">
-          <div className="space-y-4">
+          <div className="space-y-5">
             {stickyCompact && (
               <div className="sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] z-10">
-                <CompactCard key={stickyCompact.id} item={stickyCompact} />
+                <Reveal>
+                  <CompactCard key={stickyCompact.id} item={stickyCompact} />
+                </Reveal>
               </div>
             )}
-            {restTail.map((e) => (
-              <CompactCard key={e.id} item={e} />
+            {restTail.map((e, i) => (
+              <Reveal key={e.id} delay={80 + i * 40}>
+                <CompactCard item={e} />
+              </Reveal>
             ))}
           </div>
         </aside>
@@ -173,11 +184,15 @@ export default function EventsPage() {
             className="w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
           />
 
-          <FeatureCard item={feature} />
+          <Reveal>
+            <FeatureCard item={feature} />
+          </Reveal>
 
           <div className="space-y-3">
-            {rest.map((e) => (
-              <CompactCard key={e.id} item={e} />
+            {rest.map((e, i) => (
+              <Reveal key={e.id} delay={60 + i * 40}>
+                <CompactCard item={e} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -195,7 +210,7 @@ function FeatureCard({ item }: { item: EventItem }) {
           alt={item.title}
           fill
           sizes="(min-width: 1024px) 60vw, 100vw"
-          className="object-cover"
+          className="object-contain"
           priority
         />
         <div className="absolute top-3 left-3 bg-brand text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg inline-flex items-center gap-1">
@@ -240,26 +255,69 @@ function CompactCard({ item }: { item: EventItem }) {
       rel={item.href ? "noopener noreferrer" : undefined}
       className="block"
     >
-      <div className="rounded-xl bg-white border border-slate-200 dark:bg-neutral-900 dark:border-white/10 overflow-hidden hover:shadow-lg transition">
-        <div className="grid grid-cols-3 gap-3">
-          <div className="relative aspect-[16/10] col-span-1">
+      <div className="rounded-2xl bg-white border border-slate-200 dark:bg-neutral-900 dark:border-white/10 overflow-hidden hover:shadow-lg transition">
+        <div className="grid grid-cols-3 gap-2">
+          <div className="relative col-span-1 h-20 md:h-24 lg:h-28">
             <Image
               src={item.image}
               alt={item.title}
               fill
-              className="object-cover"
+              sizes="(min-width: 1024px) 200px, 33vw"
+              className="object-contain"
             />
           </div>
-          <div className="p-3 col-span-2">
-            <h3 className="font-bold text-slate-900 dark:text-white line-clamp-2">
+          <div className="py-2 pr-3 pl-1 md:p-3 col-span-2">
+            <h3 className="font-bold text-slate-900 dark:text-white leading-snug line-clamp-2">
               {item.title}
             </h3>
-            <p className="mt-1 text-xs text-slate-500 line-clamp-2">
+            <p className="mt-1 text-[11px] md:text-xs text-slate-500 leading-normal line-clamp-2">
               {item.excerpt}
             </p>
           </div>
         </div>
       </div>
     </Link>
+  );
+}
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        if (e.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 will-change-transform ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
   );
 }
