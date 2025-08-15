@@ -53,7 +53,9 @@ export default function RootLayout({
         <RenderMobile>
           <MobileHeader />
         </RenderMobile>
-        <main className="w-full max-w-full overflow-x-hidden">{children}</main>
+        <main className="w-full max-w-full overflow-x-hidden min-h-[calc(100vh-var(--topbar-h,0px)-var(--header-h,0px))]">
+          {children}
+        </main>
         <RenderMobile>
           <MobileBottomTabbar />
         </RenderMobile>

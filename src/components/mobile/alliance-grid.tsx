@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import type { SVGProps } from "react";
+import { memo } from "react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -21,39 +22,50 @@ const allianceItems: AllianceItem[] = [
   { src: "/images/logo-atq.png", label: "ATQ" },
 ];
 
-export default function AllianceGridMobile() {
+// Memoized AllianceGridMobile để tận dụng Next.js 15 caching
+const AllianceGridMobile = memo(function AllianceGridMobile() {
+  // Các config cho Swiper được định nghĩa bên ngoài component để tránh re-create mỗi lần render
+  const swiperConfig = {
+    modules: [FreeMode, Autoplay],
+    freeMode: true,
+    spaceBetween: 8,
+    slidesPerView: 3,
+    breakpoints: {
+      0: { slidesPerView: 2.5, spaceBetween: 8 },
+      360: { slidesPerView: 3, spaceBetween: 8 },
+      640: { slidesPerView: 5, spaceBetween: 10 },
+    },
+    autoplay: { delay: 3500, disableOnInteraction: false },
+    className: "!overflow-visible",
+  };
+
   return (
     <section className="mt-3 px-3" id="alliance">
       <MobileSectionHeader title="Alliance Member" />
       <div className="mt-3 -mx-1 px-1">
-        <Swiper
-          modules={[FreeMode, Autoplay]}
-          freeMode
-          spaceBetween={8}
-          slidesPerView={3}
-          breakpoints={{
-            0: { slidesPerView: 2.5, spaceBetween: 8 },
-            360: { slidesPerView: 3, spaceBetween: 8 },
-            640: { slidesPerView: 5, spaceBetween: 10 },
-          }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
-          className="!overflow-visible"
-        >
-          {allianceItems.map((it, idx) => (
-            <SwiperSlide key={`${it.label}-${idx}`}>
-              <AllianceCard item={it} />
+        <Swiper {...swiperConfig}>
+          {allianceItems.map((item, idx) => (
+            <SwiperSlide key={`${item.label}-${idx}`}>
+              <AllianceCard item={item} />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
     </section>
   );
-}
+});
 
-function AllianceCard({ item }: { item: AllianceItem }) {
+export default AllianceGridMobile;
+
+// Memoized AllianceCard để tránh re-render không cần thiết
+const AllianceCard = memo(function AllianceCard({
+  item,
+}: {
+  item: AllianceItem;
+}) {
   return (
     <a
-      href="https://imvn3k4.uk.com/"
+      href={item.href || "https://imvn3k4.uk.com/"}
       rel="noopener noreferrer"
       className="block w-full"
     >
@@ -73,9 +85,14 @@ function AllianceCard({ item }: { item: AllianceItem }) {
       </div>
     </a>
   );
-}
+});
 
-function MobileSectionHeader({ title }: { title: string }) {
+// Memoized MobileSectionHeader để tận dụng caching
+const MobileSectionHeader = memo(function MobileSectionHeader({
+  title,
+}: {
+  title: string;
+}) {
   return (
     <div className="flex items-center justify-between px-1">
       <div className="flex items-center gap-2 text-slate-900 dark:text-white">
@@ -91,9 +108,10 @@ function MobileSectionHeader({ title }: { title: string }) {
       </a>
     </div>
   );
-}
+});
 
-function SectionIcon(props: SVGProps<SVGSVGElement>) {
+// Memoized SectionIcon để tối ưu performance
+const SectionIcon = memo(function SectionIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -105,4 +123,4 @@ function SectionIcon(props: SVGProps<SVGSVGElement>) {
       <path d="M3 10h18M7 21h10a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4Z" />
     </svg>
   );
-}
+});

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer
       id="ho-tro"
-      className="mt-10 overflow-hidden border-t bg-ink text-slate-200 border-white/10 dark:bg-neutral-950 dark:text-slate-200 dark:border-white/10"
+      className="overflow-hidden border-t bg-ink text-slate-200 border-white/10 dark:bg-neutral-950 dark:text-slate-200 dark:border-white/10"
     >
       {/* Top: brand + links */}
       <div className="max-w-screen-xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-12 gap-8 lg:gap-12">
@@ -79,8 +79,7 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        {/* Mobile: Accordion */}
-        <div className="md:col-span-7 sm:hidden mt-8 md:mt-12">
+        <div className="md:col-span-7 mt-8 md:mt-12 hidden">
           <FooterAccordion
             sections={[
               {

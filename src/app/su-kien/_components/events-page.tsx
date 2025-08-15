@@ -1,6 +1,6 @@
 "use client";
 
-import { RenderMobile } from "@/components/responsive/RenderAt";
+import { RenderDesktop, RenderMobile } from "@/components/responsive/RenderAt";
 import SectionTitle from "@/components/shared/section-title";
 import { cn } from "@/lib/utils";
 import { Calendar, Play } from "lucide-react";
@@ -99,62 +99,64 @@ export default function EventsPage() {
       </div>
 
       {/* Desktop: 3 columns */}
-      <div className="hidden md:grid md:grid-cols-12 gap-5 lg:gap-6 items-start">
-        {/* Left nav */}
-        <aside className="md:col-span-2 self-start">
-          <nav className="space-y-2 sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
-            {CATEGORIES.map((c, i) => (
-              <Reveal key={c.key} delay={i * 40}>
-                <button
-                  onClick={() => setActive(c.key)}
-                  className={cn(
-                    "w-full text-left px-4 py-3 rounded-xl font-semibold transition border",
-                    active === c.key
-                      ? "bg-brand text-white border-brand"
-                      : "bg-white text-slate-800 border-slate-200 hover:bg-slate-50 dark:bg-neutral-900 dark:text-white dark:border-white/10 dark:hover:bg-white/5"
-                  )}
-                >
-                  {c.label}
-                </button>
-              </Reveal>
-            ))}
-            <Reveal>
-              <input
-                type="text"
-                placeholder="Tìm kiếm..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="mt-3 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
-              />
-            </Reveal>
-          </nav>
-        </aside>
-
-        {/* Main feature */}
-        <main className="md:col-span-7">
-          <Reveal>
-            <FeatureCard item={feature} />
-          </Reveal>
-        </main>
-
-        {/* Right list */}
-        <aside className="md:col-span-3 self-start">
-          <div className="space-y-5">
-            {stickyCompact && (
-              <div className="sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] z-10">
-                <Reveal>
-                  <CompactCard key={stickyCompact.id} item={stickyCompact} />
+      <RenderDesktop>
+        <div className="hidden md:grid md:grid-cols-12 gap-5 lg:gap-6 items-start">
+          {/* Left nav */}
+          <aside className="md:col-span-2 self-start">
+            <nav className="space-y-2 sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
+              {CATEGORIES.map((c, i) => (
+                <Reveal key={c.key} delay={i * 40}>
+                  <button
+                    onClick={() => setActive(c.key)}
+                    className={cn(
+                      "w-full text-left px-4 py-3 rounded-xl font-semibold transition border",
+                      active === c.key
+                        ? "bg-brand text-white border-brand"
+                        : "bg-white text-slate-800 border-slate-200 hover:bg-slate-50 dark:bg-neutral-900 dark:text-white dark:border-white/10 dark:hover:bg-white/5"
+                    )}
+                  >
+                    {c.label}
+                  </button>
                 </Reveal>
-              </div>
-            )}
-            {restTail.map((e, i) => (
-              <Reveal key={e.id} delay={80 + i * 40}>
-                <CompactCard item={e} />
+              ))}
+              <Reveal>
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="mt-3 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand/40 dark:border-white/15 dark:bg-neutral-900 dark:text-white"
+                />
               </Reveal>
-            ))}
-          </div>
-        </aside>
-      </div>
+            </nav>
+          </aside>
+
+          {/* Main feature */}
+          <main className="md:col-span-7">
+            <Reveal>
+              <FeatureCard item={feature} />
+            </Reveal>
+          </main>
+
+          {/* Right list */}
+          <aside className="md:col-span-3 self-start">
+            <div className="space-y-5">
+              {stickyCompact && (
+                <div className="sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] z-10">
+                  <Reveal>
+                    <CompactCard key={stickyCompact.id} item={stickyCompact} />
+                  </Reveal>
+                </div>
+              )}
+              {restTail.map((e, i) => (
+                <Reveal key={e.id} delay={80 + i * 40}>
+                  <CompactCard item={e} />
+                </Reveal>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </RenderDesktop>
 
       {/* Mobile: stacked */}
       <RenderMobile>

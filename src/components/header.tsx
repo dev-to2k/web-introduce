@@ -4,10 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "../components/theme/theme-toggle";
+import AuthPopup from "./auth/auth-popup";
 import { RenderMobile } from "./responsive/RenderAt";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -29,12 +32,12 @@ export default function Header() {
     };
   }, []);
 
-  const navLinks: { href: string; label: string; isActive?: boolean }[] = [
-    { href: "/", label: "Trang Chủ", isActive: true },
-    { href: "/su-kien", label: "Sự Kiện", isActive: false },
-    { href: "/ho-tro", label: "Liên Minh", isActive: false },
-    { href: "/huong-dan", label: "Đại Lý", isActive: false },
-    { href: "/app", label: "Tuyển dụng", isActive: false },
+  const navLinks: { href: string; label: string }[] = [
+    { href: "/", label: "Trang Chủ" },
+    { href: "/su-kien", label: "Sự Kiện" },
+    { href: "/lien-minh", label: "Liên Minh" },
+    { href: "/dai-ly", label: "Đại Lý" },
+    { href: "/tuyen-dung", label: "Tuyển dụng" },
   ];
 
   return (
@@ -54,13 +57,15 @@ export default function Header() {
           />
         </Link>
         <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 dark:text-slate-200 text-lg">
-          {navLinks.map(({ href, label, isActive }) => (
+          {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               className={`px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-white/10 hover:text-brand transition-colors font-bold uppercase
                 ${
-                  isActive ? "text-brand" : "text-slate-700 dark:text-slate-200"
+                  href === "/dai-ly"
+                    ? "text-brand"
+                    : "text-slate-700 dark:text-slate-200"
                 }
               `}
             >
@@ -70,10 +75,26 @@ export default function Header() {
         </nav>
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="link" size="sm" className="px-3 py-2 text-lg">
+          <Button
+            variant="link"
+            size="sm"
+            className="px-3 py-2 text-lg"
+            onClick={() => {
+              setAuthMode("login");
+              setIsAuthOpen(true);
+            }}
+          >
             Đăng nhập
           </Button>
-          <Button variant="gradient" size="sm" className="text-lg">
+          <Button
+            variant="gradient"
+            size="sm"
+            className="text-lg"
+            onClick={() => {
+              setAuthMode("register");
+              setIsAuthOpen(true);
+            }}
+          >
             Đăng ký
           </Button>
         </div>
@@ -107,9 +128,36 @@ export default function Header() {
                 {label}
               </Link>
             ))}
+            <button
+              className="text-left text-brand hover:text-indigo-500 transition-colors"
+              onClick={() => {
+                setAuthMode("login");
+                setIsAuthOpen(true);
+                setIsOpen(false);
+              }}
+            >
+              Đăng nhập
+            </button>
+            <button
+              className="text-left text-brand hover:text-indigo-500 transition-colors"
+              onClick={() => {
+                setAuthMode("register");
+                setIsAuthOpen(true);
+                setIsOpen(false);
+              }}
+            >
+              Đăng ký
+            </button>
           </div>
         </div>
       </RenderMobile>
+
+      {/* Auth Popup */}
+      <AuthPopup
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        initialMode={authMode}
+      />
     </header>
   );
 }

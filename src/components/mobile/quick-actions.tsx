@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode, SVGProps } from "react";
+import { memo } from "react";
 
 type Action = {
   href: string;
@@ -40,34 +43,48 @@ const actions: Action[] = [
   },
 ];
 
-export default function QuickActionsMobile() {
+// Memoized action button component để tránh re-render không cần thiết
+const ActionButton = memo(function ActionButton({
+  href,
+  label,
+  icon: Icon,
+  gradientFrom,
+  gradientTo,
+}: Action) {
+  return (
+    <Link
+      key={href}
+      href={href}
+      className="flex flex-col items-center gap-1 text-slate-900 dark:text-white"
+    >
+      <span
+        className={`h-12 w-12 grid place-items-center rounded-2xl bg-gradient-to-br ${gradientFrom} ${gradientTo}`}
+      >
+        <Icon className="h-6 w-6" />
+      </span>
+      <span className="text-[11px] font-semibold uppercase tracking-wide opacity-90 text-center leading-none">
+        {label}
+      </span>
+    </Link>
+  );
+});
+
+// Memoized QuickActionsMobile component để tận dụng Next.js 15 caching
+const QuickActionsMobile = memo(function QuickActionsMobile() {
   return (
     <div className="mt-3 px-3">
       <div className="rounded-2xl bg-white/90 border border-slate-200 p-3 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:bg-neutral-800/80 dark:border-white/10">
         <div className="grid grid-cols-4 gap-3">
-          {actions.map(
-            ({ href, label, icon: Icon, gradientFrom, gradientTo }) => (
-              <Link
-                key={href}
-                href={href}
-                className="flex flex-col items-center gap-1 text-slate-900 dark:text-white"
-              >
-                <span
-                  className={`h-12 w-12 grid place-items-center rounded-2xl bg-gradient-to-br ${gradientFrom} ${gradientTo}`}
-                >
-                  <Icon className="h-6 w-6" />
-                </span>
-                <span className="text-[11px] font-semibold uppercase tracking-wide opacity-90 text-center leading-none">
-                  {label}
-                </span>
-              </Link>
-            )
-          )}
+          {actions.map((action) => (
+            <ActionButton key={action.href} {...action} />
+          ))}
         </div>
       </div>
     </div>
   );
-}
+});
+
+export default QuickActionsMobile;
 
 function UserIcon(props: SVGProps<SVGSVGElement>) {
   return (

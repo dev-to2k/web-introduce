@@ -206,3 +206,112 @@ iframe {
   border-radius: var(--border-radius);
   animation: glow-rotate 3s ease-in-out infinite;
 }
+
+/* Alliance Slider Styles */
+.alliance-swiper .swiper-slide {
+  transition: all 0.5s ease;
+  opacity: 0.7;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alliance-swiper .swiper-slide-active {
+  opacity: 1;
+  z-index: 5;
+}
+
+.alliance-swiper .swiper-slide-prev,
+.alliance-swiper .swiper-slide-next {
+  opacity: 0.9;
+  z-index: 4;
+}
+
+.alliance-slide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ensure the center circle appears above the slider */
+.alliance-center-circle {
+  z-index: 20;
+  position: relative;
+}
+
+/* Gradient background for alliance page */
+.alliance-bg {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+/* Alliance placeholder logo */
+.alliance-logo-placeholder {
+  background: radial-gradient(
+    circle,
+    rgba(21, 94, 239, 0.2) 0%,
+    rgba(76, 29, 149, 0.1) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Alliance logo image container */
+.alliance-logo-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Agency Slider Styles */
+.agency-swiper .swiper-button-next,
+.agency-swiper .swiper-button-prev {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.agency-swiper .swiper-button-next:hover,
+.agency-swiper .swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.agency-swiper .swiper-button-next:after,
+.agency-swiper .swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.agency-swiper .swiper-slide {
+  height: auto;
+}
+
+/* Agency card styles */
+.agency-card {
+  transition: all 0.3s ease;
+}
+
+.agency-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}

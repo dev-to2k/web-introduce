@@ -1,37 +1,82 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ReactNode, SVGProps } from "react";
+import { useState } from "react";
+import AuthPopup from "../auth/auth-popup";
 
 const items: {
   href: string;
   label: string;
   icon: (props: SVGProps<SVGSVGElement>) => ReactNode;
 }[] = [
-  { href: "#home", label: "Home", icon: HomeIcon },
-  { href: "#news", label: "Hot News", icon: NewsIcon },
-  { href: "#events", label: "Events", icon: EventsIcon },
-  { href: "#members-content", label: "Member", icon: MemberIcon },
-  { href: "#support", label: "Account", icon: AccountIcon },
+  { href: "/", label: "Trang Chủ", icon: HomeIcon },
+  { href: "/su-kien", label: "Sự Kiện", icon: EventsIcon },
+  { href: "/ho-tro", label: "Liên Minh", icon: SupportIcon },
+  { href: "/huong-dan", label: "Đại Lý", icon: GuideIcon },
 ] as const;
 
 export default function MobileBottomTabbar() {
+  const pathname = usePathname();
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
+
+  // Handle account button click
+  const handleAccountClick = () => {
+    setAuthMode("login");
+    setIsAuthOpen(true);
+  };
+
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50">
-      <div className="mx-2 mb-2 rounded-2xl bg-white text-slate-900 border border-slate-200 shadow-2xl dark:bg-neutral-900 dark:text-white dark:border-white/10">
-        <ul className="grid grid-cols-5 text-[11px]">
-          {items.map(({ href, label, icon: Icon }) => (
-            <li
-              key={href}
-              className="flex flex-col items-center justify-center py-2"
-            >
-              <Link href={href} className="flex flex-col items-center gap-1">
-                <Icon className="h-5 w-5" />
-                <span className="leading-none">{label}</span>
-              </Link>
+    <>
+      <nav className="fixed bottom-0 inset-x-0 z-50">
+        <div className="mx-2 mb-2 rounded-2xl bg-white text-slate-900 border border-slate-200 shadow-2xl dark:bg-neutral-900 dark:text-white dark:border-white/10">
+          <ul className="grid grid-cols-5 text-[11px]">
+            {items.map(({ href, label, icon: Icon }) => {
+              const isActive =
+                pathname === href ||
+                (href !== "/" && pathname.startsWith(href));
+
+              return (
+                <li
+                  key={href}
+                  className="flex flex-col items-center justify-center py-2"
+                >
+                  <Link
+                    href={href}
+                    className={`flex flex-col items-center gap-1 ${
+                      isActive
+                        ? "text-brand"
+                        : "text-slate-700 dark:text-slate-200"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="leading-none">{label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+            <li className="flex flex-col items-center justify-center py-2">
+              <button
+                onClick={handleAccountClick}
+                className="flex flex-col items-center gap-1"
+              >
+                <AccountIcon className="h-5 w-5" />
+                <span className="leading-none">Tài khoản</span>
+              </button>
             </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+          </ul>
+        </div>
+      </nav>
+
+      {/* Auth Popup */}
+      <AuthPopup
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        initialMode={authMode}
+      />
+    </>
   );
 }
 
@@ -50,7 +95,7 @@ function HomeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function NewsIcon(props: SVGProps<SVGSVGElement>) {
+function SupportIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -59,8 +104,9 @@ function NewsIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="1.8"
       {...props}
     >
-      <path d="M3 4h13a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <path d="M7 8h9M7 12h9M7 16h5" />
+      <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+      <path d="M12 8v4" />
+      <path d="M12 16h.01" />
     </svg>
   );
 }
@@ -80,7 +126,7 @@ function EventsIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function MemberIcon(props: SVGProps<SVGSVGElement>) {
+function GuideIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -89,8 +135,8 @@ function MemberIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="1.8"
       {...props}
     >
-      <circle cx="12" cy="7" r="4" />
-      <path d="M5.5 21a6.5 6.5 0 0 1 13 0Z" />
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
     </svg>
   );
 }
