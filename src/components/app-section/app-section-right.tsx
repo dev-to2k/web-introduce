@@ -35,25 +35,25 @@ export default function AppSectionRight() {
         className="flex flex-wrap justify-center items-center gap-4 md:gap-6 opacity-80"
       >
         <Image
-          src="/images/8xx.png"
-          alt="8XX"
-          width={64}
-          height={32}
-          className="h-8 w-auto object-contain shrink-0 scale-100 md:scale-100 translate-y-[2px] md:translate-y-[-4px]"
-        />
-        <Image
           src="/images/58win.png"
           alt="58WIN"
           width={72}
           height={32}
-          className="h-8 md:h-10 w-auto object-contain shrink-0 scale-225 ml-6 md:scale-125 translate-y-[-2px] md:translate-y-[-4px]"
+          className="h-8 md:h-10 w-auto object-contain shrink-0 scale-225 ml-6 md:scale-225 translate-y-[-2px] md:-translate-x-20"
+        />
+        <Image
+          src="/images/8xx.png"
+          alt="8XX"
+          width={64}
+          height={32}
+          className="h-8 w-auto object-contain shrink-0 scale-100 md:scale-125 translate-x-6 translate-y-[2px] md:translate-y-[2px] md:-translate-x-8"
         />
         <Image
           src="/images/ax88.png"
           alt="AX88"
           width={64}
           height={32}
-          className="h-8 w-auto object-contain shrink-0 scale-50 md:scale-100"
+          className="h-8 w-auto object-contain shrink-0 scale-75 md:scale-100 ml-3 md:ml-0"
         />
       </motion.div>
 

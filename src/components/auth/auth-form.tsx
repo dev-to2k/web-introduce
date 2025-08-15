@@ -60,38 +60,20 @@ export default function AuthForm({
   };
 
   return (
-    <div className="relative flex flex-col md:flex-row min-h-[600px]">
-      {/* Left side - Image */}
-      <div className="relative w-full md:w-1/2 h-64 md:h-auto">
+    <div className="relative flex flex-col md:flex-row min-h-[400px] sm:min-h-[500px] md:min-h-[600px] auth-form-mobile">
+      {/* Left side - Image (Hidden on mobile) */}
+      <div className="hidden md:block relative w-full md:w-1/2 h-48 sm:h-56 md:h-64 lg:h-auto">
         <Image
-          src="/images/lienminh-58win-mockup.png"
+          src="/images/ATQ-banner2.jpg"
           alt="Background"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand/40 to-indigo-500/40 dark:from-brand/60 dark:to-indigo-500/60 flex items-center justify-center">
-          <div className="text-center p-6">
-            <Image
-              src="/images/logo-atq.png"
-              alt="Logo"
-              width={180}
-              height={60}
-              className="h-16 w-auto mx-auto mb-6"
-            />
-            <h2 className="text-2xl font-bold text-white mb-2 drop-shadow-md">
-              Chào mừng đến với ATQ
-            </h2>
-            <p className="text-white/90 max-w-xs mx-auto drop-shadow-sm">
-              Đăng nhập hoặc đăng ký để trải nghiệm dịch vụ tốt nhất của chúng
-              tôi
-            </p>
-          </div>
-        </div>
       </div>
 
-      {/* Right side - Form */}
-      <div className="relative w-full md:w-1/2 p-6 md:p-8 bg-white dark:bg-neutral-800">
+      {/* Right side - Form (Full width on mobile) */}
+      <div className="relative w-full md:w-1/2 p-4 sm:p-6 md:p-8 bg-white dark:bg-neutral-800">
         {/* Close button */}
         {onClose && (
           <button
@@ -117,11 +99,11 @@ export default function AuthForm({
         )}
 
         {/* Title */}
-        <div className="mb-6 text-center md:text-left">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+        <div className="mb-4 sm:mb-6 text-center">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
             {mode === "login" ? "Đăng nhập tài khoản" : "Đăng ký tài khoản mới"}
           </h3>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+          <p className="mt-1 text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400">
             {mode === "login"
               ? "Đăng nhập để truy cập tài khoản của bạn"
               : "Tạo tài khoản mới để bắt đầu"}
@@ -131,11 +113,11 @@ export default function AuthForm({
         {/* Tabs */}
         <div
           ref={tabsRef}
-          className="mb-6 flex rounded-lg bg-slate-100 dark:bg-neutral-700/50 p-1"
+          className="mb-4 sm:mb-6 flex rounded-lg bg-slate-100 dark:bg-neutral-700/50 p-1"
         >
           <button
             className={cn(
-              "flex-1 rounded-md py-2 text-center font-medium transition-all duration-200",
+              "flex-1 rounded-md py-2 sm:py-2.5 md:py-3 text-center font-medium transition-all duration-200 text-sm sm:text-base md:text-lg",
               mode === "login"
                 ? "bg-brand text-white shadow-sm"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
@@ -146,7 +128,7 @@ export default function AuthForm({
           </button>
           <button
             className={cn(
-              "flex-1 rounded-md py-2 text-center font-medium transition-all duration-200",
+              "flex-1 rounded-md py-2 sm:py-2.5 md:py-3 text-center font-medium transition-all duration-200 text-sm sm:text-base md:text-lg",
               mode === "register"
                 ? "bg-brand text-white shadow-sm"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
@@ -158,14 +140,14 @@ export default function AuthForm({
         </div>
 
         {/* Form */}
-        <div ref={formRef} key={mode} className="space-y-4">
+        <div ref={formRef} key={mode} className="space-y-3 sm:space-y-4">
           {mode === "login" ? (
             <>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
                   <label
                     htmlFor="username"
-                    className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                    className="block text-sm sm:text-base md:text-lg font-medium text-slate-700 dark:text-slate-300"
                   >
                     Tài khoản
                   </label>
@@ -174,7 +156,7 @@ export default function AuthForm({
                     name="username"
                     type="text"
                     required
-                    className="mt-1 block w-full rounded-lg border border-slate-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-2 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
+                    className="mt-1 block w-full rounded-lg border border-slate-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-2 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand text-sm sm:text-base md:text-lg"
                     placeholder="Hãy nhập tài khoản"
                   />
                 </div>
@@ -269,7 +251,7 @@ export default function AuthForm({
               <div className="text-right">
                 <a
                   href="#"
-                  className="text-sm font-medium text-brand hover:text-indigo-500"
+                  className="text-sm sm:text-base md:text-lg font-medium text-brand hover:text-indigo-500"
                 >
                   Quên Mật Khẩu?
                 </a>
@@ -280,20 +262,20 @@ export default function AuthForm({
                   type="submit"
                   variant="gradient"
                   size="lg"
-                  className="w-full py-2.5"
+                  className="w-full py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg"
                 >
                   Đăng nhập
                 </Button>
               </div>
 
-              <div className="mt-4 text-center text-sm text-slate-600 dark:text-slate-400">
+              <div className="mt-4 text-center text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400">
                 Hãy Lưu Thông Tin Tài Khoản Của Bạn Để Bảo Đảm An Toàn Cho Tài
                 Khoản Của Bạn
               </div>
             </>
           ) : (
             <>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
                   <label
                     htmlFor="username"
@@ -422,13 +404,13 @@ export default function AuthForm({
                   type="submit"
                   variant="gradient"
                   size="lg"
-                  className="w-full py-2.5"
+                  className="w-full py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg"
                 >
                   Đăng ký
                 </Button>
               </div>
 
-              <div className="mt-4 text-center text-sm text-slate-600 dark:text-slate-400">
+              <div className="mt-4 text-center text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400">
                 Hãy Lưu Thông Tin Tài Khoản Của Bạn Để Bảo Đảm An Toàn Cho Tài
                 Khoản Của Bạn
               </div>
@@ -437,32 +419,34 @@ export default function AuthForm({
         </div>
 
         {/* Brand logos */}
-        <div className="mt-8 flex items-center justify-center space-x-4">
+        <div className="mt-6 sm:mt-8 flex items-center justify-center space-x-3 sm:space-x-4">
           <div className="flex items-center">
             <Image
               src="/images/58win.png"
               alt="58WIN"
               width={40}
               height={40}
-              className="h-8 w-auto"
+              className="h-6 sm:h-8 md:h-10 w-auto scale-250 mr-3 -translate-y-1"
             />
           </div>
+
           <div className="flex items-center">
             <Image
               src="/images/8xx.png"
               alt="8XX"
               width={40}
               height={40}
-              className="h-8 w-auto"
+              className="h-6 sm:h-8 md:h-10 w-auto translate-x-3"
             />
           </div>
+
           <div className="flex items-center">
             <Image
               src="/images/ax88.png"
               alt="AX88"
               width={40}
               height={40}
-              className="h-8 w-auto"
+              className="h-6 sm:h-8 md:h-10 w-auto scale-75"
             />
           </div>
         </div>

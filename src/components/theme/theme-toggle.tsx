@@ -1,19 +1,44 @@
 "use client";
-import { useMemo } from "react";
-import { useTheme } from "../../hooks/use-theme";
+import { useEffect, useMemo, useState, type SVGProps } from "react";
 
 type Props = {
   className?: string;
 };
 
 export default function ThemeToggle({ className }: Props) {
-  const { theme, toggle } = useTheme();
-  const isDark = theme === "dark";
+  const [isDark, setIsDark] = useState<boolean>(false);
+
+  // Sync initial state from DOM/localStorage/media query
+  useEffect(() => {
+    try {
+      const root = document.documentElement;
+      const saved = window.localStorage.getItem("theme");
+      const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+      const initial = saved ? saved === "dark" : prefersDark;
+      if (initial) root.classList.add("dark");
+      else root.classList.remove("dark");
+      root.setAttribute("data-theme", initial ? "dark" : "light");
+      setIsDark(initial);
+    } catch {}
+  }, []);
+
   const label = useMemo(() => (isDark ? "Dark" : "Light"), [isDark]);
+
+  const onToggle = () => {
+    const next = !isDark;
+    const root = document.documentElement;
+    if (next) root.classList.add("dark");
+    else root.classList.remove("dark");
+    root.setAttribute("data-theme", next ? "dark" : "light");
+    try {
+      window.localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {}
+    setIsDark(next);
+  };
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={onToggle}
       aria-label="Toggle theme"
       className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition ${
         isDark
@@ -36,7 +61,7 @@ export default function ThemeToggle({ className }: Props) {
   );
 }
 
-function SunIcon(props: React.SVGProps<SVGSVGElement>) {
+function SunIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -51,7 +76,7 @@ function SunIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function MoonIcon(props: React.SVGProps<SVGSVGElement>) {
+function MoonIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"

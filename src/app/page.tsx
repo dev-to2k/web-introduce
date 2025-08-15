@@ -8,7 +8,6 @@ import AllianceGridMobile from "../components/mobile/alliance-grid";
 import QuickActionsMobile from "../components/mobile/quick-actions";
 import News from "../components/news/news";
 import Partners from "../components/partners";
-import Videos from "../components/video/videos";
 
 export default function Home() {
   return (
@@ -34,9 +33,6 @@ export default function Home() {
 
       {/* Hot Events */}
       <HotEvents />
-
-      {/* Video */}
-      <Videos />
 
       {/* Giới thiệu thành viên (slide video) */}
       <MembersIntroSlider />

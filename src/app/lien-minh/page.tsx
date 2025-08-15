@@ -1,5 +1,7 @@
+import { RenderDesktop, RenderMobile } from "@/components/responsive/RenderAt";
 import type { Metadata } from "next";
 import AlliancePage from "./_components/alliance-page";
+import MemberPage from "./_components/member-page";
 
 export const metadata: Metadata = {
   title: "Liên Minh | ATQ Alliance",
@@ -7,5 +9,14 @@ export const metadata: Metadata = {
 };
 
 export default function AlliancePageRoute() {
-  return <AlliancePage />;
+  return (
+    <>
+      <RenderDesktop>
+        <AlliancePage />
+      </RenderDesktop>
+      <RenderMobile>
+        <MemberPage />
+      </RenderMobile>
+    </>
+  );
 }

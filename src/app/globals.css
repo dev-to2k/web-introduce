@@ -11,7 +11,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   /* custom tokens migrated from index.html inline Tailwind config */
-  --color-brand: #155eef;
+  --color-brand: #3373f2;
   --color-ink: #0b1f3a;
   --shadow-card: 0 8px 30px rgba(12, 37, 93, 0.12);
   --radius-xl: 1.25rem;
@@ -96,6 +96,32 @@ iframe {
 }
 .swiper-wrapper {
   display: flex !important;
+}
+
+/* Auth Popup Mobile Optimization */
+@media (max-width: 640px) {
+  .auth-popup-content {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+
+  .auth-form-mobile {
+    min-height: auto !important;
+  }
+
+  .auth-form-mobile .space-y-3 {
+    gap: 0.75rem !important;
+  }
+
+  /* Hide image section on mobile */
+  .auth-form-mobile > div:first-child {
+    display: none !important;
+  }
+
+  /* Form takes full width on mobile */
+  .auth-form-mobile > div:last-child {
+    width: 100% !important;
+  }
 }
 
 :root {

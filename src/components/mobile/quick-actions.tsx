@@ -1,70 +1,49 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode, SVGProps } from "react";
 import { memo } from "react";
 
 type Action = {
   href: string;
-  label: string;
-  icon: (props: SVGProps<SVGSVGElement>) => ReactNode;
-  gradientFrom: string;
-  gradientTo: string;
+  image: string;
 };
 
 const actions: Action[] = [
   {
     href: "#login",
-    label: "Login",
-    icon: UserIcon,
-    gradientFrom: "from-sky-400",
-    gradientTo: "to-blue-500",
+    image: "/images/quick-actions/dangnhap-73x73.png",
   },
   {
     href: "#register",
-    label: "Register",
-    icon: UserPlusIcon,
-    gradientFrom: "from-pink-400",
-    gradientTo: "to-rose-500",
-  },
-  {
-    href: "#points",
-    label: "Points",
-    icon: MapIcon,
-    gradientFrom: "from-amber-400",
-    gradientTo: "to-orange-500",
+    image: "/images/quick-actions/dangky-73x73.png",
   },
   {
     href: "#support",
-    label: "Services",
-    icon: MessageIcon,
-    gradientFrom: "from-violet-400",
-    gradientTo: "to-purple-500",
+    image: "/images/quick-actions/hotro-73x73.png",
+  },
+  {
+    href: "#promotion",
+    image: "/images/quick-actions/khuyenmai-73x73.png",
   },
 ];
 
 // Memoized action button component để tránh re-render không cần thiết
-const ActionButton = memo(function ActionButton({
-  href,
-  label,
-  icon: Icon,
-  gradientFrom,
-  gradientTo,
-}: Action) {
+const ActionButton = memo(function ActionButton({ href, image }: Action) {
   return (
     <Link
       key={href}
       href={href}
-      className="flex flex-col items-center gap-1 text-slate-900 dark:text-white"
+      className="flex flex-col items-center gap-1 text-slate-900 dark:text-white h-[73px] w-[73px]"
     >
-      <span
-        className={`h-12 w-12 grid place-items-center rounded-2xl bg-gradient-to-br ${gradientFrom} ${gradientTo}`}
-      >
-        <Icon className="h-6 w-6" />
-      </span>
-      <span className="text-[11px] font-semibold uppercase tracking-wide opacity-90 text-center leading-none">
-        {label}
-      </span>
+      <Image
+        src={image}
+        alt="Logo"
+        width={73}
+        height={73}
+        quality={100}
+        priority={true}
+      />
     </Link>
   );
 });
@@ -85,63 +64,3 @@ const QuickActionsMobile = memo(function QuickActionsMobile() {
 });
 
 export default QuickActionsMobile;
-
-function UserIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  );
-}
-
-function UserPlusIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="M15 19v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M19 8v6M22 11h-6" />
-    </svg>
-  );
-}
-
-function MapIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="m9 18-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Z" />
-      <path d="M9 3v15M15 6v15" />
-    </svg>
-  );
-}
-
-function MessageIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="M21 15a4 4 0 0 1-4 4H7l-4 4V5a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
-    </svg>
-  );
-}

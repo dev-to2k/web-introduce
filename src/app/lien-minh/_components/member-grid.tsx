@@ -25,7 +25,7 @@ const MemberGrid = memo(function MemberGrid({ filter }: MemberGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
       {filteredItems.map((item, index) => (
-        <MemberCard key={item.id} item={item} index={index} />
+        <MemberCard key={`${item.id}-${index}`} item={item} index={index} />
       ))}
     </div>
   );

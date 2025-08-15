@@ -1,8 +1,8 @@
 "use client";
 
 // Lightweight video player that supports both HTML5 sources and YouTube URLs
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 
 type Props = {
   src: string;
@@ -86,7 +86,7 @@ export default function VideoPlayer({
               src={thumbnail}
               alt="Video thumbnail"
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="100vw"
               priority={false}
             />
@@ -111,7 +111,7 @@ export default function VideoPlayer({
   return (
     <div className={className}>
       <video
-        className="h-full w-full object-cover"
+        className="h-full w-full object-contain"
         src={src}
         poster={poster}
         autoPlay={autoPlay}

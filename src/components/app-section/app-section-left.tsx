@@ -33,16 +33,42 @@ export default function AppSectionLeft() {
         variants={itemVariants}
         className="relative h-[320px] md:h-[380px]"
       >
-        <div className="relative h-full w-full p-2 md:p-4">
-          <Image
-            src="/images/lienminh-58win-mockup.png"
-            alt="Mockup ứng dụng 58WIN"
-            fill
-            sizes="(min-width: 768px) 560px, 100vw"
-            className="object-contain"
-            priority
-          />
-        </div>
+        {/* Glow background */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0 -z-10"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 0.9, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 md:w-72 md:h-72 rounded-full bg-blue-500/20 dark:bg-blue-400/15 blur-3xl" />
+        </motion.div>
+
+        {/* Device entrance + gentle float */}
+        <motion.div
+          initial={{ opacity: 0, y: 24, rotate: -6, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
+          whileHover={{ scale: 1.02, rotate: 1.5 }}
+          className="relative h-full w-full"
+        >
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
+            className="relative h-full w-full p-2 md:p-4"
+          >
+            <Image
+              src="/images/lienminh-58win-mockup.png"
+              alt="Mockup ứng dụng 58WIN"
+              fill
+              sizes="(min-width: 768px) 560px, 100vw"
+              className="object-contain drop-shadow-[0_20px_40px_rgba(2,6,23,0.35)] dark:drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+              priority
+            />
+          </motion.div>
+        </motion.div>
       </motion.div>
 
       {/* QR + Buttons */}

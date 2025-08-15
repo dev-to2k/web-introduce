@@ -27,7 +27,7 @@ const AgencyPage = memo(function AgencyPage() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="p-2 sm:p-4"
+            className="p-2 sm:p-4 h-full"
           >
             <HeroSection />
           </motion.div>

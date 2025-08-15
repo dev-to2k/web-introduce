@@ -2,7 +2,8 @@
 import Button from "@/components/shared/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ThemeToggle from "../components/theme/theme-toggle";
 import AuthPopup from "./auth/auth-popup";
 import { RenderMobile } from "./responsive/RenderAt";
@@ -12,6 +13,7 @@ export default function Header() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
   const headerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const el = headerRef.current;
@@ -32,20 +34,32 @@ export default function Header() {
     };
   }, []);
 
-  const navLinks: { href: string; label: string }[] = [
-    { href: "/", label: "Trang Chủ" },
-    { href: "/su-kien", label: "Sự Kiện" },
-    { href: "/lien-minh", label: "Liên Minh" },
-    { href: "/dai-ly", label: "Đại Lý" },
-    { href: "/tuyen-dung", label: "Tuyển dụng" },
-  ];
+  // Memoize navigation links to prevent unnecessary re-renders
+  const navLinks = useMemo(
+    () => [
+      { href: "/", label: "Trang Chủ" },
+      { href: "/su-kien", label: "Sự Kiện" },
+      { href: "/lien-minh", label: "Liên Minh" },
+      { href: "/dai-ly", label: "Đại Lý" },
+      { href: "/tuyen-dung", label: "Tuyển dụng" },
+    ],
+    []
+  );
+
+  // Helper function to check if a link is active
+  const isLinkActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <header
       ref={headerRef}
-      className={`sticky z-40 w-full border-b bg-white/80 backdrop-blur border-slate-200 dark:bg-neutral-900/80 dark:border-white/10 top-[var(--topbar-h,0px)]`}
+      className={`sticky z-40 w-full border-b bg-brand text-white backdrop-blur border-brand/30 top-[var(--topbar-h,0px)]`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
+      <div className="max-w-screen-2xl mx-auto px-4 py-5 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/images/logo-atq.png"
@@ -53,32 +67,33 @@ export default function Header() {
             width={160}
             height={60}
             priority
-            className="h-10 md:h-16 w-auto max-w-full"
+            className="h-10 md:h-16 w-auto max-w-full scale-200 translate-x-16"
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-700 dark:text-slate-200 text-lg">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-white/10 hover:text-brand transition-colors font-bold uppercase
-                ${
-                  href === "/dai-ly"
-                    ? "text-brand"
-                    : "text-slate-700 dark:text-slate-200"
-                }
-              `}
-            >
-              {label}
-            </Link>
-          ))}
+        <nav className="hidden md:flex items-center gap-8 font-semibold text-white text-lg translate-x-12">
+          {navLinks.map(({ href, label }) => {
+            const isActive = isLinkActive(href);
+
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={isActive ? "page" : undefined}
+                className={`px-3 py-2 rounded-md transition-colors font-bold uppercase text-white/90 hover:text-white hover:bg-white/10 ${
+                  isActive ? "bg-white/15" : ""
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
           <Button
             variant="link"
             size="sm"
-            className="px-3 py-2 text-lg"
+            className="px-3 py-2 text-lg text-white hover:text-white/80"
             onClick={() => {
               setAuthMode("login");
               setIsAuthOpen(true);
@@ -120,16 +135,28 @@ export default function Header() {
         <div
           className={`${
             isOpen ? "" : "hidden"
-          } px-4 pb-3 border-t border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-900`}
+          } px-4 pb-3 border-t border-brand/30 bg-brand text-white`}
         >
-          <div className="flex flex-col gap-3 font-semibold text-slate-700 dark:text-slate-200 py-3">
-            {navLinks.map(({ href, label }) => (
-              <Link key={href} href={href}>
-                {label}
-              </Link>
-            ))}
+          <div className="flex flex-col gap-3 font-semibold text-white py-3">
+            {navLinks.map(({ href, label }) => {
+              const isActive = isLinkActive(href);
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`${
+                    isActive ? "font-bold" : ""
+                  } text-white hover:text-white/80 transition-colors`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {label}
+                </Link>
+              );
+            })}
             <button
-              className="text-left text-brand hover:text-indigo-500 transition-colors"
+              className="text-left text-white hover:text-white/80 transition-colors"
               onClick={() => {
                 setAuthMode("login");
                 setIsAuthOpen(true);
@@ -139,7 +166,7 @@ export default function Header() {
               Đăng nhập
             </button>
             <button
-              className="text-left text-brand hover:text-indigo-500 transition-colors"
+              className="text-left text-white hover:text-white/80 transition-colors"
               onClick={() => {
                 setAuthMode("register");
                 setIsAuthOpen(true);

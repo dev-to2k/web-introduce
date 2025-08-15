@@ -1,22 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import MemberGrid from "./member-grid";
 
 // Memoized component để tận dụng Next.js 15 caching
 const MemberPage = memo(function MemberPage() {
-  // State để kiểm soát việc render
-  const [mounted, setMounted] = useState(false);
-
-  // Chỉ render một lần sau khi component được mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Không render gì khi chưa mount để tránh hydration mismatch
-  // if (!mounted) return null;
-
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-6 sm:py-8 md:py-12">
       <motion.div

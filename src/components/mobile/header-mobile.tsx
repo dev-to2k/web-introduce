@@ -45,7 +45,7 @@ export default function MobileHeader() {
     <>
       <header
         ref={headerRef}
-        className={`sticky z-40 inset-x-0 border-b bg-white text-slate-900 border-slate-200 dark:bg-neutral-900 dark:text-white dark:border-white/10 top-[var(--topbar-h,0px)] ${
+        className={`sticky z-40 inset-x-0 border-b bg-brand text-white border-brand/30 top-[var(--topbar-h,0px)] ${
           isScrolled
             ? "shadow-sm dark:shadow-[0_1px_0_rgba(255,255,255,0.06)]"
             : ""
@@ -82,7 +82,7 @@ export default function MobileHeader() {
             <ThemeToggle />
             <button
               aria-label="Hotline"
-              className="h-8 w-8 grid place-items-center rounded-full bg-black/5 dark:bg-white/10"
+              className="h-8 w-8 grid place-items-center rounded-full bg-white/10"
             >
               <svg
                 viewBox="0 0 24 24"

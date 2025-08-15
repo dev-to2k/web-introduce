@@ -3,7 +3,7 @@ import Script from "next/script";
 
 export default function ThemeScript() {
   return (
-    <Script id="theme-script" strategy="beforeInteractive">
+    <Script id="theme-script">
       {`
 (function(){
   try {

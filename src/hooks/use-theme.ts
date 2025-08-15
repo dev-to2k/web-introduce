@@ -18,6 +18,25 @@ export function useTheme() {
       : "light";
   });
 
+  // Đồng bộ theme giữa các instance của hook (và giữa các tab)
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "theme" && (e.newValue === "dark" || e.newValue === "light")) {
+        setTheme(e.newValue as Theme);
+      }
+    };
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<Theme>).detail;
+      if (detail === "dark" || detail === "light") setTheme(detail);
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("theme-change", onThemeChange as EventListener);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("theme-change", onThemeChange as EventListener);
+    };
+  }, []);
+
   useEffect(() => {
     const root = document.documentElement.classList;
     if (theme === "dark") root.add("dark");
@@ -26,7 +45,14 @@ export function useTheme() {
   }, [theme]);
 
   const toggle = useCallback(() => {
-    setTheme((t) => (t === "dark" ? "light" : "dark"));
+    setTheme((t) => {
+      const next = t === "dark" ? "light" : "dark";
+      // Phát event để các component khác cập nhật ngay
+      window.dispatchEvent(new CustomEvent<Theme>("theme-change", { detail: next }));
+      // Lưu localStorage để đồng bộ giữa các tab
+      window.localStorage.setItem("theme", next);
+      return next;
+    });
   }, []);
 
   return { theme, setTheme, toggle } as const;

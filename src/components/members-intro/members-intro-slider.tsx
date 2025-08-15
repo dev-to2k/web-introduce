@@ -2,6 +2,7 @@
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { Marquee } from "@/components/magicui/marquee";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,8 +11,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { RenderMobile } from "../responsive/RenderAt";
 import SectionTitleClient from "../shared/section-title-client";
 import VideoPlayer from "../video/video-player";
+import { useMediaQuery } from "@/hooks/use-media";
+import VideoModal from "../video/video-modal";
 
 export default function MembersIntroSlider() {
+  const [selectedVideo, setSelectedVideo] = useState<
+    { src: string; title: string; thumbnail?: string } | null
+  >(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const videos = [
     {
       src: "https://www.youtube.com/watch?v=mBjj3RkZobw",
@@ -61,29 +68,50 @@ export default function MembersIntroSlider() {
     src: string;
     title: string;
     thumbnail?: string;
-  }) => (
-    <figure
-      className={cn(
-        "relative w-full overflow-hidden rounded-xl border",
-        // light styles
-        "border-gray-950/[.10] bg-gray-950/[.02] hover:bg-gray-950/[.06]",
-        // dark styles
-        "dark:border-gray-50/[.10] dark:bg-gray-50/[.06] dark:hover:bg-gray-50/[.12]"
-      )}
-    >
-      <VideoPlayer
-        className="h-56 w-full"
-        src={v.src}
-        poster={v.thumbnail}
-        autoPlay={false}
-        muted
-        loop
-      />
-      <figcaption className="p-3 font-semibold text-gray-900 dark:text-white">
-        {v.title}
-      </figcaption>
-    </figure>
-  );
+  }) => {
+    const clickable = isDesktop === true;
+    return (
+      <figure
+        className={cn(
+          "relative w-full overflow-hidden rounded-xl border",
+          // light styles
+          "border-gray-950/[.10] bg-gray-950/[.02] hover:bg-gray-950/[.06]",
+          // dark styles
+          "dark:border-gray-50/[.10] dark:bg-gray-50/[.06] dark:hover:bg-gray-50/[.12]",
+          clickable && "cursor-pointer group"
+        )}
+        onClick={clickable ? () => setSelectedVideo(v) : undefined}
+        role={clickable ? "button" : undefined}
+      >
+        <VideoPlayer
+          className="h-56 w-full"
+          src={v.src}
+          poster={v.thumbnail}
+          autoPlay={false}
+          muted
+          loop
+          hideOverlayPlayButton={clickable}
+        />
+        {clickable ? (
+          <span className="pointer-events-none absolute inset-0 grid place-items-center">
+            <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/90 text-black shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 ml-0.5"
+              >
+                <path d="M8 5.14v13.72L19 12 8 5.14z" />
+              </svg>
+            </span>
+          </span>
+        ) : null}
+        <figcaption className="p-3 font-semibold text-gray-900 dark:text-white">
+          {v.title}
+        </figcaption>
+      </figure>
+    );
+  };
   return (
     <section id="members-slider" className="py-6 max-w-screen-2xl mx-auto px-4">
       <BlurFade inView>
@@ -180,6 +208,14 @@ export default function MembersIntroSlider() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1/6 bg-gradient-to-b from-background" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-background" />
       </div>
+      {/* Desktop video modal */}
+      <VideoModal
+        isOpen={!!selectedVideo && isDesktop === true}
+        onClose={() => setSelectedVideo(null)}
+        src={selectedVideo?.src ?? null}
+        poster={selectedVideo?.thumbnail}
+        title={selectedVideo?.title}
+      />
     </section>
   );
 }

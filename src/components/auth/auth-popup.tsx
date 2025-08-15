@@ -75,7 +75,7 @@ export default function AuthPopup({
         setIsAnimating(false);
       }, 300);
     }
-  }, [isOpen, mounted]);
+  }, [isOpen, mounted, isAnimating]);
 
   // Handle ESC key press
   useEffect(() => {
@@ -105,12 +105,12 @@ export default function AuthPopup({
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
       onClick={handleOverlayClick}
     >
       <div
         ref={contentRef}
-        className="w-full max-w-4xl bg-transparent rounded-xl overflow-hidden shadow-2xl"
+        className="w-full max-w-4xl bg-transparent rounded-xl overflow-hidden shadow-2xl max-h-[90vh] sm:max-h-[95vh] overflow-y-auto auth-popup-content"
         onClick={(e) => e.stopPropagation()}
       >
         <AuthForm initialMode={initialMode} onClose={onClose} />

@@ -89,10 +89,9 @@ export default function MobileSidebar({
   const navLinks = [
     { href: "/", label: "Trang Chủ" },
     { href: "/su-kien", label: "Sự Kiện" },
-    { href: "/member", label: "Thành Viên" },
-    { href: "/ho-tro", label: "Liên Minh" },
-    { href: "/huong-dan", label: "Đại Lý" },
-    { href: "/app", label: "Tuyển dụng" },
+    { href: "/lien-minh", label: "Liên Minh" },
+    { href: "/dai-ly", label: "Đại Lý" },
+    { href: "/tuyen-dung", label: "Tuyển dụng" },
   ];
 
   return (
