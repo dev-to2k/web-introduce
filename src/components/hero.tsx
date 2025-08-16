@@ -11,14 +11,14 @@ const Hero = memo(function Hero() {
     <section className="overflow-hidden w-full max-w-full px-0">
       {/* Desktop Layout - 3 columns */}
       <RenderDesktop>
-        <div className="w-full h-[70vh] flex">
+        <div className="w-full h-[75vh] flex">
           {/* Left Sidebar */}
-          <div className="w-1/10 bg-gray-400 flex items-center justify-center">
-            <span className="text-white font-bold text-sm">192x108</span>
+          <div className="w-[15%] bg-gray-400 flex items-center justify-center">
+            <span className="text-white font-bold text-sm">GIF</span>
           </div>
 
           {/* Center Video */}
-          <div className="w-4/5 relative aspect-video">
+          <div className="w-[70%] relative aspect-video">
             <StableVideoPlayer
               className="absolute inset-0 w-full h-full rounded-none overflow-hidden object-cover"
               src="/videos/banner-video.mp4"
@@ -30,8 +30,8 @@ const Hero = memo(function Hero() {
           </div>
 
           {/* Right Sidebar */}
-          <div className="w-1/10 bg-gray-400 flex items-center justify-center">
-            <span className="text-white font-bold text-sm">192x108</span>
+          <div className="w-[15%] bg-gray-400 flex items-center justify-center">
+            <span className="text-white font-bold text-sm">GIF</span>
           </div>
         </div>
 
