@@ -41,41 +41,50 @@ const Hero = memo(function Hero() {
             <Link
               href="https://imvn3k4.uk.com/"
               rel="noopener noreferrer"
-              className="bg-white/20 backdrop-blur-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/30 hover:scale-105 transition-all duration-300 ease-out group min-w-[200px]"
+              className="bg-white/20 dark:bg-black/20 backdrop-blur-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/30 dark:hover:bg-black/30 hover:scale-105 transition-all duration-300 ease-out group min-w-[300px]"
             >
               <Image
                 src="/images/58win.png"
                 alt="58WIN"
                 width={120}
                 height={48}
-                className="h-12 w-auto transition-transform duration-300 scale-[3] transform -translate-y-1 translate-x-10"
+                className="h-12 w-auto transition-transform duration-300 scale-[3] transform -translate-y-1 translate-x-2 mx-auto"
               />
+              <span className="block text-center text-gray-900 dark:text-gray-100 mt-3 uppercase font-bold tracking-wider text-lg  drop-shadow-sm">
+               truy cập
+              </span>
             </Link>
             <Link
               href="https://imvn3k4.uk.com/"
               rel="noopener noreferrer"
-              className="bg-white/20 backdrop-blur-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/30 hover:scale-105 transition-all duration-300 ease-out group min-w-[200px]"
+              className="bg-white/20 dark:bg-black/20 backdrop-blur-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/30 dark:hover:bg-black/30 hover:scale-105 transition-all duration-300 ease-out group min-w-[300px]"
             >
               <Image
                 src="/images/8xx.png"
                 alt="8XX"
                 width={120}
                 height={48}
-                className="h-12 w-auto transition-transform duration-300 scale-[1.3] transform translate-y-1"
+                className="h-12 w-auto transition-transform duration-300 scale-[1.3] transform translate-y-1 mx-auto"
               />
+              <span className="block text-center text-gray-900 dark:text-gray-100 mt-3 uppercase font-bold tracking-wider text-lg  drop-shadow-sm">
+               truy cập
+              </span>
             </Link>
             <Link
               href="https://imvn3k4.uk.com/"
               rel="noopener noreferrer"
-              className="bg-white/20 backdrop-blur-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/30 hover:scale-105 transition-all duration-300 ease-out group min-w-[200px]"
+              className="bg-white/20 dark:bg-black/20 backdrop-blur-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:bg-white/30 dark:hover:bg-black/30 hover:scale-105 transition-all duration-300 ease-out group min-w-[300px]"
             >
               <Image
                 src="/images/ax88.png"
                 alt="AX88"
                 width={120}
                 height={48}
-                className="h-12 w-auto transition-transform duration-300"
+                className="h-12 w-auto transition-transform duration-300 mx-auto"
               />
+              <span className="block text-center text-gray-900 dark:text-gray-100 mt-3 uppercase font-bold tracking-wider text-lg  drop-shadow-sm">
+               truy cập
+              </span>
             </Link>
           </div>
         </div>

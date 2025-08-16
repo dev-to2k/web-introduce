@@ -14,22 +14,22 @@ const items: {
   {
     href: "/",
     label: "Trang Chủ",
-    img: "/images/bottom-tabbar/trangchu-20x20.png",
+    img: "/images/bottom-tabbar/trangchu-48x48.png",
   },
   {
     href: "/su-kien",
     label: "Sự Kiện",
-    img: "/images/bottom-tabbar/sukien-20x20.png",
+    img: "/images/bottom-tabbar/sukien-48x48.png",
   },
   {
     href: "/lien-minh",
     label: "Liên Minh",
-    img: "/images/bottom-tabbar/thanhvien-20x20.png",
+    img: "/images/bottom-tabbar/thanhvien-48x48.png",
   },
   {
     href: "/dai-ly",
     label: "Đại Lý",
-    img: "/images/bottom-tabbar/tintuc-20x20.png",
+    img: "/images/bottom-tabbar/tintuc-48x48.png",
   },
 ] as const;
 
@@ -65,17 +65,17 @@ export default function MobileBottomTabbar() {
                       isActive ? "opacity-100" : "opacity-80"
                     }`}
                   >
-                    <span className="relative block h-5 w-5">
+                    <span className="relative block">
                       <Image
                         src={img}
                         alt={label}
-                        fill
-                        sizes="20px"
+                        width={48}
+                        height={48}
+                        sizes="48px"
                         className="object-contain"
                         priority={false}
                       />
                     </span>
-                    <span className="leading-none">{label}</span>
                   </Link>
                 </li>
               );
@@ -85,17 +85,17 @@ export default function MobileBottomTabbar() {
                 onClick={handleAccountClick}
                 className="flex flex-col items-center gap-1 opacity-80"
               >
-                <span className="relative block h-5 w-5">
+                <span className="relative block">
                   <Image
-                    src="/images/bottom-tabbar/taikhoan-20x20.png"
+                    src="/images/bottom-tabbar/taikhoan-48x48.png"
                     alt="Tài khoản"
-                    fill
-                    sizes="20px"
+                    width={48}
+                    height={48}
+                    sizes="48px"
                     className="object-contain"
                     priority={false}
                   />
                 </span>
-                <span className="leading-none">Tài khoản</span>
               </button>
             </li>
           </ul>
