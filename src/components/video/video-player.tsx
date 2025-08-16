@@ -15,6 +15,8 @@ type Props = {
   hideOverlayPlayButton?: boolean;
   // Show native video controls for HTML5 videos (ignored for YouTube embeds)
   showControls?: boolean;
+  // Control how the browser preloads the video resource
+  preload?: "auto" | "metadata" | "none";
 };
 
 function extractYouTubeId(url: string): string | null {
@@ -35,6 +37,7 @@ export default function VideoPlayer({
   loop = true,
   hideOverlayPlayButton = false,
   showControls = true,
+  preload = "metadata",
 }: Props) {
   const youtubeId = extractYouTubeId(src);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -111,23 +114,15 @@ export default function VideoPlayer({
   return (
     <div className={className}>
       <video
-        className="h-full w-full object-cover"
+        className="h-full w-full object-contain"
         src={src}
         poster={poster}
         autoPlay={autoPlay}
         muted={muted}
         loop={loop}
-        onEnded={(event) => {
-          if (loop) {
-            const videoElement = event.currentTarget;
-            videoElement.currentTime = 0;
-            // Best-effort restart to ensure loop behavior across browsers
-            void videoElement.play();
-          }
-        }}
         controls={showControls}
         playsInline
-        preload="metadata"
+        preload={preload}
       />
     </div>
   );

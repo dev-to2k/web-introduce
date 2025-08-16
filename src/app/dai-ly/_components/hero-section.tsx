@@ -10,7 +10,7 @@ const HeroSection = memo(function HeroSection() {
   return (
     <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-full overflow-hidden rounded-2xl bg-gradient-to-r from-red-900/80 to-black">
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-red-900/50 via-black/30 to-black/70 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#ff8800] via-black/30 to-black/70 z-10"></div>
 
       {/* Image */}
       <div className="absolute inset-0 z-0">
@@ -23,7 +23,7 @@ const HeroSection = memo(function HeroSection() {
             priority
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-r from-red-900 to-black"></div>
+          <div className="w-full h-full bg-[#ff8800]"></div>
         )}
       </div>
 

@@ -8,7 +8,7 @@ import { bannerData } from "./agency-data";
 // Memoized component để tận dụng Next.js 15 caching
 const BannerSlide = memo(function BannerSlide() {
   return (
-    <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/80 to-black">
+    <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl bg-gradient-to-r from-[#4a9deb] to-black">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70 z-10"></div>
 
@@ -23,7 +23,7 @@ const BannerSlide = memo(function BannerSlide() {
             priority
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-r from-blue-900 to-black"></div>
+          <div className="w-full h-full bg-gradient-to-r from-[#4a9deb] to-black"></div>
         )}
       </div>
 

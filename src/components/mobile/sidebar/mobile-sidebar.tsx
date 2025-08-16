@@ -5,7 +5,7 @@ import ThemeToggle from "@/components/theme/theme-toggle";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 interface MobileSidebarProps {
@@ -18,10 +18,11 @@ interface MobileSidebarProps {
 export default function MobileSidebar({
   isOpen,
   onClose,
-  onLoginClick,
-  onRegisterClick,
+  onLoginClick: _onLoginClick,
+  onRegisterClick: _onRegisterClick,
 }: MobileSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const sidebarRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -180,7 +181,7 @@ export default function MobileSidebar({
             variant="link"
             className="w-full justify-center"
             onClick={() => {
-              onLoginClick();
+              router.push("/dang-nhap");
               onClose();
             }}
           >
@@ -190,7 +191,7 @@ export default function MobileSidebar({
             variant="gradient"
             className="w-full justify-center"
             onClick={() => {
-              onRegisterClick();
+              router.push("/dang-ky");
               onClose();
             }}
           >

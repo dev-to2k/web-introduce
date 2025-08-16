@@ -68,7 +68,7 @@ const AgencyCard = memo(function AgencyCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="relative h-[250px] sm:h-[280px] md:h-[300px] rounded-2xl overflow-hidden border-t-4 border-b-4 border-yellow-500 bg-gradient-to-b from-yellow-500/20 to-orange-700/40 agency-card"
+      className="relative h-[250px] sm:h-[280px] md:h-[300px] rounded-2xl overflow-hidden border-t-4 border-b-4 border-yellow-500 bg-gradient-to-b from-[#fdfb08] to-[#ff8800] agency-card"
     >
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/90 z-10"></div>

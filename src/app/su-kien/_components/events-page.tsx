@@ -1,12 +1,18 @@
 "use client";
 
 import { RenderDesktop, RenderMobile } from "@/components/responsive/RenderAt";
-import SectionTitle from "@/components/shared/section-title";
 import { cn } from "@/lib/utils";
-import { Calendar, Play } from "lucide-react";
+import {
+  Calendar,
+  ChevronRight,
+  Heart,
+  Newspaper,
+  Play,
+  PlayCircle,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 type Category = "news" | "video" | "charity";
 
@@ -25,7 +31,7 @@ const ALL_EVENTS: EventItem[] = [
     id: "e1",
     title: "MEGA LIVE – Trao thưởng lớn 15/08",
     date: "2025-08-01",
-    image: "/images/58WIN-content.png",
+    image: "https://images.okvip66.com/images/okvip/20250815224212_884144.png",
     category: "news",
     excerpt:
       "Sự kiện Mega Live với hàng loạt phần quà giá trị, xe điện, xe máy và nhiều ưu đãi.",
@@ -33,43 +39,46 @@ const ALL_EVENTS: EventItem[] = [
   },
   {
     id: "e2",
-    title: "Bùng nổ Mega Live 15/07 – Rinh xe sang",
+    title: "OKVIP DAY - MEGA LIVE 15/08 TẶNG XE ĐIỆN, XÂY TƯƠNG LAI XANH",
     date: "2025-07-15",
-    image: "/images/8xx-content.png",
+    image: "https://images.okvip66.com/images/okvip/20250806133326_902486.jpg",
     category: "news",
-    excerpt:
-      "Tham gia phát sóng trực tiếp, nhận quà hấp dẫn cho toàn bộ người chơi.",
+    excerpt: "OKVIP DAY - MEGA LIVE 15/08 TẶNG XE ĐIỆN, XÂY TƯƠNG LAI XANH",
   },
   {
     id: "e3",
-    title: "Ký kết đại sứ thương hiệu",
+    title: "OKVIP TRAO THƯỞNG THÀNH CÔNG SH125i TRONG PHIÊN MEGA LIVE 15/07",
     date: "2025-06-20",
-    image: "/images/ATQ-CSKH.png",
+    image: "https://images.okvip66.com/images/okvip/20250806133326_902486.jpg",
     category: "news",
-    excerpt: "Đánh dấu cột mốc hợp tác chiến lược cùng đại sứ thương hiệu.",
+    excerpt: "OKVIP TRAO THƯỞNG THÀNH CÔNG SH125i TRONG PHIÊN MEGA LIVE 15/07",
   },
   {
     id: "v1",
-    title: "Recap Mega Live – Highlights",
+    title: "BÙNG NỔ MEGA LIVE 15/07 RINH XE SANG, NHẬN QUÀ XỊN",
     date: "2025-07-16",
-    image: "/images/8xx-content.png",
+    image: "https://images.okvip66.com/images/okvip/20250716230839_461334.jpg",
     category: "video",
-    excerpt: "Video tổng hợp điểm nhấn từ sự kiện trực tuyến.",
+    excerpt: "BÙNG NỔ MEGA LIVE 15/07 RINH XE SANG, NHẬN QUÀ XỊN",
   },
   {
     id: "c1",
-    title: "Thiện nguyện – Trao yêu thương",
+    title: "78win KÝ KẾT ĐẠI SỨ THƯƠNG HIỆU CÙNG STEVEN GERRARD",
     date: "2025-05-10",
-    image: "/images/ATQ-CSKH.png",
+    image: "https://images.okvip66.com/images/okvip/20250716230839_461334.jpg",
     category: "charity",
-    excerpt: "Hành trình gắn kết cộng đồng và sẻ chia giá trị.",
+    excerpt: "78win KÝ KẾT ĐẠI SỨ THƯƠNG HIỆU CÙNG STEVEN GERRARD",
   },
 ];
 
-const CATEGORIES: { key: Category; label: string }[] = [
-  { key: "news", label: "Tin tức" },
-  { key: "video", label: "Video" },
-  { key: "charity", label: "Thiện nguyện" },
+const CATEGORIES: { key: Category; label: string; icon: ReactNode }[] = [
+  { key: "news", label: "Tin tức", icon: <Newspaper className="h-4 w-4" /> },
+  { key: "video", label: "Video", icon: <PlayCircle className="h-4 w-4" /> },
+  {
+    key: "charity",
+    label: "Thiện nguyện",
+    icon: <Heart className="h-4 w-4" />,
+  },
 ];
 
 export default function EventsPage() {
@@ -85,37 +94,47 @@ export default function EventsPage() {
 
   const feature = filtered[0] ?? ALL_EVENTS.find((e) => e.category === active)!;
   const rest = filtered.slice(1);
-  const stickyCompact = rest[0];
-  const restTail = rest.slice(1);
+  // Desktop right list: ensure 4 items. Prefer same category; fallback to others. Respect query if any.
+  const list4Base = rest.slice(0, 4);
+  const filterByQuery = (it: EventItem) =>
+    !query || it.title.toLowerCase().includes(query.toLowerCase());
+  const sameCatPool = ALL_EVENTS.filter(
+    (e) =>
+      e.category === active &&
+      e.id !== feature.id &&
+      !list4Base.some((x) => x.id === e.id) &&
+      filterByQuery(e)
+  );
+  const otherPool = ALL_EVENTS.filter(
+    (e) =>
+      e.category !== active &&
+      e.id !== feature.id &&
+      !list4Base.some((x) => x.id === e.id) &&
+      filterByQuery(e)
+  );
+  const list4 = [...list4Base, ...sameCatPool, ...otherPool].slice(0, 4);
 
   return (
-    <section className="max-w-screen-xl mx-auto px-4 py-6 md:py-10">
-      <div className="mb-6 md:mb-8">
-        <Reveal>
-          <SectionTitle align="center" variant="badge">
-            Sự kiện – ATQ
-          </SectionTitle>
-        </Reveal>
-      </div>
-
-      {/* Desktop: 3 columns */}
+    <section className="max-w-[1400px] mx-auto px-4 py-6 md:py-10">
+      {/* Desktop: flex layout */}
       <RenderDesktop>
-        <div className="hidden md:grid md:grid-cols-12 gap-5 lg:gap-6 items-start">
+        <div className="flex items-stretch gap-5 lg:gap-6">
           {/* Left nav */}
-          <aside className="md:col-span-2 self-start">
+          <aside className="self-start flex-none w-52">
             <nav className="space-y-2 sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)]">
               {CATEGORIES.map((c, i) => (
                 <Reveal key={c.key} delay={i * 40}>
                   <button
                     onClick={() => setActive(c.key)}
                     className={cn(
-                      "w-full text-left px-4 py-3 rounded-xl font-semibold transition border",
+                      "w-full flex items-center gap-2 px-4 py-3 rounded-lg font-semibold transition border",
                       active === c.key
                         ? "bg-brand text-white border-brand"
                         : "bg-white text-slate-800 border-slate-200 hover:bg-slate-50 dark:bg-neutral-900 dark:text-white dark:border-white/10 dark:hover:bg-white/5"
                     )}
                   >
-                    {c.label}
+                    <span className="shrink-0">{c.icon}</span>
+                    <span>{c.label}</span>
                   </button>
                 </Reveal>
               ))}
@@ -132,27 +151,28 @@ export default function EventsPage() {
           </aside>
 
           {/* Main feature */}
-          <main className="md:col-span-7">
-            <Reveal>
+          <main className="flex-1 basis-0">
+            <Reveal className="h-full">
               <FeatureCard item={feature} />
             </Reveal>
           </main>
 
-          {/* Right list */}
-          <aside className="md:col-span-3 self-start">
+          {/* Right list (4 items + CTA) */}
+          <aside className="self-start flex-1 basis-0">
             <div className="space-y-5">
-              {stickyCompact && (
-                <div className="sticky top-[calc(var(--topbar-h,0px)+var(--header-h,64px)+16px)] z-10">
-                  <Reveal>
-                    <CompactCard key={stickyCompact.id} item={stickyCompact} />
-                  </Reveal>
-                </div>
-              )}
-              {restTail.map((e, i) => (
-                <Reveal key={e.id} delay={80 + i * 40}>
+              {list4.map((e, i) => (
+                <Reveal key={e.id} delay={i * 40}>
                   <CompactCard item={e} />
                 </Reveal>
               ))}
+              <Reveal delay={list4.length * 40}>
+                <Link href="#" className="block">
+                  <div className="rounded-lg bg-slate-900/80 text-white border border-slate-700/60 dark:bg-neutral-800 dark:border-white/10 px-4 py-3 font-semibold flex items-center justify-center gap-2">
+                    <span>Xem nhiều hơn</span>
+                    <ChevronRight className="h-4 w-4" />
+                  </div>
+                </Link>
+              </Reveal>
             </div>
           </aside>
         </div>
@@ -167,13 +187,14 @@ export default function EventsPage() {
                 key={c.key}
                 onClick={() => setActive(c.key)}
                 className={cn(
-                  "shrink-0 px-4 py-2 rounded-full text-sm font-semibold border",
+                  "shrink-0 px-4 py-2 rounded-full text-sm font-semibold border inline-flex items-center gap-2",
                   active === c.key
                     ? "bg-brand text-white border-brand"
                     : "bg-white text-slate-800 border-slate-200 dark:bg-neutral-900 dark:text-white dark:border-white/10"
                 )}
               >
-                {c.label}
+                <span className="shrink-0">{c.icon}</span>
+                <span>{c.label}</span>
               </button>
             ))}
           </div>
@@ -191,12 +212,21 @@ export default function EventsPage() {
           </Reveal>
 
           <div className="space-y-3">
-            {rest.map((e, i) => (
+            {list4.map((e, i) => (
               <Reveal key={e.id} delay={60 + i * 40}>
                 <CompactCard item={e} />
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={list4.length * 40 + 80}>
+            <Link href="#" className="block">
+              <div className="rounded-lg bg-slate-900/80 text-white border border-slate-700/60 dark:bg-neutral-800 dark:border-white/10 px-4 py-3 font-semibold flex items-center justify-center gap-2">
+                <span>Xem nhiều hơn</span>
+                <ChevronRight className="h-4 w-4" />
+              </div>
+            </Link>
+          </Reveal>
         </div>
       </RenderMobile>
     </section>
@@ -205,16 +235,18 @@ export default function EventsPage() {
 
 function FeatureCard({ item }: { item: EventItem }) {
   return (
-    <article className="rounded-2xl bg-white border border-slate-200 dark:bg-neutral-900 dark:border-white/10 overflow-hidden shadow-xl">
-      <div className="relative h-[220px] sm:h-[300px] md:h-[360px]">
-        <Image
-          src={item.image}
-          alt={item.title}
-          fill
-          sizes="(min-width: 1024px) 60vw, 100vw"
-          className="object-contain"
-          priority
-        />
+    <article className="rounded-2xl bg-white border border-slate-200 dark:bg-neutral-900 dark:border-white/10 overflow-hidden shadow-xl h-full">
+      <div className="relative h-[220px] sm:h-[300px] md:h-[360px] p-4">
+        <div className="relative h-full w-full rounded-2xl overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 720px"
+            className="object-cover"
+            priority
+          />
+        </div>
         <div className="absolute top-3 left-3 bg-brand text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg inline-flex items-center gap-1">
           <Calendar className="h-4 w-4" />
           {item.date}
@@ -242,6 +274,7 @@ function FeatureCard({ item }: { item: EventItem }) {
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand text-white px-4 py-2 font-semibold hover:bg-brand/90 transition"
           >
             Xem đầy đủ
+            <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -257,19 +290,22 @@ function CompactCard({ item }: { item: EventItem }) {
       rel={item.href ? "noopener noreferrer" : undefined}
       className="block"
     >
-      <div className="rounded-2xl bg-white border border-slate-200 dark:bg-neutral-900 dark:border-white/10 overflow-hidden hover:shadow-lg transition">
-        <div className="grid grid-cols-3 gap-2">
-          <div className="relative col-span-1 h-20 md:h-24 lg:h-28">
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              sizes="(min-width: 1024px) 200px, 33vw"
-              className="object-contain"
-            />
+      <div className="rounded-2xl bg-white border border-slate-200 dark:bg-neutral-900 dark:border-white/10 overflow-hidden hover:shadow-lg transition min-h-[120px]">
+        <div className="flex min-h-[120px]">
+          <div className="shrink-0 w-24 md:w-32 lg:w-36 h-16 md:h-20 lg:h-24 p-2 flex items-center justify-center my-auto">
+            <div className="overflow-hidden rounded-lg">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={192}
+                height={96}
+                sizes="(max-width: 768px) 30vw, 192px"
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
-          <div className="py-2 pr-3 pl-1 md:p-3 col-span-2">
-            <h3 className="font-bold text-slate-900 dark:text-white leading-snug line-clamp-2">
+          <div className="py-2 pr-3 pl-1 md:p-3 flex-1">
+            <h3 className="font-bold text-slate-900 dark:text-white leading-snug line-clamp-2 uppercase">
               {item.title}
             </h3>
             <p className="mt-1 text-[11px] md:text-xs text-slate-500 leading-normal line-clamp-2">

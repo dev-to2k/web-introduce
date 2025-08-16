@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import AuthPopup from "../auth/auth-popup";
+import { usePathname, useRouter } from "next/navigation";
 
 const items: {
   href: string;
@@ -35,13 +33,11 @@ const items: {
 
 export default function MobileBottomTabbar() {
   const pathname = usePathname();
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<"login" | "register">("login");
+  const router = useRouter();
 
   // Handle account button click
   const handleAccountClick = () => {
-    setAuthMode("login");
-    setIsAuthOpen(true);
+    router.push("/dang-ky");
   };
 
   return (
@@ -101,13 +97,6 @@ export default function MobileBottomTabbar() {
           </ul>
         </div>
       </nav>
-
-      {/* Auth Popup */}
-      <AuthPopup
-        isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-        initialMode={authMode}
-      />
     </>
   );
 }

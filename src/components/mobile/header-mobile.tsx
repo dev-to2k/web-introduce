@@ -58,7 +58,7 @@ export default function MobileHeader() {
               alt="ATQ Alliance Logo"
               width={120}
               height={40}
-              className="h-8 w-auto object-contain"
+              className="h-8 w-auto object-contain scale-[2] translate-x-2"
               priority
             />
           </div>

@@ -12,6 +12,7 @@ type Props = {
   loop?: boolean;
   hideOverlayPlayButton?: boolean;
   showControls?: boolean;
+  preload?: "auto" | "metadata" | "none";
 };
 
 /**
@@ -36,7 +37,8 @@ const StableVideoPlayer = memo(
       prevProps.loop === nextProps.loop &&
       prevProps.hideOverlayPlayButton === nextProps.hideOverlayPlayButton &&
       prevProps.showControls === nextProps.showControls &&
-      prevProps.poster === nextProps.poster
+      prevProps.poster === nextProps.poster &&
+      prevProps.preload === nextProps.preload
     );
   }
 );

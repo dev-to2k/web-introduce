@@ -67,7 +67,7 @@ export default function Header() {
             width={160}
             height={60}
             priority
-            className="h-10 md:h-16 w-auto max-w-full scale-200 translate-x-16 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-lg"
+            className="h-10 md:h-16 w-auto max-w-full scale-200 translate-x-16 transition-transform duration-300 group-hover:drop-shadow-lg scale-[2.5]"
           />
         </Link>
         <nav className="hidden md:flex items-center gap-8 font-semibold text-white text-lg translate-x-12">
