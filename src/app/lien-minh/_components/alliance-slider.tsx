@@ -7,7 +7,7 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { alliancePartners } from "./alliance-data";
+import { alliancePartners, originalPartners } from "./alliance-data";
 
 // Memoized component để tận dụng Next.js 15 caching
 const AllianceSlider = memo(function AllianceSlider() {
@@ -15,19 +15,15 @@ const AllianceSlider = memo(function AllianceSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
 
-  // Danh sách 3 đối tác thật (không placeholder)
+  // Sử dụng danh sách đã được tối ưu với đủ slides
   const partners = alliancePartners;
 
-  // Nhân đôi mảng khi chỉ có 3 phần tử để loop mượt hơn với slidesPerView=3
-  const viewItems = useMemo(() => {
-    if (partners.length <= 3) return [...partners, ...partners];
-    return partners;
-  }, [partners]);
-
-  // Memoize đối tác đang active (theo index thực, mod theo số lượng base)
+  // Memoize đối tác đang active (dựa trên originalPartners để tránh hiển thị duplicate)
+  // Sử dụng realIndex để đồng bộ chính xác với slide transitions
   const activePartner = useMemo(() => {
-    return partners[activeIndex % partners.length] || partners[0];
-  }, [activeIndex, partners]);
+    const realIndex = activeIndex % originalPartners.length;
+    return originalPartners[realIndex] || originalPartners[0];
+  }, [activeIndex]);
 
   // Tối ưu hóa callback functions
   const handleSwiper = useCallback((swiper: SwiperType) => {
@@ -35,7 +31,9 @@ const AllianceSlider = memo(function AllianceSlider() {
   }, []);
 
   const handleSlideChange = useCallback((swiper: SwiperType) => {
-    setActiveIndex(swiper.realIndex);
+    // Sử dụng realIndex để tracking chính xác slide gốc trong loop mode
+    const realIndex = swiper.realIndex;
+    setActiveIndex(realIndex);
   }, []);
 
   useEffect(() => {
@@ -45,30 +43,80 @@ const AllianceSlider = memo(function AllianceSlider() {
   if (!mounted) return null;
 
   return (
-    <div className="relative py-8 sm:py-10 md:py-12 overflow-hidden">
+    <div className="relative pb-8 sm:pb-10 md:pb-12 overflow-hidden">
       <div className="w-full relative">
-        {/* Slider với vòng tròn ở giữa */}
-        <div className="w-full h-[280px] sm:h-[320px] md:h-[360px] relative">
+        {/* Vòng tròn ở giữa slide với animation */}
+        <motion.div
+          className="absolute top-[4%] left-1/2 transform -translate-x-1/2 w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] z-10 pointer-events-none"
+          initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        >
+          {/* <motion.div
+            className="w-full h-full rounded-full bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 dark:from-blue-500 dark:via-indigo-600 dark:to-purple-700 opacity-60 dark:opacity-40"
+            style={{
+              WebkitMask: "radial-gradient(transparent 65.75%, #000 66%)",
+              mask: "radial-gradient(transparent 65.75%, #000 66%)",
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          /> */}
+          <motion.div
+            // Nền trong suốt để chỉ hiển thị box-shadow
+            className="w-full h-full rounded-full"
+            style={{
+              // Cập nhật lại màu sắc cho phù hợp với website
+              // Lớp 1: Viền ngoài tỏa sáng màu xanh dương nhạt
+              // Lớp 2: Viền trong mảnh, sắc nét màu tím/xanh đậm
+              boxShadow:
+                "0 0 20px 4px rgba(70, 130, 220, 0.5), inset 0 0 0 1.5px rgba(88, 81, 216, 0.9)",
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          />
+        </motion.div>
+        <div className="w-full h-[280px] sm:h-[320px] md:h-[360px] relative overflow-hidden">
           <Swiper
             modules={[Autoplay]}
             grabCursor={true}
             centeredSlides={true}
+            centeredSlidesBounds={false}
+            watchSlidesProgress={true}
             slidesPerView={3}
             spaceBetween={32}
             loop={true}
             loopAdditionalSlides={3}
-            speed={800}
+            speed={600}
+            normalizeSlideIndex={false}
+            updateOnWindowResize={true}
+            observer={true}
+            observeParents={true}
             autoplay={{
-              delay: 2500,
+              delay: 3000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
+              waitForTransition: true,
             }}
             onSwiper={handleSwiper}
             onSlideChange={handleSlideChange}
             className="alliance-swiper h-full"
-            initialSlide={1} // Bắt đầu ở item giữa khi có 3 phần tử
+            initialSlide={0}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 16,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 32,
+              },
+            }}
           >
-            {viewItems.map((partner, idx) => (
+            {partners.map((partner, idx) => (
               <SwiperSlide
                 key={`${partner.id}-${idx}`}
                 className="alliance-slide group flex items-center justify-center"

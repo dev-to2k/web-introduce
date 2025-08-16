@@ -111,7 +111,7 @@ export default function VideoPlayer({
   return (
     <div className={className}>
       <video
-        className="h-full w-full object-contain"
+        className="h-full w-full object-cover"
         src={src}
         poster={poster}
         autoPlay={autoPlay}

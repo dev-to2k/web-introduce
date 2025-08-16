@@ -11,7 +11,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   /* custom tokens migrated from index.html inline Tailwind config */
-  --color-brand: #3373f2;
+  --color-brand: #389fda;
   --color-ink: #0b1f3a;
   --shadow-card: 0 8px 30px rgba(12, 37, 93, 0.12);
   --radius-xl: 1.25rem;
@@ -193,6 +193,22 @@ iframe {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Fade-in animation for hero bottom section */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
 /* Animated gradient border helper */
 @keyframes border-gradient-move {
   0% {
@@ -340,4 +356,20 @@ iframe {
 .agency-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in animation for hero bottom section */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }

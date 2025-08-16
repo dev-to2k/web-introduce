@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import { memo, useEffect, useState } from "react";
-import ThemeToggle from "../../../components/theme/theme-toggle";
 import AllianceSlider from "./alliance-slider";
 
 // Memoized component để tận dụng Next.js 15 caching
@@ -19,11 +18,6 @@ const AlliancePage = memo(function AlliancePage() {
 
   return (
     <div className="w-full min-h-[calc(100vh-var(--topbar-h,0px)-var(--header-h,0px))] bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-black/95 dark:via-slate-900/90 dark:to-black/80 transition-colors duration-500">
-      {/* Theme Toggle */}
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle className="shadow-lg backdrop-blur-sm bg-white/80 dark:bg-slate-800/80 border-white/20 dark:border-slate-600/50" />
-      </div>
-
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
